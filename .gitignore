@@ -1,0 +1,10 @@
+.vscode/
+data/
+models
+run/models/
+scripts/*.pyc
+scripts/__pycache__/
+test/
+test/*.pyc
+test/__pycache__/
+notebooks/
