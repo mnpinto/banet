@@ -1,6 +1,6 @@
 # BA-Net: A deep learning approach for mapping and dating burned areas using temporal sequences of satellite images
 ![Graphical Abstract](img/graphical_abstract.jpg)
-Article available online at [ISPRS Journal of Photogrammetry and Remote Sensing](https://www.sciencedirect.com/science/article/pii/S0924271619303089?dgcid=author).
+Article available online at [ISPRS Journal of Photogrammetry and Remote Sensing](https://authors.elsevier.com/a/1aN0a3I9x1YsQn).
 
 ## How to use 
 * Install [Anaconda](https://www.anaconda.com/distribution/) Python 3.6+ 
