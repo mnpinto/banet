@@ -23,14 +23,13 @@ def ls(x, recursive=False, include=[], exclude=[]):
     else:
         out = [o for o in x.glob('**/*')]
     out = filter_files(out, include=include, exclude=exclude)
-    return out
+    return sorted(out)
 
 Path.ls = ls
 
-def hdf_attr_check(attr, hdf_attr_dict, default):
+def hdf_attr_check(attr, hdf, default):
     "Check if attribute is in hdf_attr_dict and return default"
-    out = default if attr not in hdf_attr_dict else hdf_attr_dict[attr]
-    return out
+    return default if not hasattr(hdf, attr) else hdf.__getattr__(attr)
 
 def dict2json(data:dict, file):
     "Writes json file from dict"
