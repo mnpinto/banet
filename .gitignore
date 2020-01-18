@@ -1,3 +1,5 @@
+data/
+!data/regions
 *.bak
 .gitattributes
 .last_checked

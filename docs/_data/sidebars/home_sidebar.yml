@@ -7,24 +7,30 @@ entries:
 - folders:
   - folderitems:
     - output: web,pdf
-      title: Export to modules
-      url: /export.html
+      title: Overview
+      url: /
     - output: web,pdf
-      title: Convert to html
-      url: /export2html.html
+      title: Core
+      url: /core
     - output: web,pdf
-      title: Show doc
-      url: /showdoc.html
+      title: Geo
+      url: /geo
     - output: web,pdf
-      title: Test functions
-      url: /test.html
+      title: Data
+      url: /data
     - output: web,pdf
-      title: Core functions
-      url: /core.html
+      title: Models
+      url: /models
     - output: web,pdf
-      title: Command line functions
-      url: /cli.html
+      title: Predict
+      url: /predict
+    - output: web,pdf
+      title: Train
+      url: /train
+    - output: web,pdf
+      title: CLI
+      url: /cli
     output: web
-    title: Notebook
+    title: banet2
   output: web
   title: Sidebar
