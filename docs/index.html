@@ -30,14 +30,82 @@ summary: "Over the past decades, methods for burned areas mapping and dating fro
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>pip install banet</code></p>
+<p><code>pip install -e .</code></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-use">How to use<a class="anchor-link" href="#How-to-use">&#182;</a></h2>
+<h2 id="Dataset">Dataset<a class="anchor-link" href="#Dataset">&#182;</a></h2><p>The dataset used to train the model and the pretrained weights are available at <a href="https://drive.google.com/drive/folders/1142CCdtyekXHc60gtIgmIYzHdv8lMHqN?usp=sharing">https://drive.google.com/drive/folders/1142CCdtyekXHc60gtIgmIYzHdv8lMHqN?usp=sharing</a>. Notice that the size of the full dataset is about 160 GB. You can, however, donwload individual regions in case you want to test with a smaller dataset.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Generate-predictions-for-a-new-region-in-5-steps">Generate predictions for a new region in 5 steps<a class="anchor-link" href="#Generate-predictions-for-a-new-region-in-5-steps">&#182;</a></h2><p>The procedure to generate predictions for a new region or for a different period of the existing regions is straightforward.</p>
+<ul>
+<li><p><strong>Step 1.</strong> Define a <code>.json</code> file with region name, bounding boxes and spatial resolution. Region definition files are by default on <code>data/regions</code> and should be named as <code>R_{name}.json</code>, where name is the name you give to the region inside the file.
+For example for Iberian Peninsula region the file <code>data/regions/R_PI.json</code> contains the following: <code>{"name": "PI", "bbox": [-10, 36, 5, 44], "pixel_size": 0.01}</code>. (The code is only tested with pixel_size of 0.01.)</p>
+</li>
+<li><p><strong>Step 2.</strong> To download the reflectance data a utility script is provided, <code>run/ladsweb.bash</code>, however in order to use it you need to first register on the website and generate an authentication code. You will also need for this script a python2 environment with <code>SOAPpy</code> library. All remaining code work with python3. Once you are set, you can run <code>ladsweb.bash</code> and the files will be requested and downloaded. Depending on the size of the request and the server availability this may take a while and notice that there is a limit for the number of files in each request.</p>
+</li>
+<li><p><strong>Step 3.</strong> Next you need to download the VIIRS active fire data for the region you seletected. This procedure is manual but you should be able to request data for the entire temporal window in one go. To do that go to <a href="https://firms.modaps.eosdis.nasa.gov/download/">https://firms.modaps.eosdis.nasa.gov/download/</a>, select <code>Create New Request</code>, select the region based on your region bounding box, for fire data source select <code>VIIRS</code>, then select the date range and finally <code>.csv</code> for the file format. You should receive an email with the confirmation and later another with the link to download the data. If not go back to the download page enter the email you used for the request and choose <code>Check Request Status</code>. If it is completed the download link will appear. Once you have the file place it in <code>data/hotspots</code> and name it <code>hotspots{name}.csv</code> where name is the name of the region as in the <code>.json</code> file defined in Step 1.</p>
+</li>
+<li><p><strong>Step 4.</strong> Now that you have all the data, you can run the utility script <code>run/proc_dataset.bash</code> making sure to check the paths are correct in the begining of the file. By default the data will be processed for the entire temporal window found.</p>
+</li>
+<li><p><strong>Step 5.</strong> Finally you just need to run <code>run/predict_monthly.bash</code> to get the model outputs saved at <code>data/monthly/{name}/</code>.</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Train-the-model-from-scratch">Train the model from scratch<a class="anchor-link" href="#Train-the-model-from-scratch">&#182;</a></h2><p>To train the model you need a dataset of image tiles and the respective targets. The data for the 5 study regions is available for download at <a href="https://drive.google.com/drive/folders/1142CCdtyekXHc60gtIgmIYzHdv8lMHqN?usp=sharing">https://drive.google.com/drive/folders/1142CCdtyekXHc60gtIgmIYzHdv8lMHqN?usp=sharing</a>. In case you want to train a model on different regions the procedure to collect VIIRS data is described on <strong>Generate predictions for a new region in 5 steps</strong> above.</p>
+<ul>
+<li><p><strong>Step 0.</strong> In case you opted for new regions you need to collect MCD64A1 collection 6 burned areas to use as targets. MCD64A1 collection 6 data can be downloaded from <code>ftp://ba1.geog.umd.edu/</code> server (description and credentials available on <a href="http://modis-fire.umd.edu/files/MODIS_C6_BA_User_Guide_1.2.pdf">http://modis-fire.umd.edu/files/MODIS_C6_BA_User_Guide_1.2.pdf</a> section 4). Once you log into the server go to <code>Collection 6/TIFF</code> folder and download data for the window or windows covering your region (Figure 2 on the user guide shows the delineation of the windows).</p>
+</li>
+<li><p><strong>Step 1.</strong> Once you have the data you need to generate the dataset by runing <code>run/proc_dataset.bash</code> and then create the image tiles sequences for train and validation by running <code>run/create_tiles_dataset.bash</code>. If you downloaded the dataset already in <code>.mat</code> files format provided in the url above then you just run <code>run/create_tiles_dataset.bash</code> for each region to generate the tiles.</p>
+</li>
+<li><p><strong>Step 2.</strong> To train the model then you just need to run <code>train.bash</code>. To use sequences of 64 days with 128x128 size tiles and batch size of 1, you need a 8 GB GPU. You can try reducing the sequence length if your GPU has less memory or increase the batch size otherwise.</p>
+</li>
+<li><p><strong>Step 3.</strong> After training the models you can generate the burned area maps by running <code>run/predict_monthly.bash</code> for each region and year. <strong>You need to edit <code>run/predict_monthly.py</code> to update the weight files list to the ones you generated.</strong></p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fine-tune-the-model-for-a-specific-region-or-for-other-data-source-(transfer-learning)">Fine-tune the model for a specific region or for other data source (transfer learning)<a class="anchor-link" href="#Fine-tune-the-model-for-a-specific-region-or-for-other-data-source-(transfer-learning)">&#182;</a></h2><p>It is possible to fine-tune the trained model weights to a specific region or using a different source for the input data (e.g., data from VIIRS 375m bands or data from another satellite). The easiest way to include a new dataset is to write a <code>Dataset</code> class similar to <a href="/banet/data#Viirs750Dataset"><code>Viirs750Dataset</code></a> or the other dataset classes on <code>scripts/datasets</code>. Once you have the new dataset you can follow the <strong>Train the model from scratch</strong> guideline and the only change you need to make is to make sure you load the pretrained weights before starting to train.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Troubleshooting">Troubleshooting<a class="anchor-link" href="#Troubleshooting">&#182;</a></h2><p>If you find any bug or have any question regarding the code or applications of BA-Net you can navigate to <code>Issues</code> tab and create a new Issue describing your problem. I will try to answer as soon as possible.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Citation">Citation<a class="anchor-link" href="#Citation">&#182;</a></h2><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">pinto2020banet</span><span class="p">,</span>
+  <span class="na">title</span><span class="p">=</span><span class="s">{A deep learning approach for mapping and dating burned areas using temporal sequences of satellite images}</span><span class="p">,</span>
+  <span class="na">author</span><span class="p">=</span><span class="s">{Pinto, Miguel M and Libonati, Renata and Trigo, Ricardo M and Trigo, Isabel F and DaCamara, Carlos C}</span><span class="p">,</span>
+  <span class="na">journal</span><span class="p">=</span><span class="s">{ISPRS Journal of Photogrammetry and Remote Sensing}</span><span class="p">,</span>
+  <span class="na">volume</span><span class="p">=</span><span class="s">{160}</span><span class="p">,</span>
+  <span class="na">pages</span><span class="p">=</span><span class="s">{260--274}</span><span class="p">,</span>
+  <span class="na">year</span><span class="p">=</span><span class="s">{2020}</span><span class="p">,</span>
+  <span class="na">publisher</span><span class="p">=</span><span class="s">{Elsevier}</span>
+<span class="p">}</span>
+</pre></div>
+
 </div>
 </div>
 </div>
