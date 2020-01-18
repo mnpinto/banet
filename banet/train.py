@@ -11,7 +11,7 @@ from fastai.callbacks import *
 import scipy.io as sio
 import sys
 
-from banet.models import BA_Net
+from .models import BA_Net
 
 # Cell
 class SampleEpisode(Sampler):

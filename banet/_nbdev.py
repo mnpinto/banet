@@ -80,8 +80,8 @@ modules = ["core.py",
            "train.py",
            "cli.py"]
 
-doc_url = "https://mnpinto.github.io/banet2/"
+doc_url = "https://mnpinto.github.io/banet/"
 
-git_url = "https://github.com/mnpinto/banet2/tree/master/"
+git_url = "https://github.com/mnpinto/banet/tree/master/"
 
 def custom_doc_links(name): return None

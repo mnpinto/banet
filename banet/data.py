@@ -20,8 +20,8 @@ import matplotlib.pyplot as plt
 from concurrent.futures import ThreadPoolExecutor
 from warnings import warn
 
-from banet.core import *
-from banet.geo import *
+from .core import *
+from .geo import *
 
 # Cell
 class BandsFilter():

@@ -20,7 +20,7 @@ from rasterio.coords import BoundingBox
 import warnings
 from fastcore.test import *
 
-from banet.core import *
+from .core import *
 
 # Cell
 class Region():

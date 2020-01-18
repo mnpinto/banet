@@ -37,7 +37,7 @@ summary: "This module has functions to generate the burned areas predictions."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="open_mat" class="doc_header"><code>open_mat</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>open_mat</code>(<strong><code>fn</code></strong>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="open_mat" class="doc_header"><code>open_mat</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>open_mat</code>(<strong><code>fn</code></strong>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -57,28 +57,7 @@ summary: "This module has functions to generate the burned areas predictions."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="crop" class="doc_header"><code>crop</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L25" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crop</code>(<strong><code>im</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>, <strong><code>size</code></strong>=<em><code>128</code></em>)</p>
-</blockquote>
-<p>crop image into a square of size sz,</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="image2tiles" class="doc_header"><code>image2tiles</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>image2tiles</code>(<strong><code>x</code></strong>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
+<h4 id="_crop" class="doc_header"><code>_crop</code><a href="fastai/vision/transform.py#L169" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>_crop</code>(<strong><code>x</code></strong>, <strong><code>size</code></strong>, <strong><code>row_pct</code></strong>:<code>uniform</code>=<em><code>0.5</code></em>, <strong><code>col_pct</code></strong>:<code>uniform</code>=<em><code>0.5</code></em>)</p>
 </blockquote>
 
 </div>
@@ -98,7 +77,7 @@ summary: "This module has functions to generate the burned areas predictions."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="tiles2image" class="doc_header"><code>tiles2image</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tiles2image</code>(<strong><code>tiles</code></strong>, <strong><code>image_size</code></strong>, <strong><code>size</code></strong>=<em><code>128</code></em>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
+<h4 id="image2tiles" class="doc_header"><code>image2tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>image2tiles</code>(<strong><code>x</code></strong>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
 </blockquote>
 
 </div>
@@ -118,7 +97,7 @@ summary: "This module has functions to generate the burned areas predictions."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_preds" class="doc_header"><code>get_preds</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L76" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_preds</code>(<strong><code>tiles</code></strong>, <strong><code>model</code></strong>, <strong><code>weights</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="tiles2image" class="doc_header"><code>tiles2image</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tiles2image</code>(<strong><code>tiles</code></strong>, <strong><code>image_size</code></strong>, <strong><code>size</code></strong>=<em><code>128</code></em>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
 </blockquote>
 
 </div>
@@ -138,7 +117,28 @@ summary: "This module has functions to generate the burned areas predictions."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="predict_one" class="doc_header"><code>predict_one</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L90" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_one</code>(<strong><code>iop</code></strong>, <strong><code>times</code></strong>, <strong><code>weights_files</code></strong>, <strong><code>region</code></strong>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>)</p>
+<h4 id="get_preds" class="doc_header"><code>get_preds</code><a href="fastai/basic_train.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_preds</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>dl</code></strong>:<code>DataLoader</code>, <strong><code>pbar</code></strong>:<code>Union</code>[<code>MasterBar</code>, <code>ProgressBar</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>cb_handler</code></strong>:<code>Optional</code>[<code>CallbackHandler</code>]=<em><code>None</code></em>, <strong><code>activ</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>:<code>Optional</code>[<code>Callable</code>[<code>Tensor</code>, <code>Tensor</code>, <code>OneEltTensor</code>]]=<em><code>None</code></em>, <strong><code>n_batch</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Tuple of predictions and targets, and optional losses (if <code>loss_func</code>) using <code>dl</code>, max batches <code>n_batch</code>.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="predict_one" class="doc_header"><code>predict_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L90" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_one</code>(<strong><code>iop</code></strong>, <strong><code>times</code></strong>, <strong><code>weights_files</code></strong>, <strong><code>region</code></strong>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>)</p>
 </blockquote>
 
 </div>
@@ -158,7 +158,7 @@ summary: "This module has functions to generate the burned areas predictions."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="predict_month" class="doc_header"><code>predict_month</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L115" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_month</code>(<strong><code>iop</code></strong>, <strong><code>time</code></strong>, <strong><code>weight_files</code></strong>, <strong><code>region</code></strong>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="predict_month" class="doc_header"><code>predict_month</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L115" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_month</code>(<strong><code>iop</code></strong>, <strong><code>time</code></strong>, <strong><code>weight_files</code></strong>, <strong><code>region</code></strong>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -178,7 +178,7 @@ summary: "This module has functions to generate the burned areas predictions."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="predict_nrt" class="doc_header"><code>predict_nrt</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_nrt</code>(<strong><code>iop</code></strong>, <strong><code>time</code></strong>, <strong><code>weights_files</code></strong>, <strong><code>region</code></strong>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="predict_nrt" class="doc_header"><code>predict_nrt</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_nrt</code>(<strong><code>iop</code></strong>, <strong><code>time</code></strong>, <strong><code>weights_files</code></strong>, <strong><code>region</code></strong>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 
 </div>
@@ -198,7 +198,7 @@ summary: "This module has functions to generate the burned areas predictions."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="split_mask" class="doc_header"><code>split_mask</code><a href="https://github.com/mnpinto/banet2/tree/master/banet2/predict.py#L149" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>split_mask</code>(<strong><code>mask</code></strong>, <strong><code>thr</code></strong>=<em><code>0.5</code></em>, <strong><code>thr_obj</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="split_mask" class="doc_header"><code>split_mask</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L149" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>split_mask</code>(<strong><code>mask</code></strong>, <strong><code>thr</code></strong>=<em><code>0.5</code></em>, <strong><code>thr_obj</code></strong>=<em><code>1</code></em>)</p>
 </blockquote>
 
 </div>

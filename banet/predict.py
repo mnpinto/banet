@@ -10,8 +10,8 @@ import sys
 from tqdm import tqdm
 import scipy.ndimage as ndimage
 
-from banet.core import *
-from banet.models import BA_Net
+from .core import *
+from .models import BA_Net
 
 # Cell
 def open_mat(fn, *args, **kwargs):

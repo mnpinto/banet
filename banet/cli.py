@@ -7,12 +7,12 @@ import calendar
 import pandas as pd
 from fastscript import call_parse, Param
 
-from banet.core import InOutPath, Path, ls
-from banet.data import *
-from banet.geo import Region
-from banet.predict import predict_month
-from banet.models import BA_Net
-from banet.train import train_model
+from .core import InOutPath, Path, ls
+from .data import *
+from .geo import Region
+from .predict import predict_month
+from .models import BA_Net
+from .train import train_model
 
 # Cell
 Path.ls = ls
