@@ -153,7 +153,8 @@ def _cutout2(x, n_holes:uniform_int=1, length:uniform_int=40):
 
 cutout2 = TfmPixel(_cutout2, order=20)
 
-class BCE(nn.Module):
+class BCE(Module):
+    "Binary Cross Entropy loss."
     def forward(self, x, y):
         bce = nn.BCEWithLogitsLoss()
         return 100*bce(x.view(x.size()[0],-1),y.view(y.size()[0], -1))

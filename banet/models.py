@@ -10,9 +10,9 @@ from fastai.vision import *
 DROP = 0.2 # Dropout
 
 # Cell
-class BTNorm2d(nn.Module):
+class BTNorm2d(Module):
+    "BatchTimeNorm2d module."
     def __init__(self, channels):
-        super().__init__()
         self.bn = nn.BatchNorm2d(channels)
 
     def forward(self, x):
@@ -22,9 +22,9 @@ class BTNorm2d(nn.Module):
         x = x.view(n_sequences, sequence_len, ch, sz1, sz2).permute(0,2,1,3,4).contiguous()
         return x
 
-class LSTM(nn.Module):
+class LSTM(Module):
+    "LSTM module."
     def __init__(self, ni, nf):
-        super().__init__()
         self.lstm = nn.LSTM(ni, nf, num_layers=1, bidirectional=False, batch_first=True)
 
     def forward(self, x):
@@ -34,9 +34,9 @@ class LSTM(nn.Module):
         x = x.view(bs, sz1, sz2, ts, ch).permute(0, 4, 3, 1, 2).contiguous()
         return x, h
 
-class SpaceConv(nn.Module):
+class SpaceConv(Module):
+    "SpaceConv module."
     def __init__(self, in_ch, out_ch, kernel_sz, stride):
-        super().__init__()
         spaceConv = nn.Conv3d(in_ch, out_ch, kernel_size=(1, kernel_sz, kernel_sz),
                               stride=(1, stride, stride),
                               padding=(0, kernel_sz//2, kernel_sz//2), bias=False)
@@ -44,17 +44,17 @@ class SpaceConv(nn.Module):
         self.conv = nn.Sequential(*layers)
     def forward(self, x): return self.conv(x)
 
-class UpSpaceConv(nn.Module):
+class UpSpaceConv(Module):
+    "UpSpaceConv module."
     def __init__(self, in_ch, out_ch):
-        super().__init__()
         upConv = nn.ConvTranspose3d(in_ch, out_ch, kernel_size=(1, 2, 2), stride=(1, 2, 2), bias=False)
         layers = [upConv, BTNorm2d(out_ch), nn.ReLU(inplace=True)]
         self.conv = nn.Sequential(*layers)
     def forward(self, x): return self.conv(x)
 
-class TimeConv(nn.Module):
+class TimeConv(Module):
+    "TimeConv module."
     def __init__(self, in_ch, out_ch, kernel_sz, stride, use_lstm):
-        super().__init__()
         self.use_lstm = use_lstm
         self.timeConv = nn.Conv3d(out_ch, out_ch, kernel_size=(kernel_sz, 1, 1),
                             stride=(stride, 1, 1),
@@ -70,26 +70,26 @@ class TimeConv(nn.Module):
         x = self.relu(x)
         return x
 
-class UpTimeConv(nn.Module):
+class UpTimeConv(Module):
+    "UpTimeConv module."
     def __init__(self, in_ch, out_ch):
-        super().__init__()
         upTimeConv = nn.ConvTranspose3d(in_ch, out_ch, kernel_size=(2, 1, 1), stride=(2, 1, 1), bias=False)
         layers = [upTimeConv, BTNorm2d(out_ch), nn.ReLU(inplace=True)]
         self.conv = nn.Sequential(*layers)
     def forward(self, x): return self.conv(x)
 
-class SpaceTimeConv(nn.Module):
+class SpaceTimeConv(Module):
+    "SpaceTimeConv module."
     def __init__(self, in_ch, out_ch, kernel_sz, time_sz, stride, time_stride, time_ch, use_lstm=False):
-        super().__init__()
         spaceConv = SpaceConv(in_ch, out_ch, kernel_sz, stride)
         timeConv = TimeConv(out_ch, out_ch, time_sz, time_stride, use_lstm)
         layers = [spaceConv, timeConv, nn.Dropout3d(DROP)]
         self.stconv = nn.Sequential(*layers)
     def forward(self, x): return self.stconv(x)
 
-class UpSpaceTimeConv(nn.Module):
+class UpSpaceTimeConv(Module):
+    "UpSpaceTimeConv module."
     def __init__(self, in_ch, out_ch, time_ch):
-        super().__init__()
         upSpaceConv = UpSpaceConv(in_ch, out_ch)
         upTimeConv = UpTimeConv(out_ch, out_ch)
         layers = [upSpaceConv, upTimeConv, nn.Dropout3d(DROP)]
@@ -97,9 +97,9 @@ class UpSpaceTimeConv(nn.Module):
     def forward(self, x): return self.upstconv(x)
 
 # Cell
-class BA_Net(nn.Module):
+class BA_Net(Module):
+    "BA-Net model."
     def __init__(self, in_ch, n_classes, sequence_len):
-        super().__init__()
         n=1
         self.stconv1 = SpaceTimeConv(in_ch, n*32, 7, 7, 1, 1, sequence_len, use_lstm=True)
         self.stconv2 = SpaceTimeConv(n*32, n*64, 3, 7, 2, 2, sequence_len//2)
