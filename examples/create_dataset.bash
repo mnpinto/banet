@@ -2,7 +2,7 @@
 viirs_path=/srv/banet/data/rawdata
 mcd64_path=/srv/mcd64
 cci51_path=/srv/BA_validation/data/FireCCI51
-save_path=/srv/banet2/data/procdata
+save_path=/srv/banet/data/procdata
 fires_path=/srv/banet/data/hotspots
 region=PI
 

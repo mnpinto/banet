@@ -1,6 +1,6 @@
 #!/bin/bash -l
-input_path=/srv/banet_nbdev/data/procdata
-output_path=/srv/banet_nbdev/data/monthly
+input_path=/srv/banet/data/procdata
+output_path=/srv/banet/data/monthly
 region=PI
 year=2017
 
