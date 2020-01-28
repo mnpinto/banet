@@ -430,10 +430,9 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Defining the input and output paths and selecting one .hdf file for example</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local_files</span>
+<span class="c1"># Defining the input and output paths and selecting one .hdf file for example</span>
 <span class="n">iop</span> <span class="o">=</span> <span class="n">InOutPath</span><span class="p">(</span><span class="s1">&#39;../data/rawdata/PI&#39;</span><span class="p">,</span> <span class="s1">&#39;../data/procdata/PI&#39;</span><span class="p">)</span>
-<span class="n">file</span> <span class="o">=</span> <span class="n">iop</span><span class="o">.</span><span class="n">src</span><span class="o">.</span><span class="n">ls</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">file</span><span class="o">.</span><span class="n">name</span>
 </pre></div>
 
     </div>
@@ -462,7 +461,8 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Define region from json file</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local_files</span>
+<span class="c1"># Define region from json file</span>
 <span class="n">region</span> <span class="o">=</span> <span class="n">Region</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;../data/regions/R_PI.json&#39;</span><span class="p">)</span>
 <span class="n">region</span>
 </pre></div>
@@ -495,7 +495,8 @@ pixel_size: 0.01</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create Viirs750Dataset and check if Reflectance_M5 exists</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local_files</span>
+<span class="c1"># Create Viirs750Dataset and check if Reflectance_M5 exists</span>
 <span class="n">bands</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;Reflectance_M5&#39;</span><span class="p">,</span> <span class="s1">&#39;Reflectance_M7&#39;</span><span class="p">,</span> <span class="s1">&#39;Reflectance_M10&#39;</span><span class="p">,</span> <span class="s1">&#39;Radiance_M12&#39;</span><span class="p">,</span> 
            <span class="s1">&#39;Radiance_M15&#39;</span><span class="p">,</span> <span class="s1">&#39;SolarZenithAngle&#39;</span><span class="p">,</span> <span class="s1">&#39;SatelliteZenithAngle&#39;</span><span class="p">]</span>
 <span class="n">viirs</span> <span class="o">=</span> <span class="n">Viirs750Dataset</span><span class="p">(</span><span class="n">iop</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="n">bands</span><span class="p">)</span>
@@ -544,7 +545,8 @@ pixel_size: 0.01</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Processing functions</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local_files</span>
+<span class="c1"># Processing functions</span>
 <span class="n">merge_tiles</span> <span class="o">=</span> <span class="n">MergeTiles</span><span class="p">(</span><span class="s1">&#39;SatelliteZenithAngle&#39;</span><span class="p">)</span>
 <span class="n">mir_calc</span> <span class="o">=</span> <span class="n">MirCalc</span><span class="p">(</span><span class="s1">&#39;SolarZenithAngle&#39;</span><span class="p">,</span> <span class="s1">&#39;Radiance_M12&#39;</span><span class="p">,</span> <span class="s1">&#39;Radiance_M15&#39;</span><span class="p">)</span>
 <span class="n">rename</span> <span class="o">=</span> <span class="n">BandsRename</span><span class="p">([</span><span class="s1">&#39;Reflectance_M5&#39;</span><span class="p">,</span> <span class="s1">&#39;Reflectance_M7&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;Red&#39;</span><span class="p">,</span> <span class="s1">&#39;NIR&#39;</span><span class="p">])</span>
@@ -562,7 +564,8 @@ pixel_size: 0.01</pre>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Apply processing functions for 2017-10-27</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local_files</span>
+<span class="c1"># Apply processing functions for 2017-10-27</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">viirs</span><span class="o">.</span><span class="n">process_one</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2017-10-27&#39;</span><span class="p">),</span> <span class="n">proc_funcs</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
