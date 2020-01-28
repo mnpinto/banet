@@ -33,9 +33,10 @@ def banet_viirs750_download(region:Param("Region name", str),
     tend:Param("End of search windo yyyy-mm-dd HH:MM:SS", str),
     email:Param("ladsweb user email", str),
     auth:Param("ladsweb user authentication key (go to Profile>App Keys)", str),
-    path_save:Param("Path to save the outputs of the request", str)):
+    path_save:Param("Path to save the outputs of the request", str),
+    regions_path:Param("Path for region json files", str)=_regions_path):
 
-    region = Region.load(f'../data/regions/R_{region}.json')
+    region = Region.load(f'{regions_path}/R_{region}.json')
     viirs_downloader = VIIRS750_download(region, tstart, tend)
     viirs_downloader_list = viirs_downloader.split_times()
     print(f'Splitting request into {len(viirs_downloader_list)} orders.')
