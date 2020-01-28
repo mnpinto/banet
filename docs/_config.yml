@@ -1,7 +1,7 @@
-repository: mnpinto/banet2
+repository: mnpinto/banet
 output: web
-topnav_title: banet2
-site_title: banet2
+topnav_title: banet
+site_title: banet
 company_name: Miguel Pinto
 description: A deep learning approach for mapping and dating burned areas using temporal sequences of satellite images
 # Set to false to disable KaTeX math

@@ -2,7 +2,7 @@ topnav:
 - title: Topnav
   items:
     - title: GitHub
-      external_url: https://github.com/mnpinto/banet2
+      external_url: https://github.com/mnpinto/banet
 
 #Topnav dropdowns
 topnav_dropdowns:
