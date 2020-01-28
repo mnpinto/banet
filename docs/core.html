@@ -137,7 +137,7 @@ summary: "Functions that implement basic functionality that will be used in the 
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;banet&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">()</span>
 </pre></div>
 
@@ -153,18 +153,17 @@ summary: "Functions that implement basic functionality that will be used in the 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[PosixPath(&#39;banet/__init__.py&#39;),
- PosixPath(&#39;banet/__pycache__&#39;),
- PosixPath(&#39;banet/_nbdev.py&#39;),
- PosixPath(&#39;banet/banet&#39;),
- PosixPath(&#39;banet/cli.py&#39;),
- PosixPath(&#39;banet/core.py&#39;),
- PosixPath(&#39;banet/data.py&#39;),
- PosixPath(&#39;banet/folder&#39;),
- PosixPath(&#39;banet/geo.py&#39;),
- PosixPath(&#39;banet/models.py&#39;),
- PosixPath(&#39;banet/predict.py&#39;),
- PosixPath(&#39;banet/train.py&#39;)]</pre>
+<pre>[PosixPath(&#39;.gitattributes&#39;),
+ PosixPath(&#39;.ipynb_checkpoints&#39;),
+ PosixPath(&#39;.last_checked&#39;),
+ PosixPath(&#39;00_core.ipynb&#39;),
+ PosixPath(&#39;01_geo.ipynb&#39;),
+ PosixPath(&#39;02_data.ipynb&#39;),
+ PosixPath(&#39;03_models.ipynb&#39;),
+ PosixPath(&#39;04_predict.ipynb&#39;),
+ PosixPath(&#39;05_train.ipynb&#39;),
+ PosixPath(&#39;06_cli.ipynb&#39;),
+ PosixPath(&#39;index.ipynb&#39;)]</pre>
 </div>
 
 </div>
@@ -178,8 +177,8 @@ summary: "Functions that implement basic functionality that will be used in the 
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;banet&#39;</span><span class="p">)</span>
-<span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;.py&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;.ipynb&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -194,15 +193,15 @@ summary: "Functions that implement basic functionality that will be used in the 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[PosixPath(&#39;banet/__init__.py&#39;),
- PosixPath(&#39;banet/_nbdev.py&#39;),
- PosixPath(&#39;banet/cli.py&#39;),
- PosixPath(&#39;banet/core.py&#39;),
- PosixPath(&#39;banet/data.py&#39;),
- PosixPath(&#39;banet/geo.py&#39;),
- PosixPath(&#39;banet/models.py&#39;),
- PosixPath(&#39;banet/predict.py&#39;),
- PosixPath(&#39;banet/train.py&#39;)]</pre>
+<pre>[PosixPath(&#39;.ipynb_checkpoints&#39;),
+ PosixPath(&#39;00_core.ipynb&#39;),
+ PosixPath(&#39;01_geo.ipynb&#39;),
+ PosixPath(&#39;02_data.ipynb&#39;),
+ PosixPath(&#39;03_models.ipynb&#39;),
+ PosixPath(&#39;04_predict.ipynb&#39;),
+ PosixPath(&#39;05_train.ipynb&#39;),
+ PosixPath(&#39;06_cli.ipynb&#39;),
+ PosixPath(&#39;index.ipynb&#39;)]</pre>
 </div>
 
 </div>
@@ -216,8 +215,8 @@ summary: "Functions that implement basic functionality that will be used in the 
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;banet&#39;</span><span class="p">)</span>
-<span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;.py&#39;</span><span class="p">],</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;_&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">path</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;.ipynb&#39;</span><span class="p">],</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;_checkpoints&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -232,13 +231,14 @@ summary: "Functions that implement basic functionality that will be used in the 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[PosixPath(&#39;banet/cli.py&#39;),
- PosixPath(&#39;banet/core.py&#39;),
- PosixPath(&#39;banet/data.py&#39;),
- PosixPath(&#39;banet/geo.py&#39;),
- PosixPath(&#39;banet/models.py&#39;),
- PosixPath(&#39;banet/predict.py&#39;),
- PosixPath(&#39;banet/train.py&#39;)]</pre>
+<pre>[PosixPath(&#39;00_core.ipynb&#39;),
+ PosixPath(&#39;01_geo.ipynb&#39;),
+ PosixPath(&#39;02_data.ipynb&#39;),
+ PosixPath(&#39;03_models.ipynb&#39;),
+ PosixPath(&#39;04_predict.ipynb&#39;),
+ PosixPath(&#39;05_train.ipynb&#39;),
+ PosixPath(&#39;06_cli.ipynb&#39;),
+ PosixPath(&#39;index.ipynb&#39;)]</pre>
 </div>
 
 </div>
