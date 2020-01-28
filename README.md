@@ -6,7 +6,7 @@
 
 ## Install
 
-`pip install banet
+`pip install banet`
 
 ## Dataset
 The dataset used to train the model and the pretrained weights are available at https://drive.google.com/drive/folders/1142CCdtyekXHc60gtIgmIYzHdv8lMHqN?usp=sharing. Notice that the size of the full dataset is about 160 GB. You can, however, donwload individual regions in case you want to test with a smaller dataset.
