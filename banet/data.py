@@ -260,23 +260,23 @@ class BaseDataset():
         and `save` the processed data using save method."""
         tstr = time.strftime('%Y%m%d')
         files = self.list_files(time)
-        try:
-            if len(files) > 0:
-                data = self.open(files)
-                proc_funcs = [BandsAssertShape()] + proc_funcs
-                kwargs = {'cls': self, **proc_funcs_kwargs}
-                for f in proc_funcs:
-                    data = f(data, time, **kwargs)
-                if save:
-                    self.save(time, data)
-                else: return data
-            else:
-                warn(f'No files for {time}. Skipping to the next time.')
-        except:
-            msg = f'Unable to process files for {time}. Check if files are corrupted. Skipping to the next time. { sys.exc_info()[0]}'
-            warn(msg, UserWarning)
+        #try:
+        if len(files) > 0:
+            data = self.open(files)
+            proc_funcs = [BandsAssertShape()] + proc_funcs
+            kwargs = {'cls': self, **proc_funcs_kwargs}
+            for f in proc_funcs:
+                data = f(data, time, **kwargs)
+            if save:
+                self.save(time, data)
+            else: return data
+        else:
+            warn(f'No files for {time}. Skipping to the next time.')
+        #except:
+        #    msg = f'Unable to process files for {time}. Check if files are corrupted. Skipping to the next time. { sys.exc_info()[0]}'
+        #    warn(msg, UserWarning)
 
-    def process_all(self, proc_funcs=[], max_workers=8, **proc_funcs_kwargs):
+    def process_all(self, proc_funcs=[], max_workers=1, **proc_funcs_kwargs):
         """`process_all` runs `process_one` in parallel using the number of workers defined
         by `max_workers` and passes the `proc_funcs` list to `process_one` method"""
         process_one = partial(self.process_one, proc_funcs=proc_funcs, **proc_funcs_kwargs)
