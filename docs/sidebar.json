@@ -1,5 +1,5 @@
 {
-  "banet": {
+  "BA-Net": {
     "Overview": "/",
     "Core": "/core",
     "Geo": "/geo",
@@ -7,7 +7,9 @@
     "Models": "/models",
     "Predict": "/predict",
     "Train": "/train",
-    "CLI": "/cli",
-    "Mapping Australia 2019/2020 fires": "/tutorials_australia2020"
+    "CLI": "/cli"
+  },
+  "Tutorials": {
+    "Mapping Australia 2019/2020 fires": "/tutorial.australia2020"
   }
 }

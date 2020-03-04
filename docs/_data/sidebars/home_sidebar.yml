@@ -30,10 +30,13 @@ entries:
     - output: web,pdf
       title: CLI
       url: /cli
+    output: web
+    title: BA-Net
+  - folderitems:
     - output: web,pdf
       title: Mapping Australia 2019/2020 fires
-      url: /tutorials_australia2020
+      url: /tutorial.australia2020
     output: web
-    title: banet
+    title: Tutorials
   output: web
   title: Sidebar
