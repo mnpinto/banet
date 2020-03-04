@@ -33,15 +33,6 @@ entries:
     - output: web,pdf
       title: Mapping Australia 2019/2020 fires
       url: /tutorials_australia2020
-    - output: web,pdf
-      title: Mapping Amazon 2019 fires
-      url: /tutorials_amazon2019
-    - output: web,pdf
-      title: Mapping Greece 2018 fires
-      url: /tutorials_greece2018
-    - output: web,pdf
-      title: Mapping Camp Fire 2018 fire in California
-      url: /tutorials_campfire2018
     output: web
     title: banet
   output: web

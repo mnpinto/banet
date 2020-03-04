@@ -8,9 +8,6 @@
     "Predict": "/predict",
     "Train": "/train",
     "CLI": "/cli",
-    "Mapping Australia 2019/2020 fires": "/tutorials_australia2020",
-    "Mapping Amazon 2019 fires": "/tutorials_amazon2019",
-    "Mapping Greece 2018 fires": "/tutorials_greece2018",
-    "Mapping Camp Fire 2018 fire in California": "/tutorials_campfire2018"
+    "Mapping Australia 2019/2020 fires": "/tutorials_australia2020"
   }
 }
