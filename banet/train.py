@@ -100,7 +100,7 @@ def open_mask(fn, *args, **kwargs):
     data = torch.from_numpy(data).float()
     return Image(data.view(-1, data.size()[0], data.size()[1]))
 
-def set_info_df(items_list):
+def set_info_df(items_list, satellite='VIIRS750', target_product='MCD64A1C6'):
     names, dates = [], []
     rs, cs = [], []
     for o in items_list:
@@ -110,7 +110,8 @@ def set_info_df(items_list):
         dates.append(date)
         rs.append(r)
         cs.append(c)
-    ba = [open_mask(get_y_fn(str(o))).data.sum().item() for o in progress_bar(items_list)]
+    ba = [open_mask(get_y_fn(str(o), satellite=satellite, target_product=target_product)
+                   ).data.sum().item() for o in progress_bar(items_list)]
     return pd.DataFrame({'name': names, 'time': dates, 'r':rs, 'c':cs, 'ba':ba})
 
 class SegLabelListCustom(SegmentationLabelList):
@@ -139,16 +140,15 @@ cutout = TfmPixel(_cutout, order=20, )
 def _cutout2(x, n_holes:uniform_int=1, length:uniform_int=40):
     "Cut out `n_holes` number of square holes of size `length` in image at random locations."
     h,w = x.shape[1:]
-    for n in range(n_holes):
-        h_y = np.random.randint(0, h)
-        h_x = np.random.randint(0, w)
-        y1 = int(np.clip(h_y - length / 2, 0, h))
-        y2 = int(np.clip(h_y + length / 2, 0, h))
-        x1 = int(np.clip(h_x - length / 2, 0, w))
-        x2 = int(np.clip(h_x + length / 2, 0, w))
-        x[0, y1:y2, x1:x2] = torch.rand(1)
-        x[1, y1:y2, x1:x2] = torch.rand(1)
-        x[2, y1:y2, x1:x2] = torch.rand(1)
+    h_y = np.random.randint(0, h)
+    h_x = np.random.randint(0, w)
+    y1 = int(np.clip(h_y - length / 2, 0, h))
+    y2 = int(np.clip(h_y + length / 2, 0, h))
+    x1 = int(np.clip(h_x - length / 2, 0, w))
+    x2 = int(np.clip(h_x + length / 2, 0, w))
+    x[0, y1:y2, x1:x2] = torch.rand(1)
+    x[1, y1:y2, x1:x2] = torch.rand(1)
+    x[2, y1:y2, x1:x2] = torch.rand(1)
     return x
 
 cutout2 = TfmPixel(_cutout2, order=20)
@@ -180,9 +180,10 @@ def mae(pred, targs, thr=0.5):
     targs = targs[a.byte()]
     return (pred-targs).abs().float().mean()
 
-def train_model(val_year, r_fold, path, models_path, n_epochs=8, lr=1e-2, nburned=10, n_episodes_train=2000,
+def train_model(val_year, r_fold, path, model_path, n_epochs=8, lr=1e-2, nburned=10, n_episodes_train=2000,
         n_episodes_valid=100, sequence_len=64, n_sequences=1, do_cutout=True, model_arch=None,
-        pretrained_weights=None):
+        pretrained_weights=None, satellite='VIIRS750', target_product='MCD64A1C6',
+        get_learner=False):
     path_img = path/'images'
     train_files = sorted([f.name for f in path_img.iterdir()])
     times = pd.DatetimeIndex([pd.Timestamp(t.split('_')[1]) for t in train_files])
@@ -199,11 +200,15 @@ def train_model(val_year, r_fold, path, models_path, n_epochs=8, lr=1e-2, nburne
 
     data = (SegItemListCustom.from_df(train_df, path, cols='ID', folder='images')
         .split_by_idx(valid_idx)
-        .label_from_func(get_y_fn, classes=['Burned'])
+        .label_from_func(
+            partial(get_y_fn, satellite=satellite, target_product=target_product),
+            classes=['Burned'])
         .transform(tfms, size=128, tfm_y=False))
 
-    info_train_df = set_info_df(data.train.items)
-    info_valid_df = set_info_df(data.valid.items)
+    info_train_df = set_info_df(data.train.items,
+                                satellite=satellite, target_product=target_product)
+    info_valid_df = set_info_df(data.valid.items,
+                                satellite=satellite, target_product=target_product)
 
     bs = sequence_len*n_sequences
     train_dl = DataLoader(
@@ -231,9 +236,11 @@ def train_model(val_year, r_fold, path, models_path, n_epochs=8, lr=1e-2, nburne
     if pretrained_weights is not None:
         print(f'Loading pretrained_weights from {pretrained_weights}\n')
         model.load_state_dict(torch.load(pretrained_weights)['model'])
-    learn = Learner(databunch, model, callback_fns=[ImageSequence],
-                    loss_func=BCE(), wd=1e-2, metrics=[accuracy, dice2d, mae])
+    learn = Learner(databunch, model, callback_fns=[
+        partial(ImageSequence, sequence_len=sequence_len, n_sequences=n_sequences)],
+        loss_func=BCE(), wd=1e-2, metrics=[accuracy, dice2d, mae])
     learn.clip_grad = 1
+    if get_learner: return learn
     print('Starting traning loop\n')
     learn.fit_one_cycle(n_epochs, lr)
     model_path.mkdir(exist_ok=True)

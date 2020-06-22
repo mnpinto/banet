@@ -128,12 +128,14 @@ def banet_predict_times(region:Param("Region name", str),
                     input_path:Param("Input path for dataset", str),
                     output_path:Param("Output path for tiles dataset", str),
                     regions_path:Param("Path for region json files", str),
+                    product:Param("Name of product (default VIIRS750)", str)="VIIRS750",
+                    output:Param("Name of file to save results", str)="data",
                     weight_files:Param("List of pth weight files", list)=_weight_files):
 
     iop = InOutPath(input_path, f'{output_path}')
     times = pd.date_range(tstart, tend, freq='D')
     R = Region.load(f'{regions_path}/R_{region}.json')
-    predict_time(iop, times, weight_files, R)
+    predict_time(iop, times, weight_files, R, product=product, output=output)
 
 # Cell
 @call_parse

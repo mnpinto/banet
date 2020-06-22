@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "This module include classes and functions to train BA-Net"
+description: "This module include classes and functions to train BA-Net"
 ---
 <!--
 
@@ -18,22 +19,36 @@ summary: "This module include classes and functions to train BA-Net"
 -->
 
 <div class="container" id="notebook-container">
+        
+    {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Callbacks">Callbacks<a class="anchor-link" href="#Callbacks">&#182;</a></h1>
+<h1 id="Callbacks">Callbacks<a class="anchor-link" href="#Callbacks"> </a></h1>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -61,6 +76,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -82,9 +101,17 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -105,6 +132,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -125,6 +156,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -146,6 +181,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -155,7 +194,7 @@ that returns the length of the returned iterators.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="set_info_df" class="doc_header"><code>set_info_df</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>set_info_df</code>(<strong><code>items_list</code></strong>)</p>
+<h4 id="set_info_df" class="doc_header"><code>set_info_df</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>set_info_df</code>(<strong><code>items_list</code></strong>, <strong><code>satellite</code></strong>=<em><code>'VIIRS750'</code></em>, <strong><code>target_product</code></strong>=<em><code>'MCD64A1C6'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -166,6 +205,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -175,7 +218,7 @@ that returns the length of the returned iterators.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SegLabelListCustom" class="doc_header"><code>class</code> <code>SegLabelListCustom</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L116" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SegLabelListCustom</code>(<strong><code>items</code></strong>:<code>Iterator</code>[<code>T_co</code>], <strong><code>classes</code></strong>:<code>Collection</code>[<code>T_co</code>]=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>SegmentationLabelList</code></p>
+<h2 id="SegLabelListCustom" class="doc_header"><code>class</code> <code>SegLabelListCustom</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L117" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SegLabelListCustom</code>(<strong><code>items</code></strong>:<code>Iterator</code>[<code>T_co</code>], <strong><code>classes</code></strong>:<code>Collection</code>[<code>T_co</code>]=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>SegmentationLabelList</code></p>
 </blockquote>
 <p><code>ItemList</code> for segmentation masks.</p>
 
@@ -187,6 +230,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -196,7 +243,7 @@ that returns the length of the returned iterators.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="SegItemListCustom" class="doc_header"><code>class</code> <code>SegItemListCustom</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L119" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SegItemListCustom</code>(<strong>*<code>args</code></strong>, <strong><code>convert_mode</code></strong>=<em><code>'RGB'</code></em>, <strong><code>after_open</code></strong>:<code>Callable</code>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>ImageList</code></p>
+<h2 id="SegItemListCustom" class="doc_header"><code>class</code> <code>SegItemListCustom</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L120" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SegItemListCustom</code>(<strong>*<code>args</code></strong>, <strong><code>convert_mode</code></strong>=<em><code>'RGB'</code></em>, <strong><code>after_open</code></strong>:<code>Callable</code>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>ImageList</code></p>
 </blockquote>
 <p><code>ItemList</code> suitable for computer vision.</p>
 
@@ -208,6 +255,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -229,6 +280,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -250,6 +305,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -270,6 +329,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -291,6 +354,10 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -300,7 +367,7 @@ that returns the length of the returned iterators.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="train_model" class="doc_header"><code>train_model</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L183" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train_model</code>(<strong><code>val_year</code></strong>, <strong><code>r_fold</code></strong>, <strong><code>path</code></strong>, <strong><code>models_path</code></strong>, <strong><code>n_epochs</code></strong>=<em><code>8</code></em>, <strong><code>lr</code></strong>=<em><code>0.01</code></em>, <strong><code>nburned</code></strong>=<em><code>10</code></em>, <strong><code>n_episodes_train</code></strong>=<em><code>2000</code></em>, <strong><code>n_episodes_valid</code></strong>=<em><code>100</code></em>, <strong><code>sequence_len</code></strong>=<em><code>64</code></em>, <strong><code>n_sequences</code></strong>=<em><code>1</code></em>, <strong><code>do_cutout</code></strong>=<em><code>True</code></em>, <strong><code>model_arch</code></strong>=<em><code>None</code></em>, <strong><code>pretrained_weights</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="train_model" class="doc_header"><code>train_model</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L183" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train_model</code>(<strong><code>val_year</code></strong>, <strong><code>r_fold</code></strong>, <strong><code>path</code></strong>, <strong><code>model_path</code></strong>, <strong><code>n_epochs</code></strong>=<em><code>8</code></em>, <strong><code>lr</code></strong>=<em><code>0.01</code></em>, <strong><code>nburned</code></strong>=<em><code>10</code></em>, <strong><code>n_episodes_train</code></strong>=<em><code>2000</code></em>, <strong><code>n_episodes_valid</code></strong>=<em><code>100</code></em>, <strong><code>sequence_len</code></strong>=<em><code>64</code></em>, <strong><code>n_sequences</code></strong>=<em><code>1</code></em>, <strong><code>do_cutout</code></strong>=<em><code>True</code></em>, <strong><code>model_arch</code></strong>=<em><code>None</code></em>, <strong><code>pretrained_weights</code></strong>=<em><code>None</code></em>, <strong><code>satellite</code></strong>=<em><code>'VIIRS750'</code></em>, <strong><code>target_product</code></strong>=<em><code>'MCD64A1C6'</code></em>, <strong><code>get_learner</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 
 </div>
@@ -311,6 +378,8 @@ that returns the length of the returned iterators.</p>
 </div>
 
 </div>
+    {% endraw %}
+
 </div>
  
 

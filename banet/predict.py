@@ -90,8 +90,8 @@ def get_preds(tiles, model, weights=None):
     return np.array(data)
 
 def predict_one(iop:InOutPath, times:list, weights_files:list, region:str, threshold=0.5,
-                slice_idx=None):
-    fname = lambda t : iop.src/f'VIIRS750{region}_{t.strftime("%Y%m%d")}.mat'
+                slice_idx=None, product='VIIRS750'):
+    fname = lambda t : iop.src/f'{product}{region}_{t.strftime("%Y%m%d")}.mat'
     files = [fname(t) for t in times]
     im_size = open_mat(files[0], slice_idx=slice_idx).shape[1:]
     tiles = []
@@ -107,7 +107,9 @@ def predict_one(iop:InOutPath, times:list, weights_files:list, region:str, thres
     tiles = torch.from_numpy(tiles).float()
     preds_ens = []
     for wf in weights_files:
-        weights = torch.load(wf)['model']
+        weights = torch.load(wf)
+        if 'model' in weights:
+            weights = weights['model']
         print(f'Generating model predictions for {wf}:')
         preds = get_preds(tiles, model=BA_Net(4, 1, 64), weights=weights)
         preds = np.array([tiles2image(preds[:,i], im_size) for i in range(preds.shape[1])])
@@ -116,7 +118,8 @@ def predict_one(iop:InOutPath, times:list, weights_files:list, region:str, thres
     return preds
 
 def predict_time(path:InOutPath, times:list, weight_files:list, region,
-                 threshold=0.05, save=True, max_size=2000, buffer=128):
+                 threshold=0.05, save=True, max_size=2000, buffer=128,
+                 product='VIIRS750', output='data'):
     tstart, tend = times.min(), times.max()
     tstart = tstart + pd.Timedelta(days=32)
     tend = tend-pd.Timedelta(days=32)
@@ -135,7 +138,8 @@ def predict_time(path:InOutPath, times:list, weight_files:list, region,
         for time in ptimes:
             time_start = pd.Timestamp((time - pd.Timedelta(days=30)).strftime('%Y-%m-15')) # Day 15, previous month
             times = pd.date_range(time_start, periods=64, freq='D')
-            preds = predict_one(path, times, weight_files, region.name, slice_idx=split)
+            preds = predict_one(path, times, weight_files, region.name, slice_idx=split,
+                                product=product)
             preds = preds[times.month == time.month]
             preds_all.append(preds)
         preds_all = np.concatenate(preds_all, axis=0)
@@ -154,7 +158,7 @@ def predict_time(path:InOutPath, times:list, weight_files:list, region,
         ba_all[split_idx[0]:split_idx[1], split_idx[2]:split_idx[3]] = bas[i]
         bd_all[split_idx[0]:split_idx[1], split_idx[2]:split_idx[3]] = bds[i]
     if not save: return ba_all, bd_all
-    sio.savemat(path.dst/'data.mat', {'burndate': bd_all, 'burnconf': ba_all}, do_compression=True)
+    sio.savemat(path.dst/f'{output}.mat', {'burndate': bd_all, 'burnconf': ba_all}, do_compression=True)
 
 def predict_month(iop, time, weight_files, region, threshold=0.5, save=True, slice_idx=None):
     time_start = pd.Timestamp((time - pd.Timedelta(days=30)).strftime('%Y-%m-15')) # Day 15, previous month
