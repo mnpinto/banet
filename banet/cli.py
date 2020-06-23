@@ -163,6 +163,10 @@ def banet_train_model(val_year:Param('Validation year', int),
 
 # Cell
 def banet_nrt_run(region:Param("Region name", str),
+                  left:Param("Left limit of the bounding box.", float),
+                  bottom:Param("Bottom limit of the bounding box.", float),
+                  right:Param("Right limit of the bounding box.", float),
+                  top:Param("Top limit of the bounding box.", float),
                   project_path:Param("Root directory of the project", str),
                   hotspots_region:Param("Hotspots region name", str)):
     paths = ProjectPath(project_path)
@@ -170,7 +174,9 @@ def banet_nrt_run(region:Param("Region name", str),
                     'banetv0.20-val2017-fold1.pth',
                     'banetv0.20-val2017-fold2.pth']
     manager = RunManager(paths, region)
-    manager.update_hotspots(hotspots_region)
-    manager.download_viirs()
-    manager.preprocess_dataset()
-    manager.get_preds(weight_files)
+    with open(f'R_{region}.json', 'wb') as f:
+        f.write('{"name": "{region}", "bbox": [{left}, {bottom}, {right}, {top}], "pixel_size": 0.01}')
+    #manager.update_hotspots(hotspots_region)
+    #manager.download_viirs()
+    #manager.preprocess_dataset()
+    #manager.get_preds(weight_files)
