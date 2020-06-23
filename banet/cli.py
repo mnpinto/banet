@@ -162,6 +162,7 @@ def banet_train_model(val_year:Param('Validation year', int),
                 pretrained_weights=pretrained_weights)
 
 # Cell
+@call_parse
 def banet_nrt_run(region:Param("Region name", str),
                   left:Param("Left limit of the bounding box.", float),
                   bottom:Param("Bottom limit of the bounding box.", float),
