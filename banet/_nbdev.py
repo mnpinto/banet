@@ -55,6 +55,8 @@ index = {"filter_files": "00_core.ipynb",
          "predict_month": "04_predict.ipynb",
          "predict_nrt": "04_predict.ipynb",
          "split_mask": "04_predict.ipynb",
+         "ProjectPath": "04b_nrt.ipynb",
+         "RunManager": "04b_nrt.ipynb",
          "SampleEpisode": "05_train.ipynb",
          "ImageSequence": "05_train.ipynb",
          "get_y_fn": "05_train.ipynb",
@@ -74,13 +76,15 @@ index = {"filter_files": "00_core.ipynb",
          "banet_dataset2tiles": "06_cli.ipynb",
          "banet_predict_monthly": "06_cli.ipynb",
          "banet_predict_times": "06_cli.ipynb",
-         "banet_train_model": "06_cli.ipynb"}
+         "banet_train_model": "06_cli.ipynb",
+         "banet_nrt_run": "06_cli.ipynb"}
 
 modules = ["core.py",
            "geo.py",
            "data.py",
            "models.py",
            "predict.py",
+           "nrt.py",
            "train.py",
            "cli.py"]
 

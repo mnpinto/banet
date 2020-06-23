@@ -59,7 +59,7 @@ description: "Command line scripts."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_viirs750_download" class="doc_header"><code>banet_viirs750_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_viirs750_download</code>(<strong><code>region</code></strong>:"Region name", <strong><code>tstart</code></strong>:"Start of serach window yyyy-mm-dd HH:MM:SS", <strong><code>tend</code></strong>:"End of search windo yyyy-mm-dd HH:MM:SS", <strong><code>path_save</code></strong>:"Path to save the outputs of the request", <strong><code>regions_path</code></strong>:"Path for region json files")</p>
+<h4 id="banet_viirs750_download" class="doc_header"><code>banet_viirs750_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L35" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_viirs750_download</code>(<strong><code>region</code></strong>:"Region name", <strong><code>tstart</code></strong>:"Start of serach window yyyy-mm-dd HH:MM:SS", <strong><code>tend</code></strong>:"End of search windo yyyy-mm-dd HH:MM:SS", <strong><code>path_save</code></strong>:"Path to save the outputs of the request", <strong><code>regions_path</code></strong>:"Path for region json files")</p>
 </blockquote>
 
 </div>
@@ -105,7 +105,7 @@ banet_viirs750_download <span class="nv">$region</span> <span class="s2">&quot;<
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_create_dataset" class="doc_header"><code>banet_create_dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_create_dataset</code>(<strong><code>region</code></strong>:"Region name", <strong><code>viirs_path</code></strong>:"Input path for VIIRS raw data", <strong><code>fires_path</code></strong>:"Input path for Active Fires csv", <strong><code>save_path</code></strong>:"Path to save outputs", <strong><code>regions_path</code></strong>:"Path where region defenition files are stored", <strong><code>mcd64_path</code></strong>:"Input path for MCD64 raw data"=<em><code>None</code></em>, <strong><code>cci51_path</code></strong>:"Input path for FireCCI51 raw data"=<em><code>None</code></em>, <strong><code>bands</code></strong>:"List of bands to use as inputs for VIIRS raw data"=<em><code>['Reflectance_M5', 'Reflectance_M7', 'Reflectance_M10', 'Radiance_M12', 'Radiance_M15', 'SolarZenithAngle', 'SatelliteZenithAngle']</code></em>, <strong><code>year</code></strong>:"Set to process a single year instead of all available"=<em><code>None</code></em>)</p>
+<h4 id="banet_create_dataset" class="doc_header"><code>banet_create_dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_create_dataset</code>(<strong><code>region</code></strong>:"Region name", <strong><code>viirs_path</code></strong>:"Input path for VIIRS raw data", <strong><code>fires_path</code></strong>:"Input path for Active Fires csv", <strong><code>save_path</code></strong>:"Path to save outputs", <strong><code>regions_path</code></strong>:"Path where region defenition files are stored", <strong><code>mcd64_path</code></strong>:"Input path for MCD64 raw data"=<em><code>None</code></em>, <strong><code>cci51_path</code></strong>:"Input path for FireCCI51 raw data"=<em><code>None</code></em>, <strong><code>bands</code></strong>:"List of bands to use as inputs for VIIRS raw data"=<em><code>['Reflectance_M5', 'Reflectance_M7', 'Reflectance_M10', 'Radiance_M12', 'Radiance_M15', 'SolarZenithAngle', 'SatelliteZenithAngle']</code></em>, <strong><code>year</code></strong>:"Set to process a single year instead of all available"=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -165,7 +165,7 @@ banet_create_dataset <span class="nv">$region</span> <span class="nv">$viirs_pat
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_dataset2tiles" class="doc_header"><code>banet_dataset2tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L89" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_dataset2tiles</code>(<strong><code>region</code></strong>:"Region name", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>size</code></strong>:"Tiles size"=<em><code>128</code></em>, <strong><code>step</code></strong>:"Step size of moving window to create tiles"=<em><code>100</code></em>, <strong><code>year</code></strong>:"Set to process a single year instead of all available"=<em><code>None</code></em>)</p>
+<h4 id="banet_dataset2tiles" class="doc_header"><code>banet_dataset2tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L91" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_dataset2tiles</code>(<strong><code>region</code></strong>:"Region name", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>size</code></strong>:"Tiles size"=<em><code>128</code></em>, <strong><code>step</code></strong>:"Step size of moving window to create tiles"=<em><code>100</code></em>, <strong><code>year</code></strong>:"Set to process a single year instead of all available"=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -210,7 +210,7 @@ banet_dataset2tiles <span class="nv">$region</span> <span class="nv">$input_path
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_predict_monthly" class="doc_header"><code>banet_predict_monthly</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L105" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_predict_monthly</code>(<strong><code>region</code></strong>:"Region name", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>year</code></strong>:"Set to process a single year instead of all available", <strong><code>weight_files</code></strong>:"List of pth weight files"=<em><code>['/home/mnpinto/.banet/models/banetv0.20-val2017-fold0.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold1.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold2.pth']</code></em>)</p>
+<h4 id="banet_predict_monthly" class="doc_header"><code>banet_predict_monthly</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L107" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_predict_monthly</code>(<strong><code>region</code></strong>:"Region name", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>year</code></strong>:"Set to process a single year instead of all available", <strong><code>weight_files</code></strong>:"List of pth weight files"=<em><code>['/home/mnpinto/.banet/models/banetv0.20-val2017-fold0.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold1.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold2.pth']</code></em>)</p>
 </blockquote>
 
 </div>
@@ -256,7 +256,7 @@ banet_predict_monthly <span class="nv">$region</span> <span class="nv">$input_pa
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_predict_times" class="doc_header"><code>banet_predict_times</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_predict_times</code>(<strong><code>region</code></strong>:"Region name", <strong><code>tstart</code></strong>:"Start of serach window yyyy-mm-dd HH:MM:SS", <strong><code>tend</code></strong>:"End of search windo yyyy-mm-dd HH:MM:SS", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>regions_path</code></strong>:"Path for region json files", <strong><code>product</code></strong>:"Name of product (default VIIRS750)"=<em><code>'VIIRS750'</code></em>, <strong><code>output</code></strong>:"Name of file to save results"=<em><code>'data'</code></em>, <strong><code>weight_files</code></strong>:"List of pth weight files"=<em><code>['/home/mnpinto/.banet/models/banetv0.20-val2017-fold0.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold1.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold2.pth']</code></em>)</p>
+<h4 id="banet_predict_times" class="doc_header"><code>banet_predict_times</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L126" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_predict_times</code>(<strong><code>region</code></strong>:"Region name", <strong><code>tstart</code></strong>:"Start of serach window yyyy-mm-dd HH:MM:SS", <strong><code>tend</code></strong>:"End of search windo yyyy-mm-dd HH:MM:SS", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>regions_path</code></strong>:"Path for region json files", <strong><code>product</code></strong>:"Name of product (default VIIRS750)"=<em><code>'VIIRS750'</code></em>, <strong><code>output</code></strong>:"Name of file to save results"=<em><code>'data'</code></em>, <strong><code>weight_files</code></strong>:"List of pth weight files"=<em><code>['/home/mnpinto/.banet/models/banetv0.20-val2017-fold0.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold1.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold2.pth']</code></em>)</p>
 </blockquote>
 
 </div>
@@ -304,7 +304,7 @@ banet_predict_times <span class="nv">$region</span> <span class="s2">&quot;</spa
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_train_model" class="doc_header"><code>banet_train_model</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L141" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_train_model</code>(<strong><code>val_year</code></strong>:"Validation year", <strong><code>r_fold</code></strong>:"Fold name", <strong><code>input_path</code></strong>:"Input path for tiles dataset", <strong><code>output_path</code></strong>:"Path to save the model weights", <strong><code>n_epochs</code></strong>:"Number of epochs to train"=<em><code>8</code></em>, <strong><code>lr</code></strong>:"Learning rate"=<em><code>0.01</code></em>, <strong><code>nburned</code></strong>:"Minimum number of burned pixels to define a sequence"=<em><code>10</code></em>, <strong><code>n_episodes_train</code></strong>:"Number of episodes per train epoch"=<em><code>2000</code></em>, <strong><code>n_episodes_valid</code></strong>:"Number of episodes for validation"=<em><code>100</code></em>, <strong><code>sequence_len</code></strong>:"Number of time-steps in sequence"=<em><code>64</code></em>, <strong><code>n_sequences</code></strong>:"Number of sequences per batch"=<em><code>1</code></em>, <strong><code>pretrained_weights</code></strong>:"Path to a weights file"=<em><code>None</code></em>)</p>
+<h4 id="banet_train_model" class="doc_header"><code>banet_train_model</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L143" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_train_model</code>(<strong><code>val_year</code></strong>:"Validation year", <strong><code>r_fold</code></strong>:"Fold name", <strong><code>input_path</code></strong>:"Input path for tiles dataset", <strong><code>output_path</code></strong>:"Path to save the model weights", <strong><code>n_epochs</code></strong>:"Number of epochs to train"=<em><code>8</code></em>, <strong><code>lr</code></strong>:"Learning rate"=<em><code>0.01</code></em>, <strong><code>nburned</code></strong>:"Minimum number of burned pixels to define a sequence"=<em><code>10</code></em>, <strong><code>n_episodes_train</code></strong>:"Number of episodes per train epoch"=<em><code>2000</code></em>, <strong><code>n_episodes_valid</code></strong>:"Number of episodes for validation"=<em><code>100</code></em>, <strong><code>sequence_len</code></strong>:"Number of time-steps in sequence"=<em><code>64</code></em>, <strong><code>n_sequences</code></strong>:"Number of sequences per batch"=<em><code>1</code></em>, <strong><code>pretrained_weights</code></strong>:"Path to a weights file"=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -327,6 +327,97 @@ banet_predict_times <span class="nv">$region</span> <span class="s2">&quot;</spa
 <span class="nv">output_path</span><span class="o">=</span>/srv/banet/data/models
 
 banet_train_model <span class="nv">$val_year</span> <span class="nv">$fold_name</span> <span class="nv">$input_path</span> <span class="nv">$output_path</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="banet_nrt_run" class="doc_header"><code>banet_nrt_run</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L165" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_nrt_run</code>(<strong><code>region</code></strong>:"Region name", <strong><code>project_path</code></strong>:"Root directory of the project", <strong><code>hotspots_region</code></strong>:"Hotspots region name")</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>hotspots_region</code> name should be defined according with the image bellow. Names with multiple words use <code>_</code> in place of the spaces. More info here: <a href="https://firms.modaps.eosdis.nasa.gov/active_fire/#firms-txt">https://firms.modaps.eosdis.nasa.gov/active_fire/#firms-txt</a></p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://firms.modaps.eosdis.nasa.gov/images/Regions_500px.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<img src="https://firms.modaps.eosdis.nasa.gov/images/Regions_500px.jpg"/>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Important:</strong> Note that hotspots will only be automatically downloaded starting 7 days ago from the current date. If you want to compute burned areas for an earlier period follow this</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Example:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+<span class="nv">region</span><span class="o">=</span>PI
+<span class="nv">project_path</span><span class="o">=</span>.
+<span class="nv">hotspots_region</span><span class="o">=</span>Europe
+
+banet_nrt_run <span class="nv">$region</span> <span class="nv">$project_path</span> <span class="nv">$hotspots_region</span>
 </pre></div>
 
 </div>

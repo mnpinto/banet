@@ -180,7 +180,7 @@ def predict_month(iop, time, weight_files, region, threshold=0.5, save=True, sli
 
 def predict_nrt(iop, time, weights_files, region, threshold=0.5, save=True):
     times = pd.date_range(time-pd.Timedelta(days=63), time, freq='D')
-    preds = predict_one(iop, times, weight_files, region, threshold=threshold)
+    preds = predict_one(iop, times, weights_files, region, threshold=threshold)
     assert preds.shape[0] == len(times)
     ba = preds.sum(0)
     bd = preds.argmax(0)
