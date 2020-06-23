@@ -177,7 +177,7 @@ def banet_nrt_run(region:Param("Region name", str),
     manager = RunManager(paths, region)
     with open(f'R_{region}.json', 'wb') as f:
         f.write('{"name": "{region}", "bbox": [{left}, {bottom}, {right}, {top}], "pixel_size": 0.01}')
-    #manager.update_hotspots(hotspots_region)
-    #manager.download_viirs()
-    #manager.preprocess_dataset()
-    #manager.get_preds(weight_files)
+    manager.update_hotspots(hotspots_region)
+    manager.download_viirs()
+    manager.preprocess_dataset()
+    manager.get_preds(weight_files)
