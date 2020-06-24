@@ -25,6 +25,9 @@ entries:
       title: Predict
       url: /predict
     - output: web,pdf
+      title: NRT
+      url: /nrt
+    - output: web,pdf
       title: Train
       url: /train
     - output: web,pdf

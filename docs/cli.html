@@ -407,12 +407,12 @@ banet_train_model <span class="nv">$val_year</span> <span class="nv">$fold_name<
 <p>Example:</p>
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
 <span class="nv">region</span><span class="o">=</span>PI
-<span class="nv">project_path</span><span class="o">=</span>.
+<span class="nv">project_path</span><span class="o">=</span>data
 <span class="nv">hotspots_region</span><span class="o">=</span>Europe
-<span class="nv">left</span><span class="o">=</span>-10.
-<span class="nv">bottom</span><span class="o">=</span><span class="m">36</span>.
-<span class="nv">right</span><span class="o">=</span><span class="m">5</span>.
-<span class="nv">top</span><span class="o">=</span><span class="m">44</span>.
+<span class="nv">left</span><span class="o">=</span>-10
+<span class="nv">bottom</span><span class="o">=</span><span class="m">36</span>
+<span class="nv">right</span><span class="o">=</span><span class="m">5</span>
+<span class="nv">top</span><span class="o">=</span><span class="m">44</span>
 banet_nrt_run <span class="nv">$region</span> <span class="nv">$left</span> <span class="nv">$bottom</span> <span class="nv">$right</span> <span class="nv">$top</span> <span class="nv">$project_path</span> <span class="nv">$hotspots_region</span>
 </pre></div>
 <p><strong>Important:</strong> Note that hotspots will only be automatically downloaded starting 7 days ago from the current date. If you want to compute burned areas for an earlier period you need to manually donwload the active fires data.</p>
