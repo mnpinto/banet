@@ -13,7 +13,7 @@ import IPython
 
 from geoget.download import run_all
 
-from .core import InOutPath, Path, ls
+from .core import InOutPath, Path, ls, dict2json
 from .data import *
 from .geo import Region
 from .predict import predict_month, predict_time
@@ -175,8 +175,8 @@ def banet_nrt_run(region:Param("Region name", str),
                     'banetv0.20-val2017-fold1.pth',
                     'banetv0.20-val2017-fold2.pth']
     manager = RunManager(paths, region)
-    with open(f'R_{region}.json', 'wb') as f:
-        f.write('{"name": "{region}", "bbox": [{left}, {bottom}, {right}, {top}], "pixel_size": 0.01}')
+    R = {'name': region, 'bbox': [left, bottom, right, top], 'pixel_size': 0.01}
+    dict2json(R, paths.config/f'R_{region}.json')
     manager.update_hotspots(hotspots_region)
     manager.download_viirs()
     manager.preprocess_dataset()
