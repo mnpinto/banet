@@ -6,6 +6,7 @@
     "Data": "/data",
     "Models": "/models",
     "Predict": "/predict",
+    "NRT": "/nrt",
     "Train": "/train",
     "CLI": "/cli"
   },
