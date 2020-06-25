@@ -6,6 +6,10 @@
 
 ## Install
 
+libhdf4-dev is required for pyhdf to read .hdf4 files.
+
+`sudo apt install -y libhdf4-dev`
+
 `pip install banet`
 
 ## Dataset
