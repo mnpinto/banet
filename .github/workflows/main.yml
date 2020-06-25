@@ -11,7 +11,7 @@ jobs:
         architecture: 'x64'
     - name: Install libhdf4-dev
       run: |
-        apt install -y libhdf4-dev
+        sudo apt install -y libhdf4-dev
     - name: Install the library
       run: |
         pip install nbdev jupyter
