@@ -107,7 +107,9 @@ def predict_one(iop:InOutPath, times:list, weights_files:list, region:str, thres
     tiles = torch.from_numpy(tiles).float()
     preds_ens = []
     for wf in weights_files:
-        weights = torch.load(wf)
+        if torch.cuda.is_available():
+            weights = torch.load(wf)
+        else: weights = torch.load(wf, map_location=torch.device('cpu'))
         if 'model' in weights:
             weights = weights['model']
         print(f'Generating model predictions for {wf}:')
