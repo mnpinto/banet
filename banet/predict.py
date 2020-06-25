@@ -83,9 +83,13 @@ def get_preds(tiles, model, weights=None):
     with torch.no_grad():
         data = []
         for x in tqdm(tiles):
-            model.eval().cuda()
+            model.eval()
+            if torch.cuda.is_available():
+                model.cuda()
             x = (x[None]-mu)/std
-            out = model(x.cuda()).sigmoid().float()
+            if torch.cuda.is_available():
+                x = x.cuda()
+            out = model(x).sigmoid().float()
             data.append(out.cpu().squeeze().numpy())
     return np.array(data)
 
