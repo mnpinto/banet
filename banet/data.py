@@ -14,6 +14,7 @@ from tqdm import tqdm
 import scipy.io as sio
 from functools import partial
 from netCDF4 import Dataset
+from pyhdf.SD import SD, SDC
 from geopandas import GeoDataFrame
 from shapely.geometry import Point
 import matplotlib.pyplot as plt
@@ -289,6 +290,7 @@ class BaseDataset():
 # Cell
 class Viirs750Dataset(BaseDataset):
     "Subclass of `BaseDataset` to process VIIRS 750-meter bands."
+    _use_netcdf4 = True
     def __init__(self, paths:InOutPath, region:Region,
                  times:pd.DatetimeIndex=None, bands:list=None):
         super().__init__('VIIRS750', paths, region, times, bands)
@@ -325,7 +327,26 @@ class Viirs750Dataset(BaseDataset):
             self.times = self.times[self.times<=last]
         return self.times
 
-    def open(self, files:list) -> dict:
+    def open_hdf4(self, files:list) -> dict:
+        data_dict = {b: [] for b in self.bands}
+        for s in self.bands:
+            f = sorted([f for f in files if s in f.name])
+            if len(f) == 0:
+                warn(f'No file for {s} found on {files}')
+            for f0 in f:
+                hdf_data = SD(str(f0), SDC.READ)
+                hdf_file = hdf_data.select(s)
+                hdf_attr = hdf_file.attributes()
+                data = hdf_file[:].astype(float)
+                data[data <= -999] = np.nan
+                data[data >= 65527] = np.nan
+                scale = 1 if 'Scale' not in hdf_attr else hdf_attr['Scale']
+                offset = 0 if 'Offset' not in hdf_attr else hdf_attr['Offset']
+                data = data*scale + offset
+                data_dict[s].append(data)
+        return data_dict
+
+    def open_netcdf4(self, files:list) -> dict:
         data_dict = {b: [] for b in self.bands}
         for s in self.bands:
             f = sorted([f for f in files if s in f.name])
@@ -341,6 +362,14 @@ class Viirs750Dataset(BaseDataset):
                 data = data*scale + offset
                 data_dict[s].append(data)
         return data_dict
+
+    def open(self, files:list) -> dict:
+        if self._use_netcdf4:
+            try: return self.open_netcdf4(files)
+            except: return self.open_hdf4(files)
+        else:
+            try: return self.open_hdf4(files)
+            except: return self.open_netcdf4(files)
 
 # Cell
 class MCD64Dataset(BaseDataset):

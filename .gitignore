@@ -1,6 +1,7 @@
 hide/
-data/
+data/*
 !data/regions
+!data/*.hdf
 *.bak
 .gitattributes
 .last_checked
