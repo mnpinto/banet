@@ -33,12 +33,12 @@ class Region():
     @property
     def width(self):
         "Width of the region"
-        return int(np.round(np.abs(self.bbox.left-self.bbox.right)/self.pixel_size))
+        return np.arange(self.bbox.left, self.bbox.right, self.pixel_size).shape[0]
 
     @property
     def height(self):
         "Height of the region"
-        return int(np.round(np.abs(self.bbox.top-self.bbox.bottom)/self.pixel_size))
+        return np.arange(self.bbox.bottom, self.bbox.top, self.pixel_size).shape[0]
 
     @property
     def transform(self):
