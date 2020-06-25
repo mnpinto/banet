@@ -235,7 +235,11 @@ def train_model(val_year, r_fold, path, model_path, n_epochs=8, lr=1e-2, nburned
 
     if pretrained_weights is not None:
         print(f'Loading pretrained_weights from {pretrained_weights}\n')
-        model.load_state_dict(torch.load(pretrained_weights)['model'])
+        if torch.cuda.is_available():
+            model.load_state_dict(torch.load(pretrained_weights)['model'])
+        else:
+            model.load_state_dict(
+                torch.load(pretrained_weights, map_location=torch.device('cpu'))['model'])
     learn = Learner(databunch, model, callback_fns=[
         partial(ImageSequence, sequence_len=sequence_len, n_sequences=n_sequences)],
         loss_func=BCE(), wd=1e-2, metrics=[accuracy, dice2d, mae])
