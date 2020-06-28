@@ -169,7 +169,11 @@ def banet_nrt_run(region:Param("Region name", str),
                   right:Param("Right limit of the bounding box.", float),
                   top:Param("Top limit of the bounding box.", float),
                   project_path:Param("Root directory of the project", str),
-                  hotspots_region:Param("Hotspots region name", str)):
+                  hotspots_region:Param("Hotspots region name", str),
+                  skip_hotspots:Param("Skip download of ladsweb data", bool)=False,
+                  skip_ladsweb:Param("Skip download of ladsweb data", bool)=False,
+                  skip_preprocess:Param("Skip download of ladsweb data", bool)=False,
+                  skip_getpreds:Param("Skip download of ladsweb data", bool)=False):
     paths = ProjectPath(project_path)
     weight_files = ['banetv0.20-val2017-fold0.pth',
                     'banetv0.20-val2017-fold1.pth',
@@ -177,7 +181,7 @@ def banet_nrt_run(region:Param("Region name", str),
     manager = RunManager(paths, region)
     R = {'name': region, 'bbox': [left, bottom, right, top], 'pixel_size': 0.01}
     dict2json(R, paths.config/f'R_{region}.json')
-    manager.update_hotspots(hotspots_region)
-    manager.download_viirs()
-    manager.preprocess_dataset()
-    manager.get_preds(weight_files)
+    if not skip_hotspots: manager.update_hotspots(hotspots_region)
+    if not skip_ladsweb: manager.download_viirs()
+    if not skip_preprocess: manager.preprocess_dataset()
+    if not skip_getpreds: manager.get_preds(weight_files)
