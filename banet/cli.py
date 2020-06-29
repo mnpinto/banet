@@ -170,6 +170,7 @@ def banet_nrt_run(region:Param("Region name", str),
                   top:Param("Top limit of the bounding box.", float),
                   project_path:Param("Root directory of the project", str),
                   hotspots_region:Param("Hotspots region name", str),
+                  time:Param("Day for the run", str, choices=["today", "yesterday"])="today",
                   skip_hotspots:Param("Skip download of ladsweb data", bool)=False,
                   skip_ladsweb:Param("Skip download of ladsweb data", bool)=False,
                   skip_preprocess:Param("Skip download of ladsweb data", bool)=False,
@@ -178,7 +179,7 @@ def banet_nrt_run(region:Param("Region name", str),
     weight_files = ['banetv0.20-val2017-fold0.pth',
                     'banetv0.20-val2017-fold1.pth',
                     'banetv0.20-val2017-fold2.pth']
-    manager = RunManager(paths, region)
+    manager = RunManager(paths, region, time=time)
     R = {'name': region, 'bbox': [left, bottom, right, top], 'pixel_size': 0.01}
     dict2json(R, paths.config/f'R_{region}.json')
     if not skip_hotspots: manager.update_hotspots(hotspots_region)
