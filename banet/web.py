@@ -57,8 +57,8 @@ def fires2raster(path_save, fires, data):
         lat_r = lat[rmin-1:rmax+1]
         lon_r = lon[cmin-1:cmax+1]
         tfm = rasterio.Affine(0.01, 0, lon_r.min(), 0, -0.01, lat_r.max())
-        burned_r = data['burned'][rmin-1:rmax+1, cmin-1:cmax+1]
-        date_r =  data['date'][rmin-1:rmax+1, cmin-1:cmax+1]
+        burned_r = data['burned'][rmin-1:rmax+1, cmin-1:cmax+1].copy()
+        date_r =  data['date'][rmin-1:rmax+1, cmin-1:cmax+1].copy()
         burned_r[f[rmin-1:rmax+1, cmin-1:cmax+1]==0] = np.nan
         date_r[f[rmin-1:rmax+1, cmin-1:cmax+1]==0] = np.nan
 
