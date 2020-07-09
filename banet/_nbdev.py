@@ -6,7 +6,7 @@ index = {"filter_files": "00_core.ipynb",
          "ls": "00_core.ipynb",
          "hdf_attr_check": "00_core.ipynb",
          "dict2json": "00_core.ipynb",
-         "Path.ls": "06_cli.ipynb",
+         "Path.ls": "07_web.ipynb",
          "monthlen": "00_core.ipynb",
          "InOutPath": "00_core.ipynb",
          "Region": "01_geo.ipynb",
@@ -77,7 +77,10 @@ index = {"filter_files": "00_core.ipynb",
          "banet_predict_monthly": "06_cli.ipynb",
          "banet_predict_times": "06_cli.ipynb",
          "banet_train_model": "06_cli.ipynb",
-         "banet_nrt_run": "06_cli.ipynb"}
+         "banet_nrt_run": "06_cli.ipynb",
+         "ba_split": "07_web.ipynb",
+         "fires2raster": "07_web.ipynb",
+         "process_last": "07_web.ipynb"}
 
 modules = ["core.py",
            "geo.py",
@@ -86,7 +89,8 @@ modules = ["core.py",
            "predict.py",
            "nrt.py",
            "train.py",
-           "cli.py"]
+           "cli.py",
+           "web.py"]
 
 doc_url = "https://mnpinto.github.io/banet/"
 
