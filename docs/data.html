@@ -52,7 +52,39 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="VIIRS750_download" class="doc_header"><code>class</code> <code>VIIRS750_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L30" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>VIIRS750_download</code>(<strong><code>region</code></strong>, <strong><code>tstart</code></strong>, <strong><code>tend</code></strong>) :: <code>Ladsweb</code></p>
+<h2 id="VIIRS375_download" class="doc_header"><code>class</code> <code>VIIRS375_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L32" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>VIIRS375_download</code>(<strong><code>region</code></strong>, <strong><code>tstart</code></strong>, <strong><code>tend</code></strong>, <strong><code>bands</code></strong>=<em><code>None</code></em>) :: <code>Ladsweb</code></p>
+</blockquote>
+<p>Utility for downloading VIIRS 375m data to create the dataset.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="VIIRS750_download" class="doc_header"><code>class</code> <code>VIIRS750_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L44" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>VIIRS750_download</code>(<strong><code>region</code></strong>, <strong><code>tstart</code></strong>, <strong><code>tend</code></strong>, <strong><code>bands</code></strong>=<em><code>None</code></em>) :: <code>Ladsweb</code></p>
 </blockquote>
 <p>Utility for downloading VIIRS 750m data to create the dataset.</p>
 
@@ -84,7 +116,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BandsFilter" class="doc_header"><code>class</code> <code>BandsFilter</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L42" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BandsFilter</code>(<strong><code>to_keep</code></strong>:<code>list</code>)</p>
+<h2 id="BandsFilter" class="doc_header"><code>class</code> <code>BandsFilter</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L57" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BandsFilter</code>(<strong><code>to_keep</code></strong>:<code>list</code>)</p>
 </blockquote>
 <p>Remove bands not in to_keep list from the dictionary.</p>
 
@@ -116,7 +148,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BandsRename" class="doc_header"><code>class</code> <code>BandsRename</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L55" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BandsRename</code>(<strong><code>input_names</code></strong>:<code>list</code>, <strong><code>output_names</code></strong>:<code>list</code>)</p>
+<h2 id="BandsRename" class="doc_header"><code>class</code> <code>BandsRename</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L70" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BandsRename</code>(<strong><code>input_names</code></strong>:<code>list</code>, <strong><code>output_names</code></strong>:<code>list</code>)</p>
 </blockquote>
 
 </div>
@@ -147,7 +179,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="MergeTiles" class="doc_header"><code>class</code> <code>MergeTiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L66" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MergeTiles</code>(<strong><code>band</code></strong>:<code>str</code>)</p>
+<h2 id="MergeTiles" class="doc_header"><code>class</code> <code>MergeTiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L81" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MergeTiles</code>(<strong><code>band</code></strong>:<code>str</code>)</p>
 </blockquote>
 
 </div>
@@ -178,7 +210,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BandsAssertShape" class="doc_header"><code>class</code> <code>BandsAssertShape</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L83" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BandsAssertShape</code>()</p>
+<h2 id="BandsAssertShape" class="doc_header"><code>class</code> <code>BandsAssertShape</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L98" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BandsAssertShape</code>()</p>
 </blockquote>
 
 </div>
@@ -209,7 +241,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ActiveFires" class="doc_header"><code>class</code> <code>ActiveFires</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L105" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActiveFires</code>(<strong><code>file</code></strong>)</p>
+<h2 id="ActiveFires" class="doc_header"><code>class</code> <code>ActiveFires</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L120" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ActiveFires</code>(<strong><code>file</code></strong>)</p>
 </blockquote>
 <p>Get active fires and interpolate to grid.</p>
 
@@ -241,7 +273,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="MirCalc" class="doc_header"><code>class</code> <code>MirCalc</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L132" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MirCalc</code>(<strong><code>solar_zenith_angle</code></strong>:<code>str</code>, <strong><code>mir_radiance</code></strong>:<code>str</code>, <strong><code>tir_radiance</code></strong>:<code>str</code>, <strong><code>output_name</code></strong>:<code>str</code>=<em><code>'MIR'</code></em>)</p>
+<h2 id="MirCalc" class="doc_header"><code>class</code> <code>MirCalc</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L147" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MirCalc</code>(<strong><code>solar_zenith_angle</code></strong>:<code>str</code>, <strong><code>mir_radiance</code></strong>:<code>str</code>, <strong><code>tir_radiance</code></strong>:<code>str</code>, <strong><code>output_name</code></strong>:<code>str</code>=<em><code>'MIR'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -272,7 +304,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BaseDataset" class="doc_header"><code>class</code> <code>BaseDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L207" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseDataset</code>(<strong><code>name</code></strong>:<code>str</code>, <strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>)</p>
+<h2 id="BaseDataset" class="doc_header"><code>class</code> <code>BaseDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L222" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseDataset</code>(<strong><code>name</code></strong>:<code>str</code>, <strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -303,7 +335,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.list_files" class="doc_header"><code>BaseDataset.list_files</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L219" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.list_files</code>(<strong><code>time</code></strong>:<code>Timestamp</code>)</p>
+<h4 id="BaseDataset.list_files" class="doc_header"><code>BaseDataset.list_files</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L234" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.list_files</code>(<strong><code>time</code></strong>:<code>Timestamp</code>)</p>
 </blockquote>
 <p>This method should return a list of filenames corresponding to the given Timestamp.</p>
 
@@ -328,7 +360,7 @@ description: "This module includes classes to create the datasets."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.find_dates" class="doc_header"><code>BaseDataset.find_dates</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L223" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.find_dates</code>()</p>
+<h4 id="BaseDataset.find_dates" class="doc_header"><code>BaseDataset.find_dates</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L238" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.find_dates</code>()</p>
 </blockquote>
 <p>This method should return a pd.DatetimeIndex
 with list of dates present in the data available in the input path.</p>
@@ -354,7 +386,7 @@ with list of dates present in the data available in the input path.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.open" class="doc_header"><code>BaseDataset.open</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L246" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.open</code>(<strong><code>files</code></strong>:<code>list</code>)</p>
+<h4 id="BaseDataset.open" class="doc_header"><code>BaseDataset.open</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L261" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.open</code>(<strong><code>files</code></strong>:<code>list</code>)</p>
 </blockquote>
 <p>This method is used to open a file or list of files for a given
 time period and returns a dictionary with the data ready to be passed
@@ -388,7 +420,7 @@ to the processing functions.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.match_times" class="doc_header"><code>BaseDataset.match_times</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L228" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.match_times</code>(<strong><code>other</code></strong>, <strong><code>on</code></strong>=<em><code>'month'</code></em>)</p>
+<h4 id="BaseDataset.match_times" class="doc_header"><code>BaseDataset.match_times</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L243" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.match_times</code>(<strong><code>other</code></strong>, <strong><code>on</code></strong>=<em><code>'month'</code></em>)</p>
 </blockquote>
 <p>Set the times attribute to match the times of other dataset.</p>
 
@@ -413,7 +445,7 @@ to the processing functions.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.filter_times" class="doc_header"><code>BaseDataset.filter_times</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L240" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.filter_times</code>(<strong><code>year</code></strong>)</p>
+<h4 id="BaseDataset.filter_times" class="doc_header"><code>BaseDataset.filter_times</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L255" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.filter_times</code>(<strong><code>year</code></strong>)</p>
 </blockquote>
 <p>To select only a specific year. This can be usefull for testing and
 for adding more new years and avoid reprocessing all the dataset.</p>
@@ -439,9 +471,9 @@ for adding more new years and avoid reprocessing all the dataset.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.save" class="doc_header"><code>BaseDataset.save</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L252" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.save</code>(<strong><code>time</code></strong>:<code>Timestamp</code>, <strong><code>data</code></strong>:<code>dict</code>, <strong><code>do_compression</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="BaseDataset.save" class="doc_header"><code>BaseDataset.save</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L267" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.save</code>(<strong><code>time</code></strong>:<code>Timestamp</code>, <strong><code>data</code></strong>:<code>dict</code>)</p>
 </blockquote>
-<p>Saves data in a single file for a specific timestamp in .mat format.</p>
+<p>Saves data in a single file for a specific timestamp in netcdf4 format.</p>
 
 </div>
 
@@ -464,7 +496,7 @@ for adding more new years and avoid reprocessing all the dataset.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.process_one" class="doc_header"><code>BaseDataset.process_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L258" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.process_one</code>(<strong><code>time</code></strong>:<code>Timestamp</code>, <strong><code>proc_funcs</code></strong>:<code>list</code>=<em><code>[]</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong>**<code>proc_funcs_kwargs</code></strong>)</p>
+<h4 id="BaseDataset.process_one" class="doc_header"><code>BaseDataset.process_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L286" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.process_one</code>(<strong><code>time</code></strong>:<code>Timestamp</code>, <strong><code>proc_funcs</code></strong>:<code>list</code>=<em><code>[]</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong>**<code>proc_funcs_kwargs</code></strong>)</p>
 </blockquote>
 <p>This method defines a processing pipeline consisting of opening the file
 using the <code>open</code> method, applying each of the <code>proc_funcs</code> to the output of the previous
@@ -491,7 +523,7 @@ and <code>save</code> the processed data using save method.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.process_all" class="doc_header"><code>BaseDataset.process_all</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L280" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.process_all</code>(<strong><code>proc_funcs</code></strong>=<em><code>[]</code></em>, <strong><code>max_workers</code></strong>=<em><code>1</code></em>, <strong>**<code>proc_funcs_kwargs</code></strong>)</p>
+<h4 id="BaseDataset.process_all" class="doc_header"><code>BaseDataset.process_all</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L312" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.process_all</code>(<strong><code>proc_funcs</code></strong>=<em><code>[]</code></em>, <strong><code>max_workers</code></strong>=<em><code>1</code></em>, <strong>**<code>proc_funcs_kwargs</code></strong>)</p>
 </blockquote>
 <p><code>process_all</code> runs <code>process_one</code> in parallel using the number of workers defined
 by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code>process_one</code> method</p>
@@ -524,7 +556,57 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Viirs750Dataset" class="doc_header"><code>class</code> <code>Viirs750Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L291" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Viirs750Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="ViirsDataset" class="doc_header"><code>class</code> <code>ViirsDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L323" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ViirsDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
+</blockquote>
+<p>Subclass of <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a> to process VIIRS 750-meter bands.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Viirs375Dataset" class="doc_header"><code>class</code> <code>Viirs375Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L407" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Viirs375Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data#ViirsDataset"><code>ViirsDataset</code></a></p>
+</blockquote>
+<p>Subclass of <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a> to process VIIRS 750-meter bands.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Viirs750Dataset" class="doc_header"><code>class</code> <code>Viirs750Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L410" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Viirs750Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data#ViirsDataset"><code>ViirsDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a> to process VIIRS 750-meter bands.</p>
 
@@ -563,6 +645,8 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 <span class="n">bfilter</span> <span class="o">=</span> <span class="n">BandsFilter</span><span class="p">([</span><span class="s1">&#39;Red&#39;</span><span class="p">,</span> <span class="s1">&#39;NIR&#39;</span><span class="p">,</span> <span class="s1">&#39;MIR&#39;</span><span class="p">])</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">Viirs750Dataset</span><span class="p">(</span><span class="n">iop</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">bands</span><span class="o">=</span><span class="n">bands</span><span class="p">)</span>
+
+<span class="n">test_eq</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;VIIRS750&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -575,7 +659,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 1/1 [00:00&lt;00:00, 1782.53it/s]
+<pre>100%|██████████| 1/1 [00:00&lt;00:00, 1070.52it/s]
 </pre>
 </div>
 </div>
@@ -625,7 +709,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:70: RuntimeWarning: invalid value encountered in greater_equal
+<pre>/home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:71: RuntimeWarning: invalid value encountered in greater_equal
 /home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:50: RuntimeWarning: invalid value encountered in less_equal
 /home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:51: RuntimeWarning: invalid value encountered in less_equal
 /home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:73: RuntimeWarning: invalid value encountered in less_equal
@@ -682,8 +766,8 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 1/1 [00:00&lt;00:00, 2119.41it/s]
-/home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:53: RuntimeWarning: invalid value encountered in greater_equal
+<pre>100%|██████████| 1/1 [00:00&lt;00:00, 2743.17it/s]
+/home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:54: RuntimeWarning: invalid value encountered in greater_equal
 /home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:50: RuntimeWarning: invalid value encountered in less_equal
 /home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:51: RuntimeWarning: invalid value encountered in less_equal
 /home/mnpinto/anaconda3/envs/fastai_dev/lib/python3.7/site-packages/ipykernel_launcher.py:73: RuntimeWarning: invalid value encountered in less_equal
@@ -735,7 +819,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="MCD64Dataset" class="doc_header"><code>class</code> <code>MCD64Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L375" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MCD64Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="MCD64Dataset" class="doc_header"><code>class</code> <code>MCD64Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L414" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MCD64Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a> to process MCD64A1 Collection 6 burned areas product.</p>
 
@@ -767,7 +851,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FireCCI51Dataset" class="doc_header"><code>class</code> <code>FireCCI51Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L435" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FireCCI51Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="FireCCI51Dataset" class="doc_header"><code>class</code> <code>FireCCI51Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L474" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FireCCI51Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a> to process FireCCI51 burned areas product.</p>
 
@@ -799,7 +883,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AusCoverDataset" class="doc_header"><code>class</code> <code>AusCoverDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L486" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AusCoverDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="AusCoverDataset" class="doc_header"><code>class</code> <code>AusCoverDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L525" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AusCoverDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a> to process AusCover burned areas product.</p>
 
@@ -831,7 +915,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="MTBSDataset" class="doc_header"><code>class</code> <code>MTBSDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L537" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MTBSDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="MTBSDataset" class="doc_header"><code>class</code> <code>MTBSDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L576" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MTBSDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a> to process MTBS burned areas product.</p>
 
@@ -863,7 +947,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ICNFDataset" class="doc_header"><code>class</code> <code>ICNFDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L580" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ICNFDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="ICNFDataset" class="doc_header"><code>class</code> <code>ICNFDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L619" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ICNFDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data#BaseDataset"><code>BaseDataset</code></a> to process ICNF burned areas product.</p>
 
@@ -895,7 +979,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Region2Tiles" class="doc_header"><code>class</code> <code>Region2Tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L627" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Region2Tiles</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>input_name</code></strong>:<code>str</code>, <strong><code>target_name</code></strong>:<code>str</code>, <strong><code>regions</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>size</code></strong>=<em><code>128</code></em>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
+<h2 id="Region2Tiles" class="doc_header"><code>class</code> <code>Region2Tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L666" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Region2Tiles</code>(<strong><code>paths</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>input_name</code></strong>:<code>str</code>, <strong><code>target_name</code></strong>:<code>str</code>, <strong><code>regions</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>size</code></strong>=<em><code>128</code></em>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
 </blockquote>
 <p>Crops processed dataset into 128x128 tiles to be used to train the model</p>
 
@@ -920,7 +1004,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.open" class="doc_header"><code>Region2Tiles.open</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L645" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.open</code>(<strong><code>file</code></strong>, <strong><code>bands</code></strong>:<code>list</code>)</p>
+<h4 id="Region2Tiles.open" class="doc_header"><code>Region2Tiles.open</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L684" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.open</code>(<strong><code>file</code></strong>, <strong><code>bands</code></strong>:<code>list</code>)</p>
 </blockquote>
 <p>Open .mat file and select <code>bands</code>.</p>
 
@@ -932,7 +1016,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.save" class="doc_header"><code>Region2Tiles.save</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L692" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.save</code>(<strong><code>data</code></strong>, <strong><code>file</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>, <strong><code>folder</code></strong>, <strong><code>bands</code></strong>)</p>
+<h4 id="Region2Tiles.save" class="doc_header"><code>Region2Tiles.save</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L731" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.save</code>(<strong><code>data</code></strong>, <strong><code>file</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>, <strong><code>folder</code></strong>, <strong><code>bands</code></strong>)</p>
 </blockquote>
 <p>Save <a href="/banet/data"><code>data</code></a> to <code>file</code> on <code>folder</code> selecting only the given <code>bands</code>.
 The row and column index are included in the filename so that the large
@@ -946,7 +1030,7 @@ scene can be reconstructed afterwards after generating the model predictions.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.crop" class="doc_header"><code>Region2Tiles.crop</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L676" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.crop</code>(<strong><code>im</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>)</p>
+<h4 id="Region2Tiles.crop" class="doc_header"><code>Region2Tiles.crop</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L715" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.crop</code>(<strong><code>im</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>)</p>
 </blockquote>
 <p>crop image into a square of size sz</p>
 
@@ -958,7 +1042,7 @@ scene can be reconstructed afterwards after generating the model predictions.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.process_one" class="doc_header"><code>Region2Tiles.process_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L650" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.process_one</code>(<strong><code>file</code></strong>, <strong><code>bands</code></strong>, <strong><code>folder</code></strong>)</p>
+<h4 id="Region2Tiles.process_one" class="doc_header"><code>Region2Tiles.process_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L689" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.process_one</code>(<strong><code>file</code></strong>, <strong><code>bands</code></strong>, <strong><code>folder</code></strong>)</p>
 </blockquote>
 <p>Create tiles for a <code>file</code> saving the results in <code>folder</code> for each
 crop using <code>save</code> method</p>
@@ -971,7 +1055,7 @@ crop using <code>save</code> method</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.process_all" class="doc_header"><code>Region2Tiles.process_all</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L664" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.process_all</code>(<strong><code>max_workers</code></strong>=<em><code>8</code></em>, <strong><code>include</code></strong>=<em><code>[]</code></em>)</p>
+<h4 id="Region2Tiles.process_all" class="doc_header"><code>Region2Tiles.process_all</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L703" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.process_all</code>(<strong><code>max_workers</code></strong>=<em><code>8</code></em>, <strong><code>include</code></strong>=<em><code>[]</code></em>)</p>
 </blockquote>
 <p>Run <code>process_one</code> in parallel using the number of workers given by <code>max_workers</code></p>
 

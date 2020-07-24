@@ -52,7 +52,7 @@ description: "This module contain functions to process the model outputs for web
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ba_split" class="doc_header"><code>ba_split</code><a href="https://github.com/mnpinto/banet/tree/master/banet/web.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ba_split</code>(<strong><code>io_path</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>min_size</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="ba_split" class="doc_header"><code>ba_split</code><a href="https://github.com/mnpinto/banet/tree/master/banet/web.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ba_split</code>(<strong><code>io_path</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>min_size</code></strong>=<em><code>1</code></em>, <strong><code>keys</code></strong>=<em><code>['burned', 'date']</code></em>)</p>
 </blockquote>
 <p>Computes burned areas shapefiles.</p>
 
@@ -77,7 +77,7 @@ description: "This module contain functions to process the model outputs for web
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fires2raster" class="doc_header"><code>fires2raster</code><a href="https://github.com/mnpinto/banet/tree/master/banet/web.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fires2raster</code>(<strong><code>path_save</code></strong>, <strong><code>fires</code></strong>, <strong><code>data</code></strong>)</p>
+<h4 id="fires2raster" class="doc_header"><code>fires2raster</code><a href="https://github.com/mnpinto/banet/tree/master/banet/web.py#L59" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fires2raster</code>(<strong><code>path_save</code></strong>, <strong><code>fires</code></strong>, <strong><code>data</code></strong>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>keys</code></strong>=<em><code>['burned', 'date']</code></em>)</p>
 </blockquote>
 <p>Saves raster files for individual fires.</p>
 
@@ -102,7 +102,32 @@ description: "This module contain functions to process the model outputs for web
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="process_last" class="doc_header"><code>process_last</code><a href="https://github.com/mnpinto/banet/tree/master/banet/web.py#L86" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process_last</code>(<strong><code>iop</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>filter_region</code></strong>:<code>Polygon</code>)</p>
+<h4 id="out2raster" class="doc_header"><code>out2raster</code><a href="https://github.com/mnpinto/banet/tree/master/banet/web.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>out2raster</code>(<strong><code>iop</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>keys</code></strong>=<em><code>['burned', 'date']</code></em>)</p>
+</blockquote>
+<p>Saves raster files for last output.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="process_last" class="doc_header"><code>process_last</code><a href="https://github.com/mnpinto/banet/tree/master/banet/web.py#L126" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>process_last</code>(<strong><code>iop</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>filter_region</code></strong>:<code>Polygon</code>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>min_size</code></strong>=<em><code>1</code></em>, <strong><code>keys</code></strong>=<em><code>['burned', 'date']</code></em>)</p>
 </blockquote>
 
 </div>

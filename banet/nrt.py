@@ -4,12 +4,12 @@ __all__ = ['ProjectPath', 'RunManager']
 
 # Cell
 import pandas as pd
-from datetime import date
 import scipy.io as sio
 import requests
 import IPython
 import matplotlib.pyplot as plt
 from nbdev.imports import test_eq
+import datetime
 from geoget.download import run_all
 from .core import filter_files, ls, Path, InOutPath
 from .geo import Region
@@ -39,18 +39,19 @@ class ProjectPath():
 # Cell
 class RunManager():
     def __init__(self, project_path:ProjectPath, region, time='today',
-                 product:str='VIIRS750', days=64):
+                 product:str='VIIRS750', days=64, max_size=2000):
         self.path    = project_path
         self.time    = self.init_time(time)
         self.product = product
         self.region  = region
         self.days    = days
+        self.max_size= 2000
 
     def init_time(self, time):
         if time == 'today':
-            time = pd.Timestamp(date.today())
+            time = pd.Timestamp(datetime.date.today())
         elif time == 'yesterday':
-            time = pd.Timestamp(date.today())-pd.Timedelta(days=1)
+            time = pd.Timestamp(datetime.date.today())-pd.Timedelta(days=1)
         return time
 
     def last_n_days(self, time:pd.Timestamp, days):
@@ -100,11 +101,24 @@ class RunManager():
         "Download viirs data needed for the dataset."
         tstart, tend = self.get_download_dates()
         region = Region.load(f'{self.path.config}/R_{self.region}.json')
-        viirs_downloader = VIIRS750_download(region, tstart, tend)
-        viirs_downloader_list = viirs_downloader.split_times()
+
+        if self.product == 'VIIRS750':
+            viirs_downloader = VIIRS750_download(region, tstart, tend)
+            viirs_downloader_list = viirs_downloader.split_times()
+
+        elif self.product == 'VIIRS375':
+            viirs_downloader1 = VIIRS375_download(region, tstart, tend)
+            viirs_downloader2 = VIIRS750_download(region, tstart, tend,
+                                bands=['SolarZenithAngle', 'SatelliteZenithAngle'])
+            viirs_downloader_list1 = viirs_downloader1.split_times()
+            viirs_downloader_list2 = viirs_downloader2.split_times()
+            viirs_downloader_list = [*viirs_downloader_list1, *viirs_downloader_list2]
+
+        else: raise NotImplementedError(f'Not implemented for {self.product}.')
+
         run_all(viirs_downloader_list, self.path.ladsweb)
 
-    def preprocess_dataset(self):
+    def preprocess_dataset_750(self):
         "Apply pre-processing to the rawdata and saves results in dataset directory."
         paths = InOutPath(f'{self.path.ladsweb}', f'{self.path.dataset}')
         R = Region.load(f'{self.path.config}/R_{self.region}.json')
@@ -119,6 +133,28 @@ class RunManager():
         act_fires = ActiveFires(f'{self.path.hotspots}/hotspots{self.region}.csv')
         viirs.process_all(proc_funcs=[merge_tiles, mir_calc, rename, bfilter, act_fires])
 
+    def preprocess_dataset_375(self):
+        "Apply pre-processing to the rawdata and saves results in dataset directory."
+        paths = InOutPath(f'{self.path.ladsweb}', f'{self.path.dataset}')
+        R = Region.load(f'{self.path.config}/R_{self.region}.json')
+        bands = ['Reflectance_I1', 'Reflectance_I2', 'Reflectance_I3',
+                 'Radiance_I4', 'Radiance_I5', 'SolarZenithAngle', 'SatelliteZenithAngle']
+        print('\nPre-processing data...')
+        viirs = Viirs375Dataset(paths, R, bands=bands)
+        merge_tiles = MergeTiles('SatelliteZenithAngle')
+        mir_calc = MirCalc('SolarZenithAngle', 'Radiance_I4', 'Radiance_I5')
+        rename = BandsRename(['Reflectance_I1', 'Reflectance_I2'], ['Red', 'NIR'])
+        bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
+        act_fires = ActiveFires(f'{self.path.hotspots}/hotspots{self.region}.csv')
+        viirs.process_all(proc_funcs=[merge_tiles, mir_calc, rename, bfilter, act_fires])
+
+    def preprocess_dataset(self):
+        if self.product == 'VIIRS750':
+            self.preprocess_dataset_750()
+        elif self.product == 'VIIRS375':
+            self.preprocess_dataset_375()
+        else: raise NotImplementedError(f'Not implemented for {self.product}.')
+
     def init_model_weights(self, weight_files:list):
         "Downloads model weights if they don't exist yet on config directory."
         local_files = []
@@ -132,8 +168,10 @@ class RunManager():
             local_files.append(file_save)
         return local_files
 
-    def get_preds(self, weight_files:list, threshold=0.5, save=True):
+    def get_preds(self, weight_files:list, threshold=0.5, save=True, max_size=2000):
         "Computes BA-Net predictions ensembling the models in the weight_files list."
         local_files = self.init_model_weights(weight_files)
         iop = InOutPath(self.path.dataset, self.path.outputs, mkdir=False)
-        predict_nrt(iop, self.time, local_files, self.region, threshold, save)
+        region = Region.load(f'{self.path.config}/R_{self.region}.json')
+        predict_nrt(iop, self.time, local_files, region, threshold=threshold,
+                    save=save, max_size=max_size, product=self.product)
