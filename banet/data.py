@@ -274,7 +274,7 @@ class BaseDataset():
             latD = rootgrp.createDimension("lat", self.region.height)
             lonD = rootgrp.createDimension("lon", self.region.width)
             for k in data:
-                a = rootgrp.createVariable(k,"u2",("lat","lon",))
+                a = rootgrp.createVariable(k,"u2",("lat","lon",), zlib=True)
                 a.setncattr('scale', scale_factor)
                 a.setncattr('mask', mask_value)
                 v = data[k]*scale_factor
