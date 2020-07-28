@@ -87,7 +87,7 @@ def banet_create_dataset(region:Param("Region name", str),
     mir_calc = MirCalc('SolarZenithAngle', 'Radiance_M12', 'Radiance_M15')
     rename = BandsRename(['Reflectance_M5', 'Reflectance_M7'], ['Red', 'NIR'])
     bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
-    act_fires = ActiveFires(f'{fires_path}/hotspots{R.name}.csv')
+    act_fires = ActiveFiresLog(f'{fires_path}/hotspots{R.name}.csv')
     viirs.process_all(proc_funcs=[merge_tiles, mir_calc, rename, bfilter, act_fires])
 
     # MCD64A1C6

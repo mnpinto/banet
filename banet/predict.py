@@ -27,7 +27,6 @@ def open_nc(fn, slice_idx=None, *args, **kwargs):
     data[data == 65535] = 0
     data = data.astype(np.float32)
     data = data/100
-    data[-1, ...] = np.log1p(data[-1,...])
     return data
 
 def crop(im, r, c, size=128):

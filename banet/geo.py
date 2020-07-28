@@ -64,6 +64,13 @@ class Region():
             args = json.load(f)
         return cls(args['name'], args['bbox'], args['pixel_size'])
 
+    def new(self, name:str=None, bbox:list=None, pixel_size:float=None):
+        "Create new region with updated parameters."
+        if name is None: name = self.name
+        if bbox is None: bbox = list(self.bbox)
+        if pixel_size is None: pixel_size = self.pixel_size
+        return Region(name, bbox, pixel_size)
+
     def export(self, file):
         """Exports region information to json file"""
         dict2json(self.__dict__, file)

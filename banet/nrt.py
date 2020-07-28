@@ -111,7 +111,7 @@ class RunManager():
         mir_calc = MirCalc('SolarZenithAngle', 'Radiance_M12', 'Radiance_M15')
         rename = BandsRename(['Reflectance_M5', 'Reflectance_M7'], ['Red', 'NIR'])
         bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
-        act_fires = ActiveFires(f'{self.path.hotspots}/hotspots{self.region}.csv')
+        act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
         viirs.process_all(proc_funcs=[merge_tiles, mir_calc, rename, bfilter, act_fires])
 
     def preprocess_dataset_375(self):
@@ -122,11 +122,12 @@ class RunManager():
                  'Radiance_I4', 'Radiance_I5', 'SolarZenithAngle', 'SatelliteZenithAngle']
         print('\nPre-processing data...')
         viirs = Viirs375Dataset(paths, R, bands=bands)
+        print(viirs.times)
         merge_tiles = MergeTiles('SatelliteZenithAngle')
         mir_calc = MirCalc('SolarZenithAngle', 'Radiance_I4', 'Radiance_I5')
         rename = BandsRename(['Reflectance_I1', 'Reflectance_I2'], ['Red', 'NIR'])
         bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
-        act_fires = ActiveFires(f'{self.path.hotspots}/hotspots{self.region}.csv')
+        act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
         viirs.process_all(proc_funcs=[merge_tiles, mir_calc, rename, bfilter, act_fires])
 
     def preprocess_dataset(self):
