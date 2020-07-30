@@ -135,6 +135,7 @@ def predict_time(path:InOutPath, times, weight_files:list, region:Region,
     tstart = pd.Timestamp(f'{tstart.year}-{tstart.month}-01')
     tend = pd.Timestamp(f'{tend.year}-{tend.month}-01')
     ptimes = pd.date_range(tstart, tend, freq='MS')[1:-1]
+    ptimes_eom = pd.date_range(tstart, tend, freq='M')[1:-1]
     preds_all = []
     si = [[max(0,j*max_size-buffer), (j+1)*max_size+buffer,
            max(0,i*max_size-buffer), (i+1)*max_size+buffer]
@@ -166,7 +167,7 @@ def predict_time(path:InOutPath, times, weight_files:list, region:Region,
         ba_all[split_idx[0]:split_idx[1], split_idx[2]:split_idx[3]] = bas[i]
         bd_all[split_idx[0]:split_idx[1], split_idx[2]:split_idx[3]] = bds[i]
     if not save: return ba_all, bd_all
-    times = pd.date_range(ptimes[0], ptimes[-1], freq='D')
+    times = pd.date_range(ptimes[0], ptimes_eom[-1], freq='D')
     sio.savemat(path.dst/f'{output}.mat', {'burned': ba_all, 'date': bd_all, 'times': np.array(times).astype(str)}, do_compression=True)
 
 def predict_month(iop, time, weight_files, region, threshold=0.5, save=True, slice_idx=None):
