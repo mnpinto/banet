@@ -126,17 +126,15 @@ def predict_one(iop:InOutPath, times:list, weights_files:list, region:str, thres
         preds = np.array([tiles2image(preds[:,i], im_size) for i in range(preds.shape[1])])
         preds_ens.append(preds)
     preds = np.array(preds_ens).mean(0)
-    return preds
+    return preds.astype(np.float32)
 
-def predict_time(path:InOutPath, times:list, weight_files:list, region,
+def predict_time(path:InOutPath, times, weight_files:list, region:Region,
                  threshold=0.05, save=True, max_size=2000, buffer=128,
                  product='VIIRS750', output='data'):
     tstart, tend = times.min(), times.max()
-    tstart = tstart + pd.Timedelta(days=32)
-    tend = tend-pd.Timedelta(days=32)
     tstart = pd.Timestamp(f'{tstart.year}-{tstart.month}-01')
     tend = pd.Timestamp(f'{tend.year}-{tend.month}-01')
-    ptimes = pd.date_range(tstart, tend, freq='MS')
+    ptimes = pd.date_range(tstart, tend, freq='MS')[1:-1]
     preds_all = []
     si = [[max(0,j*max_size-buffer), (j+1)*max_size+buffer,
            max(0,i*max_size-buffer), (i+1)*max_size+buffer]
@@ -158,18 +156,17 @@ def predict_time(path:InOutPath, times:list, weight_files:list, region,
         ba[ba>1] = 1
         ba[ba<threshold] = np.nan
         bd = preds_all.argmax(0)
-        bd = bd.astype(float)
+        bd = bd.astype(np.float32)
         bd[np.isnan(ba)] = np.nan
-        #sio.savemat(path.dst/f'data_{i}.mat', {'burndate': bd, 'burnconf': ba}, do_compression=True)
-        bas.append(ba)
-        bds.append(bd)
-    ba_all = np.zeros(region.shape)
+        bas.append(ba.astype(np.float16))
+        bds.append(bd.astype(np.float16))
+    ba_all = np.zeros(region.shape, dtype=np.float16)
     bd_all = np.zeros_like(ba_all)
     for i, split_idx in enumerate(si):
         ba_all[split_idx[0]:split_idx[1], split_idx[2]:split_idx[3]] = bas[i]
         bd_all[split_idx[0]:split_idx[1], split_idx[2]:split_idx[3]] = bds[i]
     if not save: return ba_all, bd_all
-    times = pd.date_range(tstart, tend, freq='D')
+    times = pd.date_range(ptimes[0], ptimes[-1], freq='D')
     sio.savemat(path.dst/f'{output}.mat', {'burned': ba_all, 'date': bd_all, 'times': np.array(times).astype(str)}, do_compression=True)
 
 def predict_month(iop, time, weight_files, region, threshold=0.5, save=True, slice_idx=None):
@@ -207,11 +204,11 @@ def predict_nrt(path:InOutPath, time, weight_files:list, region:Region,
         ba[ba>1] = 1
         ba[ba<threshold] = np.nan
         bd = preds_all.argmax(0)
-        bd = bd.astype(float)
+        bd = bd.astype(np.float32)
         bd[np.isnan(ba)] = np.nan
-        bas.append(ba)
-        bds.append(bd)
-    ba_all = np.zeros(region.shape)
+        bas.append(ba.astype(np.float16))
+        bds.append(bd.astype(np.float16))
+    ba_all = np.zeros(region.shape, dtype=np.float16)
     bd_all = np.zeros_like(ba_all)
     for i, split_idx in enumerate(si):
         ba_all[split_idx[0]:split_idx[1], split_idx[2]:split_idx[3]] = bas[i]

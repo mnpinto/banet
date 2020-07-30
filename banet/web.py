@@ -127,7 +127,7 @@ def process_last(iop:InOutPath, region:Region, filter_region:Polygon, threshold=
                  min_size=1, keys=['burned', 'date']):
     df, data, fires = ba_split(iop, region, min_size=min_size, threshold=threshold, keys=keys)
     df = df.loc[df.within(filter_region)]
-    fires = np.array(fires)
+    fires = np.array(fires, dtype=np.uint16)
     fires = fires[df.index.values.reshape(-1)]
     df = df.reset_index(drop=True)
     fires2raster(iop.dst, fires, data, region, keys=keys)

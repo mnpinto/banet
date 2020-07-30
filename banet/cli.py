@@ -88,7 +88,8 @@ def banet_create_dataset(region:Param("Region name", str),
     rename = BandsRename(['Reflectance_M5', 'Reflectance_M7'], ['Red', 'NIR'])
     bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
     act_fires = ActiveFiresLog(f'{fires_path}/hotspots{R.name}.csv')
-    viirs.process_all(proc_funcs=[merge_tiles, mir_calc, rename, bfilter, act_fires])
+    viirs.process_all(proc_funcs=[BandsAssertShape(), merge_tiles, mir_calc,
+                                  rename, bfilter, act_fires])
 
     # MCD64A1C6
     if mcd64_path is not None:
@@ -144,8 +145,8 @@ def banet_predict_monthly(region:Param("Region name", str),
 # Cell
 @call_parse
 def banet_predict_times(region:Param("Region name", str),
-                    tstart:Param("Start of serach window yyyy-mm-dd HH:MM:SS", str),
-                    tend:Param("End of search windo yyyy-mm-dd HH:MM:SS", str),
+                    tstart:Param("Start of search window yyyy-mm-01", str),
+                    tend:Param("End of search window yyyy-mm-01", str),
                     input_path:Param("Input path for dataset", str),
                     output_path:Param("Output path for tiles dataset", str),
                     regions_path:Param("Path for region json files", str),
@@ -154,7 +155,13 @@ def banet_predict_times(region:Param("Region name", str),
                     weight_files:Param("List of pth weight files", list)=_weight_files):
 
     iop = InOutPath(input_path, f'{output_path}')
+
+    tstart = pd.Timestamp(tstart) - pd.Timedelta(days=15)
+    tstart = pd.Timestamp(f'{tstart.year}-{tstart.month}-01')
+    tend = pd.Timestamp(tend) + pd.Timedelta(days=75)
+    tend = pd.Timestamp(f'{tend.year}-{tend.month}-01') - pd.Timedelta(days=1)
     times = pd.date_range(tstart, tend, freq='D')
+
     R = Region.load(f'{regions_path}/R_{region}.json')
     predict_time(iop, times, weight_files, R, product=product, output=output)
 
