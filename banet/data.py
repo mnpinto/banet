@@ -341,7 +341,7 @@ class BaseDataset():
                 v[np.isnan(v)] = mask_value
                 assert np.sum(data[k] < 0) == 0
                 if np.sum(data[k]*scale_factor > mask_value) > 0:
-                    warning.warn(f'Clipping data to {mask_value-1} for {k}.')
+                    warn(f'Clipping data to {mask_value-1} for {k}.')
                 v[v>mask_value] = mask_value-1
                 a[:] = v.astype(np.uint16)
 
