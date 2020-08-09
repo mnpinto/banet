@@ -32,7 +32,7 @@ class RunManager():
         self.times   = self.init_times(times)
         self.product = product
         self.region  = region
-        self.max_size= 2000
+        self.max_size= max_size
 
     def init_times(self, times):
         tstart = times[0] - pd.Timedelta(days=15)
@@ -80,9 +80,8 @@ class RunManager():
             viirs_downloader2 = VIIRS750_download(region, tstart, tend,
                                 bands=['SolarZenithAngle', 'SatelliteZenithAngle'])
             viirs_downloader_list1 = viirs_downloader1.split_times()
-            viirs_downloader_list2 = viirs_downloader2.split_times()
+            viirs_downloader_list2 = viirs_downloader2.split_times(maxOrderSize=1200)
             viirs_downloader_list = [*viirs_downloader_list1, *viirs_downloader_list2]
-
         else: raise NotImplementedError(f'Not implemented for {self.product}.')
 
         run_all(viirs_downloader_list, self.path.ladsweb)
