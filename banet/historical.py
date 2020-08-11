@@ -65,7 +65,7 @@ class RunManager():
         end = self.times[-1].strftime('%Y-%m-%d 23:59:59')
         return start, end
 
-    def download_viirs(self):
+    def download_viirs(self, maxOrderSize=[1800, 1200]):
         "Download viirs data needed for the dataset."
         tstart, tend = self.get_download_dates()
         region = Region.load(f'{self.path.config}/R_{self.region}.json')
@@ -79,8 +79,8 @@ class RunManager():
             region.pixel_size = 0.1 # Angles can be interpolated later
             viirs_downloader2 = VIIRS750_download(region, tstart, tend,
                                 bands=['SolarZenithAngle', 'SatelliteZenithAngle'])
-            viirs_downloader_list1 = viirs_downloader1.split_times()
-            viirs_downloader_list2 = viirs_downloader2.split_times(maxOrderSize=1200)
+            viirs_downloader_list1 = viirs_downloader1.split_times(maxOrderSize=maxOrderSize[0])
+            viirs_downloader_list2 = viirs_downloader2.split_times(maxOrderSize=maxOrderSize[1])
             viirs_downloader_list = [*viirs_downloader_list1, *viirs_downloader_list2]
         else: raise NotImplementedError(f'Not implemented for {self.product}.')
 

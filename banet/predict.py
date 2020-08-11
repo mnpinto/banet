@@ -135,7 +135,7 @@ def predict_time(path:InOutPath, times, weight_files:list, region:Region,
     tstart = pd.Timestamp(f'{tstart.year}-{tstart.month}-01')
     tend = pd.Timestamp(f'{tend.year}-{tend.month}-01')
     ptimes = pd.date_range(tstart, tend, freq='MS')[1:-1]
-    ptimes_eom = pd.date_range(tstart, tend, freq='M')[1:-1]
+    ptimes_eom = pd.date_range(tstart, tend, freq='M')[1:]
     preds_all = []
     si = [[max(0,j*max_size-buffer), (j+1)*max_size+buffer,
            max(0,i*max_size-buffer), (i+1)*max_size+buffer]
@@ -146,7 +146,7 @@ def predict_time(path:InOutPath, times, weight_files:list, region:Region,
         print(f'Split {split}')
         preds_all = []
         for time in ptimes:
-            time_start = pd.Timestamp((time - pd.Timedelta(days=30)).strftime('%Y-%m-15')) # Day 15, previous month
+            time_start = pd.Timestamp((time - pd.Timedelta(days=15)).strftime('%Y-%m-15')) # Day 15, previous month
             times = pd.date_range(time_start, periods=64, freq='D')
             preds = predict_one(path, times, weight_files, region.name, slice_idx=split,
                                 product=product)
@@ -168,7 +168,7 @@ def predict_time(path:InOutPath, times, weight_files:list, region:Region,
         bd_all[split_idx[0]:split_idx[1], split_idx[2]:split_idx[3]] = bds[i]
     if not save: return ba_all, bd_all
     times = pd.date_range(ptimes[0], ptimes_eom[-1], freq='D')
-    sio.savemat(path.dst/f'{output}.mat', {'burned': ba_all, 'date': bd_all, 'times': np.array(times).astype(str)}, do_compression=True)
+    sio.savemat(path.dst/f'{output}.mat', {'burned': ba_all, 'date': bd_all, 'times': times.astype(str).tolist()}, do_compression=True)
 
 def predict_month(iop, time, weight_files, region, threshold=0.5, save=True, slice_idx=None):
     time_start = pd.Timestamp((time - pd.Timedelta(days=30)).strftime('%Y-%m-15')) # Day 15, previous month
