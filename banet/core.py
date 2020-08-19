@@ -82,7 +82,8 @@ class InOutPath():
 # Cell
 class ProjectPath():
     def __init__(self, path:Path, config_dir='config', ladsweb_dir='ladsweb',
-                 hotspots_dir='hotspots', dataset_dir='dataset', outputs_dir='outputs'):
+                 hotspots_dir='hotspots', dataset_dir='dataset', outputs_dir='outputs',
+                 web_dir='web'):
         if isinstance(path, str): path = Path(path)
         self.path     = path
         self.config   = path/config_dir
@@ -90,8 +91,9 @@ class ProjectPath():
         self.hotspots = path/hotspots_dir
         self.dataset  = path/dataset_dir
         self.outputs  = path/outputs_dir
+        self.web      = path/web_dir
         self.create_dirs([self.path, self.config, self.ladsweb, self.hotspots,
-                          self.dataset, self.outputs])
+                          self.dataset, self.outputs, self.web])
 
     @staticmethod
     def create_dirs(paths_list):

@@ -4,21 +4,25 @@ __all__ = ['RunManager']
 
 # Cell
 import pandas as pd
+import numpy as np
 import scipy.io as sio
+import rasterio
 import requests
 import IPython
 import matplotlib.pyplot as plt
 from nbdev.imports import test_eq
 import datetime
 from geoget.download import run_all
+import banet.nrt
 from .core import filter_files, ls, Path, InOutPath, ProjectPath
 from .geo import Region
 from .data import *
 from .predict import predict_time
+from fire_split.core import split_fires, save_data, to_polygon
 Path.ls = ls
 
 # Cell
-class RunManager():
+class RunManager(banet.nrt.RunManager):
     def __init__(self, project_path:ProjectPath, region:str, times:pd.DatetimeIndex,
                  product:str='VIIRS750', max_size=2000):
         """
@@ -68,7 +72,7 @@ class RunManager():
     def download_viirs(self, maxOrderSize=[1800, 1200]):
         "Download viirs data needed for the dataset."
         tstart, tend = self.get_download_dates()
-        region = Region.load(f'{self.path.config}/R_{self.region}.json')
+        region = self.R.new()
 
         if self.product == 'VIIRS750':
             viirs_downloader = VIIRS750_download(region, tstart, tend)
@@ -86,64 +90,11 @@ class RunManager():
 
         run_all(viirs_downloader_list, self.path.ladsweb)
 
-    def preprocess_dataset_750(self):
-        "Apply pre-processing to the rawdata and saves results in dataset directory."
-        paths = InOutPath(f'{self.path.ladsweb}', f'{self.path.dataset}')
-        R = Region.load(f'{self.path.config}/R_{self.region}.json')
-        bands = ['Reflectance_M5', 'Reflectance_M7', 'Reflectance_M10', 'Radiance_M12',
-                 'Radiance_M15', 'SolarZenithAngle', 'SatelliteZenithAngle']
-        print('\nPre-processing data...')
-        viirs = Viirs750Dataset(paths, R, bands=bands)
-        merge_tiles = MergeTiles('SatelliteZenithAngle')
-        mir_calc = MirCalc('SolarZenithAngle', 'Radiance_M12', 'Radiance_M15')
-        rename = BandsRename(['Reflectance_M5', 'Reflectance_M7'], ['Red', 'NIR'])
-        bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
-        act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
-        viirs.process_all(proc_funcs=[merge_tiles, mir_calc, rename, bfilter, act_fires])
-
-    def preprocess_dataset_375(self):
-        "Apply pre-processing to the rawdata and saves results in dataset directory."
-        paths = InOutPath(f'{self.path.ladsweb}', f'{self.path.dataset}')
-        R = Region.load(f'{self.path.config}/R_{self.region}.json')
-        bands = ['Reflectance_I1', 'Reflectance_I2', 'Reflectance_I3',
-                 'Radiance_I4', 'Radiance_I5', 'SolarZenithAngle', 'SatelliteZenithAngle']
-        print('\nPre-processing data...')
-        viirs = Viirs375Dataset(paths, R, bands=bands)
-        interpAng = InterpolateAngles(R.new(pixel_size=0.1), R,
-                      ['SolarZenithAngle', 'SatelliteZenithAngle'])
-        merge_tiles = MergeTiles('SatelliteZenithAngle')
-        mir_calc = MirCalc('SolarZenithAngle', 'Radiance_I4', 'Radiance_I5')
-        rename = BandsRename(['Reflectance_I1', 'Reflectance_I2'], ['Red', 'NIR'])
-        bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
-        act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
-        viirs.process_all(proc_funcs=[interpAng, BandsAssertShape(), merge_tiles,
-                                      mir_calc, rename, bfilter, act_fires])
-
-    def preprocess_dataset(self):
-        if self.product == 'VIIRS750':
-            self.preprocess_dataset_750()
-        elif self.product == 'VIIRS375':
-            self.preprocess_dataset_375()
-        else: raise NotImplementedError(f'Not implemented for {self.product}.')
-
-    def init_model_weights(self, weight_files:list):
-        "Downloads model weights if they don't exist yet on config directory."
-        local_files = []
-        for w in weight_files:
-            file_save = self.path.config/w
-            if not file_save.is_file():
-                print(f'Downloading model weights {w}')
-                url = f'https://github.com/mnpinto/banet_weights/raw/master/model/{w}'
-                file = requests.get(url)
-                open(str(file_save), 'wb').write(file.content)
-            local_files.append(file_save)
-        return local_files
-
     def get_preds(self, weight_files:list, threshold=0.5, save=True, max_size=2000,
                   filename='data'):
         "Computes BA-Net predictions ensembling the models in the weight_files list."
         local_files = self.init_model_weights(weight_files)
         iop = InOutPath(self.path.dataset, self.path.outputs, mkdir=False)
-        region = Region.load(f'{self.path.config}/R_{self.region}.json')
+        region = self.R.new()
         predict_time(iop, self.times, local_files, region, threshold=threshold,
                      save=save, max_size=max_size, product=self.product, output=filename)

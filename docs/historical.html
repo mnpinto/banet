@@ -52,7 +52,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="RunManager" class="doc_header"><code>class</code> <code>RunManager</code><a href="https://github.com/mnpinto/banet/tree/master/banet/historical.py#L21" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RunManager</code>(<strong><code>project_path</code></strong>:<a href="/banet/core#ProjectPath"><code>ProjectPath</code></a>, <strong><code>region</code></strong>:<code>str</code>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>, <strong><code>product</code></strong>:<code>str</code>=<em><code>'VIIRS750'</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>)</p>
+<h2 id="RunManager" class="doc_header"><code>class</code> <code>RunManager</code><a href="https://github.com/mnpinto/banet/tree/master/banet/historical.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RunManager</code>(<strong><code>project_path</code></strong>:<a href="/banet/core#ProjectPath"><code>ProjectPath</code></a>, <strong><code>region</code></strong>:<code>str</code>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>, <strong><code>product</code></strong>:<code>str</code>=<em><code>'VIIRS750'</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>) :: <a href="/banet/04c_historical#RunManager"><code>RunManager</code></a></p>
 </blockquote>
 
 </div>
@@ -76,7 +76,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="RunManager.preprocess_dataset" class="doc_header"><code>RunManager.preprocess_dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/historical.py#L122" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>RunManager.preprocess_dataset</code>()</p>
+<h4 id="RunManager.preprocess_dataset" class="doc_header"><code>RunManager.preprocess_dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/nrt.py#L145" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>RunManager.preprocess_dataset</code>()</p>
 </blockquote>
 
 </div>
@@ -87,7 +87,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="RunManager.init_model_weights" class="doc_header"><code>RunManager.init_model_weights</code><a href="https://github.com/mnpinto/banet/tree/master/banet/historical.py#L129" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>RunManager.init_model_weights</code>(<strong><code>weight_files</code></strong>:<code>list</code>)</p>
+<h4 id="RunManager.init_model_weights" class="doc_header"><code>RunManager.init_model_weights</code><a href="https://github.com/mnpinto/banet/tree/master/banet/nrt.py#L152" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>RunManager.init_model_weights</code>(<strong><code>weight_files</code></strong>:<code>list</code>)</p>
 </blockquote>
 <p>Downloads model weights if they don't exist yet on config directory.</p>
 
@@ -99,7 +99,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="RunManager.get_preds" class="doc_header"><code>RunManager.get_preds</code><a href="https://github.com/mnpinto/banet/tree/master/banet/historical.py#L142" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>RunManager.get_preds</code>(<strong><code>weight_files</code></strong>:<code>list</code>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>, <strong><code>filename</code></strong>=<em><code>'data'</code></em>)</p>
+<h4 id="RunManager.get_preds" class="doc_header"><code>RunManager.get_preds</code><a href="https://github.com/mnpinto/banet/tree/master/banet/historical.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>RunManager.get_preds</code>(<strong><code>weight_files</code></strong>:<code>list</code>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>, <strong><code>filename</code></strong>=<em><code>'data'</code></em>)</p>
 </blockquote>
 <p>Computes BA-Net predictions ensembling the models in the weight_files list.</p>
 
@@ -119,25 +119,20 @@ description: "This module has functions to generate the burned areas predictions
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;BR&#39;</span>
-<span class="n">paths</span> <span class="o">=</span> <span class="n">ProjectPath</span><span class="p">(</span><span class="s1">&#39;../hide/historical_test&#39;</span><span class="p">)</span>
-<span class="n">weight_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;banetv0.20-val2017-fold0.pth&#39;</span><span class="p">]</span>
+</div>#```python
+region = 'BR'
+paths = ProjectPath('../hide/historical_test')
+weight_files = ['banetv0.20-val2017-fold0.pth']
 
-<span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2015-08-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2015-09-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
-<span class="c1"># Save R_{region}.json file in config folder</span>
-<span class="n">manager</span> <span class="o">=</span> <span class="n">RunManager</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">product</span><span class="o">=</span><span class="s1">&#39;VIIRS375&#39;</span><span class="p">)</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">download_viirs</span><span class="p">()</span>
-<span class="c1"># Save hotspots{region}.csv file in hotspots folder</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">preprocess_dataset</span><span class="p">()</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">get_preds</span><span class="p">(</span><span class="n">weight_files</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;ba100m&#39;</span><span class="p">)</span>
-</pre></div>
+times = pd.date_range('2019-08-01', '2019-09-01', freq='MS')
+Region(region,  [-58, -20, -44, -5], 0.001).export(paths.config/f'R_{region}.json')
 
-</div>
-</div>
-</div>
+manager = RunManager(paths, region, times, product='VIIRS375')
+#manager.download_viirs()
+# Save hotspots{region}.csv file in hotspots folder
+manager.preprocess_dataset()
+manager.get_preds(weight_files, threshold=0.01, filename=f'ba100m_{region}{times[0].year}')
+#```
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;PT&#39;</span>
@@ -165,6 +160,7 @@ description: "This module has functions to generate the burned areas predictions
 <span class="n">Region</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">44</span><span class="p">],</span> <span class="mf">0.001</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">config</span><span class="o">/</span><span class="sa">f</span><span class="s1">&#39;R_</span><span class="si">{region}</span><span class="s1">.json&#39;</span><span class="p">)</span>
 
 <span class="n">manager</span> <span class="o">=</span> <span class="n">RunManager</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">product</span><span class="o">=</span><span class="s1">&#39;VIIRS375&#39;</span><span class="p">)</span>
+
 <span class="n">manager</span><span class="o">.</span><span class="n">download_viirs</span><span class="p">(</span><span class="n">maxOrderSize</span><span class="o">=</span><span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1200</span><span class="p">])</span>
 <span class="c1"># Save hotspots{region}.csv file in hotspots folder</span>
 <span class="c1">#path = InOutPath(&#39;historicalPT/hotspots/&#39;, &#39;&#39;)</span>
@@ -174,11 +170,49 @@ description: "This module has functions to generate the burned areas predictions
 <span class="c1">#df.to_csv(path.src/&#39;hotspots{region}.csv&#39;)</span>
 <span class="n">manager</span><span class="o">.</span><span class="n">preprocess_dataset</span><span class="p">()</span>
 <span class="n">manager</span><span class="o">.</span><span class="n">get_preds</span><span class="p">(</span><span class="n">weight_files</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ba100m_</span><span class="si">{region}{times[0].year}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ba100m_</span><span class="si">{region}{times[0].year}</span><span class="s1">&#39;</span><span class="p">,</span> 
+                    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">area_epsg</span><span class="o">=</span><span class="mi">3763</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
-</div>
+</div>region = 'PT'
+paths = ProjectPath('../hide/historicalPT')
+weight_files = ['banetv0.20-val2017-fold0.pth']
+times = pd.date_range('2019-01-01', '2019-06-01', freq='MS')
+Region(region, [-10, 36, -6, 44], 0.001).export(paths.config/f'R_{region}.json')
+
+manager = RunManager(paths, region, times, product='VIIRS375')
+
+manager.download_viirs(maxOrderSize=[1200, 1200])
+# Save hotspots{region}.csv file in hotspots folder
+#path = InOutPath('historicalPT/hotspots/', '')
+#files = path.src.ls(include=['.csv'])
+#dfs = [pd.read_csv(file) for file in files]
+#df = pd.concat(dfs, axis=0, sort=True).reset_index(drop=True)
+#df.to_csv(path.src/'hotspots{region}.csv')
+#manager.preprocess_dataset()
+#manager.get_preds(weight_files, threshold=0.01, filename=f'ba100m_{region}{times[0].year}')
+#manager.postprocess(filename=f'ba100m_{region}{times[0].year}', 
+#                    threshold=0.5, area_epsg=3763)region = 'PT'
+paths = ProjectPath('../hide/historicalPT')
+weight_files = ['banetv0.20-val2017-fold0.pth']
+times = pd.date_range('2018-01-01', '2018-12-01', freq='MS')
+Region(region, [-10, 36, -6, 44], 0.001).export(paths.config/f'R_{region}.json')
+
+manager = RunManager(paths, region, times, product='VIIRS375')
+
+#manager.download_viirs(maxOrderSize=[1200, 1200])
+# Save hotspots{region}.csv file in hotspots folder
+#path = InOutPath('historicalPT/hotspots/', '')
+#files = path.src.ls(include=['.csv'])
+#dfs = [pd.read_csv(file) for file in files]
+#df = pd.concat(dfs, axis=0, sort=True).reset_index(drop=True)
+#df.to_csv(path.src/'hotspots{region}.csv')
+#manager.preprocess_dataset()
+manager.get_preds(weight_files, threshold=0.01, filename=f'ba100m_{region}{times[0].year}')
+manager.postprocess(filename=f'ba100m_{region}{times[0].year}', 
+                    threshold=0.5, area_epsg=3763)
 </div>
  
 

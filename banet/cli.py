@@ -197,6 +197,7 @@ def banet_nrt_run(region:Param("Region name", str),
                   project_path:Param("Root directory of the project", str),
                   hotspots_region:Param("Hotspots region name", str),
                   product:Param("Product name", str)='VIIRS750',
+                  area_epsg:Param("EPSG to compute burned area", int)=3763,
                   pixel_size:Param("Pixel size", float)=0.01,
                   time:Param("Day for the run", str, choices=["today", "yesterday"])="today",
                   threshold:Param("Threshold to apply to output of the model", float)=0.5,
@@ -204,6 +205,7 @@ def banet_nrt_run(region:Param("Region name", str),
                   skip_ladsweb:Param("Skip download of ladsweb data", bool)=False,
                   skip_preprocess:Param("Skip download of ladsweb data", bool)=False,
                   skip_getpreds:Param("Skip download of ladsweb data", bool)=False,
+                  skip_postprocess:Param("Skip post processing", bool)=False,
                   single_fold:Param("Use only one model", bool)=False,
                   max_size:Param("Max size to split region on inference and avoid memory error", int)=2000):
     paths = ProjectPath(project_path)
@@ -218,3 +220,5 @@ def banet_nrt_run(region:Param("Region name", str),
     if not skip_ladsweb: manager.download_viirs()
     if not skip_preprocess: manager.preprocess_dataset()
     if not skip_getpreds: manager.get_preds(weight_files, threshold=threshold, max_size=max_size)
+    if not skip_postprocess: manager.postprocess(filename=f'ba_{manager.time.strftime("%Y%m%d")}',
+                    threshold=threshold, area_epsg=area_epsg)

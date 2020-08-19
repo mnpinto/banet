@@ -17,6 +17,7 @@ from rasterio import features
 from rasterio.mask import mask
 from rasterio.merge import merge
 from rasterio.coords import BoundingBox
+from rasterio.crs import CRS
 import warnings
 from fastcore.test import *
 
@@ -25,10 +26,11 @@ from .core import *
 # Cell
 class Region():
     """Defines a geographical region with a name, a bounding box and the pixel size"""
-    def __init__(self, name:str, bbox:list, pixel_size:float):
-        self.name = name
-        self.bbox = rasterio.coords.BoundingBox(*bbox) # left, bottom, right, top
+    def __init__(self, name:str, bbox:list, pixel_size:float, epsg:int=4326):
+        self.name       = name
+        self.bbox       = rasterio.coords.BoundingBox(*bbox) # left, bottom, right, top
         self.pixel_size = pixel_size
+        self.epsg       = epsg
 
     @property
     def width(self):
@@ -44,6 +46,10 @@ class Region():
     def transform(self):
         "Rasterio Affine transform of the region"
         return rasterio.transform.from_bounds(*self.bbox, self.width, self.height)
+
+    @property
+    def crs(self):
+        return CRS.from_epsg(self.epsg)
 
     @property
     def shape(self):
@@ -64,12 +70,13 @@ class Region():
             args = json.load(f)
         return cls(args['name'], args['bbox'], args['pixel_size'])
 
-    def new(self, name:str=None, bbox:list=None, pixel_size:float=None):
+    def new(self, name:str=None, bbox:list=None, pixel_size:float=None, epsg:int=None):
         "Create new region with updated parameters."
         if name is None: name = self.name
         if bbox is None: bbox = list(self.bbox)
         if pixel_size is None: pixel_size = self.pixel_size
-        return Region(name, bbox, pixel_size)
+        if epsg is None: epsg = self.epsg
+        return Region(name, bbox, pixel_size, epsg=epsg)
 
     def export(self, file):
         """Exports region information to json file"""
