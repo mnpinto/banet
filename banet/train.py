@@ -5,7 +5,6 @@ __all__ = ['SampleEpisode', 'ImageSequence', 'get_y_fn', 'open_mat', 'open_mask'
 
 # Cell
 import fastai
-from fastai import *
 from fastai.vision import *
 from fastai.callbacks import *
 import scipy.io as sio

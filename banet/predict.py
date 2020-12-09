@@ -4,13 +4,14 @@ __all__ = ['open_nc', 'crop', 'image2tiles', 'tiles2image', 'get_preds', 'predic
            'predict_nrt', 'split_mask']
 
 # Cell
-from fastai.vision import *
 import scipy.io as sio
 import sys
 from tqdm import tqdm
 import netCDF4
 import pdb
+import gc
 import scipy.ndimage as ndimage
+from fastai.vision.all import *
 
 from .core import *
 from .geo import Region
@@ -20,14 +21,13 @@ from .models import BA_Net
 def open_nc(fn, slice_idx=None, *args, **kwargs):
     data = netCDF4.Dataset(fn, mode='r')
     if slice_idx is None:
-        data = np.array([data[r][:] for r in ['Red', 'NIR', 'MIR', 'FRP']])
+        data = np.array([data[r][:] for r in ['Red', 'NIR', 'MIR', 'FRP']], dtype=np.float32)
     else:
         data = np.array([data[r][slice_idx[0]:slice_idx[1], slice_idx[2]:slice_idx[3]]
-                         for r in ['Red', 'NIR', 'MIR', 'FRP']])
+                         for r in ['Red', 'NIR', 'MIR', 'FRP']], dtype=np.float32)
     data[data == 65535] = 0
-    data = data.astype(np.float32)
     data = data/100
-    return data
+    return data.astype(np.float16)
 
 def crop(im, r, c, size=128):
     '''
@@ -36,7 +36,7 @@ def crop(im, r, c, size=128):
     sz = size
     out_sz = (sz, sz, im.shape[-1])
     rs,cs,hs = im.shape
-    tile = np.zeros(out_sz)
+    tile = np.zeros(out_sz, dtype=np.float16)
     if (r+sz > rs) and (c+sz > cs):
         tile[:rs-r, :cs-c, :] = im[r:, c:, :]
     elif (r+sz > rs):
@@ -47,20 +47,20 @@ def crop(im, r, c, size=128):
         tile[...] = im[r:r+sz, c:c+sz, :]
     return tile
 
-def image2tiles(x, step=100):
+def image2tiles(x, step=100, size=128):
     tiles = []
     rr, cc, _ = x.shape
     for c in range(0, cc-1, step):
         for r in range(0, rr-1, step):
-            img = crop(x, r, c)
+            img = crop(x, r, c, size=size)
             tiles.append(img)
-    return np.array(tiles)
+    return np.array(tiles, dtype=np.float16)
 
 def tiles2image(tiles, image_size, size=128, step=100):
     rr, cc, = image_size
     sz = size
-    im = np.zeros(image_size)
-    indicator = np.zeros_like(im).astype(float)
+    im = np.zeros(image_size, dtype=np.float16)
+    indicator = np.zeros_like(im)
     k = 0
     for c in range(0, cc-1, step):
         for r in range(0, rr-1, step):
@@ -96,7 +96,7 @@ def get_preds(tiles, model, weights=None):
                 x = x.cuda()
             out = model(x).sigmoid().float()
             data.append(out.cpu().squeeze().numpy())
-    return np.array(data)
+    return np.array(data, np.float16)
 
 def predict_one(iop:InOutPath, times:list, weights_files:list, region:str, threshold=0.5,
                 slice_idx=None, product='VIIRS750'):
@@ -112,6 +112,7 @@ def predict_one(iop:InOutPath, times:list, weights_files:list, region:str, thres
             warn(f'No data for {file}')
             s = np.zeros_like(s)
         tiles.append(s)
+    del s
     tiles = np.array(tiles, dtype=np.float16).transpose((1, 2, 0, 3, 4))
     tiles = torch.from_numpy(tiles).float()
     preds_ens = []
@@ -125,8 +126,9 @@ def predict_one(iop:InOutPath, times:list, weights_files:list, region:str, thres
         preds = get_preds(tiles, model=BA_Net(4, 1, 64), weights=weights)
         preds = np.array([tiles2image(preds[:,i], im_size) for i in range(preds.shape[1])])
         preds_ens.append(preds)
-    preds = np.array(preds_ens).mean(0)
-    return preds.astype(np.float32)
+    del tiles
+    preds = np.array(preds_ens, dtype=np.float16).mean(0)
+    return preds.astype(np.float16)
 
 def predict_time(path:InOutPath, times, weight_files:list, region:Region,
                  threshold=0.05, save=True, max_size=2000, buffer=128,
@@ -140,7 +142,6 @@ def predict_time(path:InOutPath, times, weight_files:list, region:Region,
     si = [[max(0,j*max_size-buffer), (j+1)*max_size+buffer,
            max(0,i*max_size-buffer), (i+1)*max_size+buffer]
           for i in range(region.shape[1]//max_size+1) for j in range(region.shape[0]//max_size+1)]
-
     bas, bds = [], []
     for i, split in progress_bar(enumerate(si), total=len(si)):
         print(f'Split {split}')
@@ -152,15 +153,19 @@ def predict_time(path:InOutPath, times, weight_files:list, region:Region,
                                 product=product)
             preds = preds[times.month == time.month]
             preds_all.append(preds)
+            del preds
+            gc.collect()
         preds_all = np.concatenate(preds_all, axis=0)
         ba = preds_all.sum(0)
         ba[ba>1] = 1
         ba[ba<threshold] = np.nan
         bd = preds_all.argmax(0)
-        bd = bd.astype(np.float32)
+        bd = bd.astype(np.float16)
         bd[np.isnan(ba)] = np.nan
         bas.append(ba.astype(np.float16))
         bds.append(bd.astype(np.float16))
+        del ba, bd
+    gc.collect()
     ba_all = np.zeros(region.shape, dtype=np.float16)
     bd_all = np.zeros_like(ba_all)
     for i, split_idx in enumerate(si):
@@ -205,10 +210,11 @@ def predict_nrt(path:InOutPath, time, weight_files:list, region:Region,
         ba[ba>1] = 1
         ba[ba<threshold] = np.nan
         bd = preds_all.argmax(0)
-        bd = bd.astype(np.float32)
+        bd = bd.astype(np.float16)
         bd[np.isnan(ba)] = np.nan
         bas.append(ba.astype(np.float16))
         bds.append(bd.astype(np.float16))
+        gc.collect()
     ba_all = np.zeros(region.shape, dtype=np.float16)
     bd_all = np.zeros_like(ba_all)
     for i, split_idx in enumerate(si):

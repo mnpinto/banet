@@ -171,59 +171,74 @@ class RunManager():
                     save=save, max_size=max_size, product=self.product)
 
     def postprocess(self, filename, threshold=0.5, interval_days=2, interval_pixels=2,
-                    min_size_pixels=25, area_epsg=None, keys=['burned', 'date']):
+                    min_size_pixels=25, area_epsg=None, keys=['burned', 'date'],
+                    geotiff_only=False):
         "Computes tifs and shapefiles from outputs."
         data = sio.loadmat(self.path.outputs/f'{filename}.mat')
-        times = pd.DatetimeIndex([pd.Timestamp(o) for o in data['times']])
+        times = pd.DatetimeIndex([pd.Timestamp(str(o)) for o in data['times']])
+        unique_years = times.year.unique()
+        if len(unique_years) > 2: raise NotImplementedError(
+            'Not implemented for more than 2 years range')
         burned = data[keys[0]]
         date = data[keys[1]]
-        I = burned < 0.5
+        I = burned < threshold
         date[I] = np.nan
-        date[date>0] = times[date[date>0].astype(np.uint16)].dayofyear
+        It = date[date>=0].astype(np.uint16)
+        if len(unique_years) > 1:
+            m = (times.year[It] == unique_years[1])*pd.Timestamp(f'{unique_years[1]}-12-31').dayofyear
+        else: m = 0
+        date[date>=0] = times[It].dayofyear + m
         date[np.isnan(date)] = 0
         date = date.astype(np.uint16)
         burned = (burned*255).astype(np.uint8)
         region = self.R.new()
-        labels, df = split_fires(date, interval_days=interval_days,
-                                 interval_pixels=interval_pixels,
-                                 min_size_pixels=min_size_pixels)
-        burned[labels==0] = 0
-        date[labels==0] = 0
-        raster = np.array([burned, date])
-        save_data(self.path.web/f'{filename}.tif', raster, crs=region.crs,
-                               transform=region.transform)
-        for i in range(labels.max()):
-            l = (i+1)
-            f = labels == l
-            args = np.argwhere(f)
-            lon, lat = region.coords()
-            (rmin, cmin), (rmax, cmax) = args.min(0), args.max(0)
-            rmax += 1
-            cmax += 1
-            lat_r = lat[rmin-1:rmax+1]
-            lon_r = lon[cmin-1:cmax+1]
-            tfm = rasterio.Affine(region.pixel_size, 0, lon_r.min(), 0, -region.pixel_size, lat_r.max())
-            burned_r = data[keys[0]][rmin-1:rmax+1, cmin-1:cmax+1].copy().astype(np.float16)
-            date_r =  data[keys[1]][rmin-1:rmax+1, cmin-1:cmax+1].copy().astype(np.float16)
-            burned_r[f[rmin-1:rmax+1, cmin-1:cmax+1]==0] = np.nan
-            date_r[f[rmin-1:rmax+1, cmin-1:cmax+1]==0] = np.nan
+        if geotiff_only:
+            raster = np.array([burned, date])
+            save_data(self.path.web/f'{filename}.tif', raster, crs=region.crs,
+                                   transform=region.transform)
+        else:
+            labels, df = split_fires(date, interval_days=interval_days,
+                         interval_pixels=interval_pixels,
+                         min_size_pixels=min_size_pixels)
+            burned[labels==0] = 0
+            date[labels==0] = 0
+            raster = np.array([burned, date])
+            save_data(self.path.web/f'{filename}.tif', raster, crs=region.crs,
+                                   transform=region.transform)
+            for i in range(labels.max()):
+                l = (i+1)
+                f = labels == l
+                args = np.argwhere(f)
+                lon, lat = region.coords()
+                (rmin, cmin), (rmax, cmax) = args.min(0), args.max(0)
+                rmax += 1
+                cmax += 1
+                rmin = max(rmin, 1)
+                cmin = max(cmin, 1)
+                lat_r = lat[rmin-1:rmax+1]
+                lon_r = lon[cmin-1:cmax+1]
+                tfm = rasterio.Affine(region.pixel_size, 0, lon_r.min(), 0, -region.pixel_size, lat_r.max())
+                burned_r = data[keys[0]][rmin-1:rmax+1, cmin-1:cmax+1].copy().astype(np.float16)
+                date_r =  data[keys[1]][rmin-1:rmax+1, cmin-1:cmax+1].copy().astype(np.float16)
+                burned_r[f[rmin-1:rmax+1, cmin-1:cmax+1]==0] = np.nan
+                date_r[f[rmin-1:rmax+1, cmin-1:cmax+1]==0] = np.nan
 
-            burned_r = burned_r*255
-            burned_r[np.isnan(burned_r)] = 0
-            burned_r = burned_r.astype(np.uint16)
-            date_r[np.isnan(date_r)] = 0
-            date_r = date_r.astype(np.uint16)
-            raster = np.array((burned_r, date_r))
+                burned_r = burned_r*255
+                burned_r[np.isnan(burned_r)] = 0
+                burned_r = burned_r.astype(np.uint16)
+                date_r[np.isnan(date_r)] = 0
+                date_r = date_r.astype(np.uint16)
+                raster = np.array((burned_r, date_r))
 
-            (self.path.web/'events').mkdir(exist_ok=True)
-            save_data(self.path.web/'events'/f'{filename}_{l}.tif',
-                      raster, crs=region.crs, transform=tfm)
-            im = array2png(burned_r, cmap='RdYlGn_r')
-            im.save(self.path.web/'events'/f'{filename}_{l}_cl.png')
-            im = array2png(date_r, cmap='jet')
-            im.save(self.path.web/'events'/f'{filename}_{l}_bd.png')
+                (self.path.web/'events').mkdir(exist_ok=True)
+                save_data(self.path.web/'events'/f'{filename}_{l}.tif',
+                          raster, crs=region.crs, transform=tfm)
+                im = array2png(burned_r, cmap='RdYlGn_r')
+                im.save(self.path.web/'events'/f'{filename}_{l}_cl.png')
+                im = array2png(date_r, cmap='jet')
+                im.save(self.path.web/'events'/f'{filename}_{l}_bd.png')
 
-        df = to_polygon(labels, region.crs, region.transform, df, area_epsg=area_epsg)
-        df['area_ha'] = df['area_ha'].astype(np.uint32)
-        df.to_file(self.path.web/f'{filename}.shp')
-        df.to_file(self.path.web/f'{filename}.json', driver='GeoJSON')
+            df = to_polygon(labels, region.crs, region.transform, df, area_epsg=area_epsg)
+            df['area_ha'] = df['area_ha'].astype(np.uint32)
+            df.to_file(self.path.web/f'{filename}.shp')
+            df.to_file(self.path.web/f'{filename}.json', driver='GeoJSON')

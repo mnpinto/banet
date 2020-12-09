@@ -2,11 +2,13 @@
 
 title: Create Historical Dataset (2012 onwards)
 
+
 keywords: fastai
 sidebar: home_sidebar
 
 summary: "This module has functions to generate the burned areas predictions to an extended historical period."
 description: "This module has functions to generate the burned areas predictions to an extended historical period."
+nb_path: "nbs/04c_historical.ipynb"
 ---
 <!--
 
@@ -38,13 +40,6 @@ description: "This module has functions to generate the burned areas predictions
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -52,7 +47,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="RunManager" class="doc_header"><code>class</code> <code>RunManager</code><a href="https://github.com/mnpinto/banet/tree/master/banet/historical.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RunManager</code>(<strong><code>project_path</code></strong>:<a href="/banet/core#ProjectPath"><code>ProjectPath</code></a>, <strong><code>region</code></strong>:<code>str</code>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>, <strong><code>product</code></strong>:<code>str</code>=<em><code>'VIIRS750'</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>) :: <a href="/banet/04c_historical#RunManager"><code>RunManager</code></a></p>
+<h2 id="RunManager" class="doc_header"><code>class</code> <code>RunManager</code><a href="https://github.com/mnpinto/banet/tree/master/banet/historical.py#L25" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>RunManager</code>(<strong><code>project_path</code></strong>:<a href="/banet/core.html#ProjectPath"><code>ProjectPath</code></a>, <strong><code>region</code></strong>:<code>str</code>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>, <strong><code>product</code></strong>:<code>str</code>=<em><code>'VIIRS750'</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>) :: <a href="/banet/historical.html#RunManager"><code>RunManager</code></a></p>
 </blockquote>
 
 </div>
@@ -61,6 +56,13 @@ description: "This module has functions to generate the burned areas predictions
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -119,100 +121,25 @@ description: "This module has functions to generate the burned areas predictions
 
 </div>
 </div>
-</div>#```python
-region = 'BR'
-paths = ProjectPath('../hide/historical_test')
-weight_files = ['banetv0.20-val2017-fold0.pth']
-
-times = pd.date_range('2019-08-01', '2019-09-01', freq='MS')
-Region(region,  [-58, -20, -44, -5], 0.001).export(paths.config/f'R_{region}.json')
-
-manager = RunManager(paths, region, times, product='VIIRS375')
-#manager.download_viirs()
-# Save hotspots{region}.csv file in hotspots folder
-manager.preprocess_dataset()
-manager.get_preds(weight_files, threshold=0.01, filename=f'ba100m_{region}{times[0].year}')
-#```
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;PT&#39;</span>
 <span class="n">paths</span> <span class="o">=</span> <span class="n">ProjectPath</span><span class="p">(</span><span class="s1">&#39;../hide/historical_test&#39;</span><span class="p">)</span>
 <span class="n">weight_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;banetv0.20-val2017-fold0.pth&#39;</span><span class="p">]</span>
 <span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2017-06-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2017-10-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
-<span class="n">Region</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">44</span><span class="p">],</span> <span class="mf">0.001</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">config</span><span class="o">/</span><span class="sa">f</span><span class="s1">&#39;R_</span><span class="si">{region}</span><span class="s1">.json&#39;</span><span class="p">)</span>
+<span class="n">Region</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">44</span><span class="p">],</span> <span class="mf">0.001</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">config</span><span class="o">/</span><span class="sa">f</span><span class="s1">&#39;R_</span><span class="si">{</span><span class="n">region</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">)</span>
 
 <span class="n">manager</span> <span class="o">=</span> <span class="n">RunManager</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">product</span><span class="o">=</span><span class="s1">&#39;VIIRS375&#39;</span><span class="p">)</span>
 <span class="n">manager</span><span class="o">.</span><span class="n">download_viirs</span><span class="p">()</span>
 <span class="c1"># Save hotspots{region}.csv file in hotspots folder</span>
 <span class="n">manager</span><span class="o">.</span><span class="n">preprocess_dataset</span><span class="p">()</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">get_preds</span><span class="p">(</span><span class="n">weight_files</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ba100m_</span><span class="si">{region}{times[0].year}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">get_preds</span><span class="p">(</span><span class="n">weight_files</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ba100m_</span><span class="si">{</span><span class="n">region</span><span class="si">}{</span><span class="n">times</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">year</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;PT&#39;</span>
-<span class="n">paths</span> <span class="o">=</span> <span class="n">ProjectPath</span><span class="p">(</span><span class="s1">&#39;../hide/historicalPT&#39;</span><span class="p">)</span>
-<span class="n">weight_files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;banetv0.20-val2017-fold0.pth&#39;</span><span class="p">]</span>
-<span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2020-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2020-06-01&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span>
-<span class="n">Region</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">44</span><span class="p">],</span> <span class="mf">0.001</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">config</span><span class="o">/</span><span class="sa">f</span><span class="s1">&#39;R_</span><span class="si">{region}</span><span class="s1">.json&#39;</span><span class="p">)</span>
-
-<span class="n">manager</span> <span class="o">=</span> <span class="n">RunManager</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">region</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">product</span><span class="o">=</span><span class="s1">&#39;VIIRS375&#39;</span><span class="p">)</span>
-
-<span class="n">manager</span><span class="o">.</span><span class="n">download_viirs</span><span class="p">(</span><span class="n">maxOrderSize</span><span class="o">=</span><span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1200</span><span class="p">])</span>
-<span class="c1"># Save hotspots{region}.csv file in hotspots folder</span>
-<span class="c1">#path = InOutPath(&#39;historicalPT/hotspots/&#39;, &#39;&#39;)</span>
-<span class="c1">#files = path.src.ls(include=[&#39;.csv&#39;])</span>
-<span class="c1">#dfs = [pd.read_csv(file) for file in files]</span>
-<span class="c1">#df = pd.concat(dfs, axis=0, sort=True).reset_index(drop=True)</span>
-<span class="c1">#df.to_csv(path.src/&#39;hotspots{region}.csv&#39;)</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">preprocess_dataset</span><span class="p">()</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">get_preds</span><span class="p">(</span><span class="n">weight_files</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ba100m_</span><span class="si">{region}{times[0].year}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">manager</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ba100m_</span><span class="si">{region}{times[0].year}</span><span class="s1">&#39;</span><span class="p">,</span> 
-                    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">area_epsg</span><span class="o">=</span><span class="mi">3763</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>region = 'PT'
-paths = ProjectPath('../hide/historicalPT')
-weight_files = ['banetv0.20-val2017-fold0.pth']
-times = pd.date_range('2019-01-01', '2019-06-01', freq='MS')
-Region(region, [-10, 36, -6, 44], 0.001).export(paths.config/f'R_{region}.json')
-
-manager = RunManager(paths, region, times, product='VIIRS375')
-
-manager.download_viirs(maxOrderSize=[1200, 1200])
-# Save hotspots{region}.csv file in hotspots folder
-#path = InOutPath('historicalPT/hotspots/', '')
-#files = path.src.ls(include=['.csv'])
-#dfs = [pd.read_csv(file) for file in files]
-#df = pd.concat(dfs, axis=0, sort=True).reset_index(drop=True)
-#df.to_csv(path.src/'hotspots{region}.csv')
-#manager.preprocess_dataset()
-#manager.get_preds(weight_files, threshold=0.01, filename=f'ba100m_{region}{times[0].year}')
-#manager.postprocess(filename=f'ba100m_{region}{times[0].year}', 
-#                    threshold=0.5, area_epsg=3763)region = 'PT'
-paths = ProjectPath('../hide/historicalPT')
-weight_files = ['banetv0.20-val2017-fold0.pth']
-times = pd.date_range('2018-01-01', '2018-12-01', freq='MS')
-Region(region, [-10, 36, -6, 44], 0.001).export(paths.config/f'R_{region}.json')
-
-manager = RunManager(paths, region, times, product='VIIRS375')
-
-#manager.download_viirs(maxOrderSize=[1200, 1200])
-# Save hotspots{region}.csv file in hotspots folder
-#path = InOutPath('historicalPT/hotspots/', '')
-#files = path.src.ls(include=['.csv'])
-#dfs = [pd.read_csv(file) for file in files]
-#df = pd.concat(dfs, axis=0, sort=True).reset_index(drop=True)
-#df.to_csv(path.src/'hotspots{region}.csv')
-#manager.preprocess_dataset()
-manager.get_preds(weight_files, threshold=0.01, filename=f'ba100m_{region}{times[0].year}')
-manager.postprocess(filename=f'ba100m_{region}{times[0].year}', 
-                    threshold=0.5, area_epsg=3763)
 </div>
  
 

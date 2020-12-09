@@ -4,7 +4,7 @@ __all__ = ['DROP', 'BTNorm2d', 'LSTM', 'SpaceConv', 'UpSpaceConv', 'TimeConv', '
            'UpSpaceTimeConv', 'BA_Net']
 
 # Cell
-from fastai.vision import *
+from fastai.vision.all import *
 
 # Cell
 DROP = 0.2 # Dropout

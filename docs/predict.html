@@ -2,11 +2,13 @@
 
 title: Predict
 
+
 keywords: fastai
 sidebar: home_sidebar
 
 summary: "This module has functions to generate the burned areas predictions."
 description: "This module has functions to generate the burned areas predictions."
+nb_path: "nbs/04_predict.ipynb"
 ---
 <!--
 
@@ -38,13 +40,6 @@ description: "This module has functions to generate the burned areas predictions
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -52,7 +47,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="open_nc" class="doc_header"><code>open_nc</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>open_nc</code>(<strong><code>fn</code></strong>, <strong><code>slice_idx</code></strong>=<em><code>None</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="open_nc" class="doc_header"><code>open_nc</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>open_nc</code>(<strong><code>fn</code></strong>, <strong><code>slice_idx</code></strong>=<em><code>None</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -76,8 +71,9 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="_crop" class="doc_header"><code>_crop</code><a href="fastai/vision/transform.py#L169" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>_crop</code>(<strong><code>x</code></strong>, <strong><code>size</code></strong>, <strong><code>row_pct</code></strong>:<code>uniform</code>=<em><code>0.5</code></em>, <strong><code>col_pct</code></strong>:<code>uniform</code>=<em><code>0.5</code></em>)</p>
+<h4 id="crop" class="doc_header"><code>crop</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crop</code>(<strong><code>im</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>, <strong><code>size</code></strong>=<em><code>128</code></em>)</p>
 </blockquote>
+<p>crop image into a square of size sz,</p>
 
 </div>
 
@@ -100,7 +96,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="image2tiles" class="doc_header"><code>image2tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>image2tiles</code>(<strong><code>x</code></strong>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
+<h4 id="image2tiles" class="doc_header"><code>image2tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>image2tiles</code>(<strong><code>x</code></strong>, <strong><code>step</code></strong>=<em><code>100</code></em>, <strong><code>size</code></strong>=<em><code>128</code></em>)</p>
 </blockquote>
 
 </div>
@@ -148,32 +144,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_preds" class="doc_header"><code>get_preds</code><a href="fastai/basic_train.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_preds</code>(<strong><code>model</code></strong>:<code>Module</code>, <strong><code>dl</code></strong>:<code>DataLoader</code>, <strong><code>pbar</code></strong>:<code>Union</code>[<code>MasterBar</code>, <code>ProgressBar</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>cb_handler</code></strong>:<code>Optional</code>[<code>CallbackHandler</code>]=<em><code>None</code></em>, <strong><code>activ</code></strong>:<code>Module</code>=<em><code>None</code></em>, <strong><code>loss_func</code></strong>:<code>Optional</code>[<code>Callable</code>[<code>Tensor</code>, <code>Tensor</code>, <code>OneEltTensor</code>]]=<em><code>None</code></em>, <strong><code>n_batch</code></strong>:<code>Optional</code>[<code>int</code>]=<em><code>None</code></em>)</p>
-</blockquote>
-<p>Tuple of predictions and targets, and optional losses (if <code>loss_func</code>) using <code>dl</code>, max batches <code>n_batch</code>.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="predict_one" class="doc_header"><code>predict_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L101" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_one</code>(<strong><code>iop</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>times</code></strong>:<code>list</code>, <strong><code>weights_files</code></strong>:<code>list</code>, <strong><code>region</code></strong>:<code>str</code>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>slice_idx</code></strong>=<em><code>None</code></em>, <strong><code>product</code></strong>=<em><code>'VIIRS750'</code></em>)</p>
+<h4 id="get_preds" class="doc_header"><code>get_preds</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L83" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_preds</code>(<strong><code>tiles</code></strong>, <strong><code>model</code></strong>, <strong><code>weights</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -197,7 +168,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="predict_time" class="doc_header"><code>predict_time</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L131" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_time</code>(<strong><code>path</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>times</code></strong>, <strong><code>weight_files</code></strong>:<code>list</code>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>threshold</code></strong>=<em><code>0.05</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>, <strong><code>buffer</code></strong>=<em><code>128</code></em>, <strong><code>product</code></strong>=<em><code>'VIIRS750'</code></em>, <strong><code>output</code></strong>=<em><code>'data'</code></em>)</p>
+<h4 id="predict_one" class="doc_header"><code>predict_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L101" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_one</code>(<strong><code>iop</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>times</code></strong>:<code>list</code>, <strong><code>weights_files</code></strong>:<code>list</code>, <strong><code>region</code></strong>:<code>str</code>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>slice_idx</code></strong>=<em><code>None</code></em>, <strong><code>product</code></strong>=<em><code>'VIIRS750'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -221,7 +192,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="predict_month" class="doc_header"><code>predict_month</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L173" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_month</code>(<strong><code>iop</code></strong>, <strong><code>time</code></strong>, <strong><code>weight_files</code></strong>, <strong><code>region</code></strong>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong><code>slice_idx</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="predict_time" class="doc_header"><code>predict_time</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L133" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_time</code>(<strong><code>path</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>times</code></strong>, <strong><code>weight_files</code></strong>:<code>list</code>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>threshold</code></strong>=<em><code>0.05</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>, <strong><code>buffer</code></strong>=<em><code>128</code></em>, <strong><code>product</code></strong>=<em><code>'VIIRS750'</code></em>, <strong><code>output</code></strong>=<em><code>'data'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -245,7 +216,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="predict_nrt" class="doc_header"><code>predict_nrt</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_nrt</code>(<strong><code>path</code></strong>:<a href="/banet/core#InOutPath"><code>InOutPath</code></a>, <strong><code>time</code></strong>, <strong><code>weight_files</code></strong>:<code>list</code>, <strong><code>region</code></strong>:<a href="/banet/geo#Region"><code>Region</code></a>, <strong><code>threshold</code></strong>=<em><code>0.1</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>, <strong><code>buffer</code></strong>=<em><code>128</code></em>, <strong><code>product</code></strong>=<em><code>'VIIRS750'</code></em>)</p>
+<h4 id="predict_month" class="doc_header"><code>predict_month</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L178" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_month</code>(<strong><code>iop</code></strong>, <strong><code>time</code></strong>, <strong><code>weight_files</code></strong>, <strong><code>region</code></strong>, <strong><code>threshold</code></strong>=<em><code>0.5</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong><code>slice_idx</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -269,7 +240,7 @@ description: "This module has functions to generate the burned areas predictions
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="split_mask" class="doc_header"><code>split_mask</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L221" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>split_mask</code>(<strong><code>mask</code></strong>, <strong><code>thr</code></strong>=<em><code>0.5</code></em>, <strong><code>thr_obj</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="predict_nrt" class="doc_header"><code>predict_nrt</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L196" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict_nrt</code>(<strong><code>path</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>time</code></strong>, <strong><code>weight_files</code></strong>:<code>list</code>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>threshold</code></strong>=<em><code>0.1</code></em>, <strong><code>save</code></strong>=<em><code>True</code></em>, <strong><code>max_size</code></strong>=<em><code>2000</code></em>, <strong><code>buffer</code></strong>=<em><code>128</code></em>, <strong><code>product</code></strong>=<em><code>'VIIRS750'</code></em>)</p>
 </blockquote>
 
 </div>
@@ -278,6 +249,37 @@ description: "This module has functions to generate the burned areas predictions
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="split_mask" class="doc_header"><code>split_mask</code><a href="https://github.com/mnpinto/banet/tree/master/banet/predict.py#L227" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>split_mask</code>(<strong><code>mask</code></strong>, <strong><code>thr</code></strong>=<em><code>0.5</code></em>, <strong><code>thr_obj</code></strong>=<em><code>1</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}

@@ -482,7 +482,7 @@ class MCD64Dataset(BaseDataset):
         out = []
         if time in self.times:
             time = pd.Timestamp(f'{time.year}-{time.month}-01')
-            time_pattern = f'.A{time.year}{time.dayofyear}.'
+            time_pattern = f'.A{time.year}{time.dayofyear:03d}.'
             files = self.paths.src.ls(recursive=True, include=['burndate.tif', time_pattern],
                                 exclude=['.xml'])
             # Find windows joint with region bounding box
@@ -526,10 +526,10 @@ class MCD64Dataset(BaseDataset):
         data_dict[self.bands[0]] = out
         return data_dict
 
-    def save(self, time:pd.Timestamp, data:dict, do_compression=True):
+    def save(self, time:pd.Timestamp, data:dict):
         v = self.bands[0]
         for i, t in enumerate(data['times']):
-            super().save(t, {v: data[v][i]}, do_compression=do_compression)
+            super().save(t, {v: data[v][i]})
 
 # Cell
 class FireCCI51Dataset(BaseDataset):
