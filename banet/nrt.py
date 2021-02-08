@@ -172,7 +172,7 @@ class RunManager():
 
     def postprocess(self, filename, threshold=0.5, interval_days=2, interval_pixels=2,
                     min_size_pixels=25, area_epsg=None, keys=['burned', 'date'],
-                    geotiff_only=False):
+                    geotiff_only=False, padding=1):
         "Computes tifs and shapefiles from outputs."
         data = sio.loadmat(self.path.outputs/f'{filename}.mat')
         times = pd.DatetimeIndex([pd.Timestamp(str(o)) for o in data['times']])
@@ -215,13 +215,13 @@ class RunManager():
                 cmax += 1
                 rmin = max(rmin, 1)
                 cmin = max(cmin, 1)
-                lat_r = lat[rmin-1:rmax+1]
-                lon_r = lon[cmin-1:cmax+1]
+                lat_r = lat[rmin-padding:rmax+padding]
+                lon_r = lon[cmin-padding:cmax+padding]
                 tfm = rasterio.Affine(region.pixel_size, 0, lon_r.min(), 0, -region.pixel_size, lat_r.max())
-                burned_r = data[keys[0]][rmin-1:rmax+1, cmin-1:cmax+1].copy().astype(np.float16)
-                date_r =  data[keys[1]][rmin-1:rmax+1, cmin-1:cmax+1].copy().astype(np.float16)
-                burned_r[f[rmin-1:rmax+1, cmin-1:cmax+1]==0] = np.nan
-                date_r[f[rmin-1:rmax+1, cmin-1:cmax+1]==0] = np.nan
+                burned_r = data[keys[0]][rmin-padding:rmax+padding, cmin-padding:cmax+padding].copy().astype(np.float16)
+                date_r =  data[keys[1]][rmin-padding:rmax+padding, cmin-padding:cmax+padding].copy().astype(np.float16)
+                burned_r[f[rmin-padding:rmax+padding, cmin-padding:cmax+padding]==0] = np.nan
+                date_r[f[rmin-padding:rmax+padding, cmin-padding:cmax+padding]==0] = np.nan
 
                 burned_r = burned_r*255
                 burned_r[np.isnan(burned_r)] = 0
