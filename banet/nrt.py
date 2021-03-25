@@ -25,13 +25,12 @@ Path.ls = ls
 # Cell
 class RunManager():
     def __init__(self, project_path:ProjectPath, region, time='today',
-                 product:str='VIIRS750', days=64, max_size=2000):
+                 product:str='VIIRS750', days=64):
         self.path    = project_path
         self.time    = self.init_time(time)
         self.product = product
         self.region  = region
         self.days    = days
-        self.max_size= max_size
 
     @property
     def R(self):
@@ -109,7 +108,7 @@ class RunManager():
 
         run_all(viirs_downloader_list, self.path.ladsweb)
 
-    def preprocess_dataset_750(self):
+    def preprocess_dataset_750(self, max_size=None, max_workers=1):
         "Apply pre-processing to the rawdata and saves results in dataset directory."
         paths = InOutPath(f'{self.path.ladsweb}', f'{self.path.dataset}')
         R = self.R.new()
@@ -117,14 +116,21 @@ class RunManager():
                  'Radiance_M15', 'SolarZenithAngle', 'SatelliteZenithAngle']
         print('\nPre-processing data...')
         viirs = Viirs750Dataset(paths, R, bands=bands)
-        merge_tiles = MergeTiles('SatelliteZenithAngle')
+        merge_tiles = MergeTiles('SatelliteZenithAngle', ignore=['R'])
         mir_calc = MirCalc('SolarZenithAngle', 'Radiance_M12', 'Radiance_M15')
         rename = BandsRename(['Reflectance_M5', 'Reflectance_M7'], ['Red', 'NIR'])
-        bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
+        bfilter = BandsFilter(['Red', 'NIR', 'MIR', 'R'])
         act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
-        viirs.process_all(proc_funcs=[merge_tiles, mir_calc, rename, bfilter, act_fires])
+        bfilter2 = BandsFilter(['Red', 'NIR', 'MIR', 'FRP'])
+        if max_size is None:
+            proc_funcs = [BandsAssertShape(), merge_tiles,
+                          mir_calc, rename, bfilter1, act_fires, bfilter2]
+        else:
+            proc_funcs = [merge_tiles, mir_calc, rename, bfilter1,
+                          act_fires, bfilter2]
+        viirs.process_all(proc_funcs=proc_funcs, max_size=max_size, max_workers=max_workers)
 
-    def preprocess_dataset_375(self):
+    def preprocess_dataset_375(self, max_size=None, max_workers=1):
         "Apply pre-processing to the rawdata and saves results in dataset directory."
         paths = InOutPath(f'{self.path.ladsweb}', f'{self.path.dataset}')
         R = self.R.new()
@@ -134,19 +140,25 @@ class RunManager():
         viirs = Viirs375Dataset(paths, R, bands=bands)
         interpAng = InterpolateAngles(R.new(pixel_size=0.1), R,
                               ['SolarZenithAngle', 'SatelliteZenithAngle'])
-        merge_tiles = MergeTiles('SatelliteZenithAngle')
+        merge_tiles = MergeTiles('SatelliteZenithAngle', ignore=['R'])
         mir_calc = MirCalc('SolarZenithAngle', 'Radiance_I4', 'Radiance_I5')
         rename = BandsRename(['Reflectance_I1', 'Reflectance_I2'], ['Red', 'NIR'])
-        bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
+        bfilter1 = BandsFilter(['Red', 'NIR', 'MIR', 'R'])
         act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
-        viirs.process_all(proc_funcs=[interpAng, BandsAssertShape(), merge_tiles,
-                                      mir_calc, rename, bfilter, act_fires])
+        bfilter2 = BandsFilter(['Red', 'NIR', 'MIR', 'FRP'])
+        if max_size is None:
+            proc_funcs = [interpAng, BandsAssertShape(), merge_tiles,
+                          mir_calc, rename, bfilter1, act_fires, bfilter2]
+        else:
+            proc_funcs = [interpAng, merge_tiles, mir_calc, rename, bfilter1,
+                          act_fires, bfilter2]
+        viirs.process_all(proc_funcs=proc_funcs, max_size=max_size, max_workers=max_workers)
 
-    def preprocess_dataset(self):
+    def preprocess_dataset(self, max_size=None, max_workers=1):
         if self.product == 'VIIRS750':
-            self.preprocess_dataset_750()
+            self.preprocess_dataset_750(max_size=max_size, max_workers=max_workers)
         elif self.product == 'VIIRS375':
-            self.preprocess_dataset_375()
+            self.preprocess_dataset_375(max_size=max_size, max_workers=max_workers)
         else: raise NotImplementedError(f'Not implemented for {self.product}.')
 
     def init_model_weights(self, weight_files:list):

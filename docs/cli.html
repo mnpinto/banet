@@ -2,11 +2,13 @@
 
 title: CLI
 
+
 keywords: fastai
 sidebar: home_sidebar
 
 summary: "Command line scripts."
 description: "Command line scripts."
+nb_path: "nbs/06_cli.ipynb"
 ---
 <!--
 
@@ -45,13 +47,6 @@ description: "Command line scripts."
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -59,7 +54,7 @@ description: "Command line scripts."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_viirs375_download" class="doc_header"><code>banet_viirs375_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_viirs375_download</code>(<strong><code>region</code></strong>:"Region name", <strong><code>tstart</code></strong>:"Start of serach window yyyy-mm-dd HH:MM:SS", <strong><code>tend</code></strong>:"End of search windo yyyy-mm-dd HH:MM:SS", <strong><code>path_save</code></strong>:"Path to save the outputs of the request", <strong><code>regions_path</code></strong>:"Path for region json files")</p>
+<h4 id="banet_viirs375_download" class="doc_header"><code>banet_viirs375_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_viirs375_download</code>(<strong><code>region</code></strong>:<code>Param object at 0x7f6639ba0700&gt;</code>, <strong><code>tstart</code></strong>:<code>Param object at 0x7f65e5e61970&gt;</code>, <strong><code>tend</code></strong>:<code>Param object at 0x7f65e5c5e550&gt;</code>, <strong><code>path_save</code></strong>:<code>Param object at 0x7f65e5990a00&gt;</code>, <strong><code>regions_path</code></strong>:<code>Param object at 0x7f65e5990a30&gt;</code>)</p>
 </blockquote>
 
 </div>
@@ -68,6 +63,13 @@ description: "Command line scripts."
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -91,13 +93,6 @@ banet_viirs375_download <span class="nv">$region</span> <span class="s2">&quot;<
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -105,7 +100,7 @@ banet_viirs375_download <span class="nv">$region</span> <span class="s2">&quot;<
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_viirs750_download" class="doc_header"><code>banet_viirs750_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_viirs750_download</code>(<strong><code>region</code></strong>:"Region name", <strong><code>tstart</code></strong>:"Start of serach window yyyy-mm-dd HH:MM:SS", <strong><code>tend</code></strong>:"End of search windo yyyy-mm-dd HH:MM:SS", <strong><code>path_save</code></strong>:"Path to save the outputs of the request", <strong><code>regions_path</code></strong>:"Path for region json files")</p>
+<h4 id="banet_viirs750_download" class="doc_header"><code>banet_viirs750_download</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_viirs750_download</code>(<strong><code>region</code></strong>:<code>Param object at 0x7f65d6516580&gt;</code>, <strong><code>tstart</code></strong>:<code>Param object at 0x7f66210dd460&gt;</code>, <strong><code>tend</code></strong>:<code>Param object at 0x7f657410e850&gt;</code>, <strong><code>path_save</code></strong>:<code>Param object at 0x7f657410e880&gt;</code>, <strong><code>regions_path</code></strong>:<code>Param object at 0x7f657410e190&gt;</code>)</p>
 </blockquote>
 
 </div>
@@ -114,6 +109,13 @@ banet_viirs375_download <span class="nv">$region</span> <span class="s2">&quot;<
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -137,13 +139,6 @@ banet_viirs750_download <span class="nv">$region</span> <span class="s2">&quot;<
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -151,7 +146,7 @@ banet_viirs750_download <span class="nv">$region</span> <span class="s2">&quot;<
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_create_dataset" class="doc_header"><code>banet_create_dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L68" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_create_dataset</code>(<strong><code>region</code></strong>:"Region name", <strong><code>viirs_path</code></strong>:"Input path for VIIRS raw data", <strong><code>fires_path</code></strong>:"Input path for Active Fires csv", <strong><code>save_path</code></strong>:"Path to save outputs", <strong><code>regions_path</code></strong>:"Path where region defenition files are stored", <strong><code>mcd64_path</code></strong>:"Input path for MCD64 raw data"=<em><code>None</code></em>, <strong><code>cci51_path</code></strong>:"Input path for FireCCI51 raw data"=<em><code>None</code></em>, <strong><code>bands</code></strong>:"List of bands to use as inputs for VIIRS raw data"=<em><code>['Reflectance_M5', 'Reflectance_M7', 'Reflectance_M10', 'Radiance_M12', 'Radiance_M15', 'SolarZenithAngle', 'SatelliteZenithAngle']</code></em>, <strong><code>year</code></strong>:"Set to process a single year instead of all available"=<em><code>None</code></em>)</p>
+<h4 id="banet_create_dataset" class="doc_header"><code>banet_create_dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L68" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_create_dataset</code>(<strong><code>region</code></strong>:<code>Param object at 0x7f657410e820&gt;</code>, <strong><code>viirs_path</code></strong>:<code>Param object at 0x7f657410e8b0&gt;</code>, <strong><code>fires_path</code></strong>:<code>Param object at 0x7f657410e940&gt;</code>, <strong><code>save_path</code></strong>:<code>Param object at 0x7f657410e910&gt;</code>, <strong><code>regions_path</code></strong>:<code>Param object at 0x7f657410e5e0&gt;</code>, <strong><code>mcd64_path</code></strong>:<code>Param object at 0x7f657410e8e0&gt;</code>=<em><code>None</code></em>, <strong><code>cci51_path</code></strong>:<code>Param object at 0x7f657410e970&gt;</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>Param object at 0x7f657410e9a0&gt;</code>=<em><code>['Reflectance_M5', 'Reflectance_M7', 'Reflectance_M10', 'Radiance_M12', 'Radiance_M15', 'SolarZenithAngle', 'SatelliteZenithAngle']</code></em>, <strong><code>year</code></strong>:<code>Param object at 0x7f657410e9d0&gt;</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -160,6 +155,13 @@ banet_viirs750_download <span class="nv">$region</span> <span class="s2">&quot;<
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -197,13 +199,6 @@ banet_create_dataset <span class="nv">$region</span> <span class="nv">$viirs_pat
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -211,7 +206,7 @@ banet_create_dataset <span class="nv">$region</span> <span class="nv">$viirs_pat
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_dataset2tiles" class="doc_header"><code>banet_dataset2tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_dataset2tiles</code>(<strong><code>region</code></strong>:"Region name", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>size</code></strong>:"Tiles size"=<em><code>128</code></em>, <strong><code>step</code></strong>:"Step size of moving window to create tiles"=<em><code>100</code></em>, <strong><code>year</code></strong>:"Set to process a single year instead of all available"=<em><code>None</code></em>)</p>
+<h4 id="banet_dataset2tiles" class="doc_header"><code>banet_dataset2tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_dataset2tiles</code>(<strong><code>region</code></strong>:<code>Param object at 0x7f657410ea30&gt;</code>, <strong><code>input_path</code></strong>:<code>Param object at 0x7f657410ea60&gt;</code>, <strong><code>output_path</code></strong>:<code>Param object at 0x7f657410eb20&gt;</code>, <strong><code>size</code></strong>:<code>Param object at 0x7f657410eaf0&gt;</code>=<em><code>128</code></em>, <strong><code>step</code></strong>:<code>Param object at 0x7f657410eac0&gt;</code>=<em><code>100</code></em>, <strong><code>year</code></strong>:<code>Param object at 0x7f657410ea90&gt;</code>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -220,6 +215,13 @@ banet_create_dataset <span class="nv">$region</span> <span class="nv">$viirs_pat
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -242,13 +244,6 @@ banet_dataset2tiles <span class="nv">$region</span> <span class="nv">$input_path
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -256,7 +251,7 @@ banet_dataset2tiles <span class="nv">$region</span> <span class="nv">$input_path
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_predict_monthly" class="doc_header"><code>banet_predict_monthly</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L127" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_predict_monthly</code>(<strong><code>region</code></strong>:"Region name", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>year</code></strong>:"Set to process a single year instead of all available", <strong><code>weight_files</code></strong>:"List of pth weight files"=<em><code>['/home/mnpinto/.banet/models/banetv0.20-val2017-fold0.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold1.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold2.pth']</code></em>)</p>
+<h4 id="banet_predict_monthly" class="doc_header"><code>banet_predict_monthly</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L127" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_predict_monthly</code>(<strong><code>region</code></strong>:<code>Param object at 0x7f657410eb80&gt;</code>, <strong><code>input_path</code></strong>:<code>Param object at 0x7f657410ebb0&gt;</code>, <strong><code>output_path</code></strong>:<code>Param object at 0x7f657410ec70&gt;</code>, <strong><code>year</code></strong>:<code>Param object at 0x7f657410ec40&gt;</code>, <strong><code>weight_files</code></strong>:<code>Param object at 0x7f657410ec10&gt;</code>=<em><code>['/home/mnpinto/.banet/models/banetv0.20-val2017-fold0.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold1.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold2.pth']</code></em>)</p>
 </blockquote>
 
 </div>
@@ -265,6 +260,13 @@ banet_dataset2tiles <span class="nv">$region</span> <span class="nv">$input_path
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -288,13 +290,6 @@ banet_predict_monthly <span class="nv">$region</span> <span class="nv">$input_pa
     
 <div class="cell border-box-sizing code_cell rendered">
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
@@ -302,7 +297,7 @@ banet_predict_monthly <span class="nv">$region</span> <span class="nv">$input_pa
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_predict_times" class="doc_header"><code>banet_predict_times</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L146" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_predict_times</code>(<strong><code>region</code></strong>:"Region name", <strong><code>tstart</code></strong>:"Start of search window yyyy-mm-01", <strong><code>tend</code></strong>:"End of search window yyyy-mm-01", <strong><code>input_path</code></strong>:"Input path for dataset", <strong><code>output_path</code></strong>:"Output path for tiles dataset", <strong><code>regions_path</code></strong>:"Path for region json files", <strong><code>product</code></strong>:"Name of product (default VIIRS750)"=<em><code>'VIIRS750'</code></em>, <strong><code>output</code></strong>:"Name of file to save results"=<em><code>'data'</code></em>, <strong><code>weight_files</code></strong>:"List of pth weight files"=<em><code>['/home/mnpinto/.banet/models/banetv0.20-val2017-fold0.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold1.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold2.pth']</code></em>)</p>
+<h4 id="banet_predict_times" class="doc_header"><code>banet_predict_times</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L146" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_predict_times</code>(<strong><code>region</code></strong>:<code>Param object at 0x7f657410eca0&gt;</code>, <strong><code>tstart</code></strong>:<code>Param object at 0x7f657410ecd0&gt;</code>, <strong><code>tend</code></strong>:<code>Param object at 0x7f657410ed90&gt;</code>, <strong><code>input_path</code></strong>:<code>Param object at 0x7f657410ed60&gt;</code>, <strong><code>output_path</code></strong>:<code>Param object at 0x7f657410ed30&gt;</code>, <strong><code>regions_path</code></strong>:<code>Param object at 0x7f657410ed00&gt;</code>, <strong><code>product</code></strong>:<code>Param object at 0x7f657410edc0&gt;</code>=<em><code>'VIIRS750'</code></em>, <strong><code>output</code></strong>:<code>Param object at 0x7f657410edf0&gt;</code>=<em><code>'data'</code></em>, <strong><code>weight_files</code></strong>:<code>Param object at 0x7f657410ee20&gt;</code>=<em><code>['/home/mnpinto/.banet/models/banetv0.20-val2017-fold0.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold1.pth', '/home/mnpinto/.banet/models/banetv0.20-val2017-fold2.pth']</code></em>)</p>
 </blockquote>
 
 </div>
@@ -311,6 +306,13 @@ banet_predict_monthly <span class="nv">$region</span> <span class="nv">$input_pa
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -331,14 +333,36 @@ banet_predict_times <span class="nv">$region</span> <span class="s2">&quot;</spa
 
 </div>
 </div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
+</div># export
+@call_parse
+def banet_train_model(val_year:Param('Validation year', int),
+                r_fold:Param('Fold name', str),
+                input_path:Param("Input path for tiles dataset", str),
+                output_path:Param("Path to save the model weights", str),
+                n_epochs:Param("Number of epochs to train", int)=8,
+                lr:Param("Learning rate", float)=1e-2,
+                nburned:Param("Minimum number of burned pixels to define a sequence", int)=10,
+                n_episodes_train:Param("Number of episodes per train epoch", int)=2000,
+                n_episodes_valid:Param("Number of episodes for validation", int)=100,
+                sequence_len:Param("Number of time-steps in sequence", int)=64,
+                n_sequences:Param("Number of sequences per batch", int)=1,
+                pretrained_weights:Param("Path to a weights file", str)=None):
 
-</div>
-    {% endraw %}
+    path = Path(input_path)
+    model_path = Path(output_path)
+    print(f'Training model for {val_year}, fold {r_fold}:')
+    train_model(val_year, r_fold, path, model_path, n_epochs, lr, nburned,
+                n_episodes_train, n_episodes_valid, sequence_len, n_sequences,
+                pretrained_weights=pretrained_weights)Example:
+```bash
+#!/bin/bash -l
+val_year=2018
+fold_name=99
+input_path=/srv/banet/data/tiles/train
+output_path=/srv/banet/data/models
 
+banet_train_model $val_year $fold_name $input_path $output_path
+```
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -350,7 +374,7 @@ banet_predict_times <span class="nv">$region</span> <span class="s2">&quot;</spa
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_train_model" class="doc_header"><code>banet_train_model</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L169" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_train_model</code>(<strong><code>val_year</code></strong>:"Validation year", <strong><code>r_fold</code></strong>:"Fold name", <strong><code>input_path</code></strong>:"Input path for tiles dataset", <strong><code>output_path</code></strong>:"Path to save the model weights", <strong><code>n_epochs</code></strong>:"Number of epochs to train"=<em><code>8</code></em>, <strong><code>lr</code></strong>:"Learning rate"=<em><code>0.01</code></em>, <strong><code>nburned</code></strong>:"Minimum number of burned pixels to define a sequence"=<em><code>10</code></em>, <strong><code>n_episodes_train</code></strong>:"Number of episodes per train epoch"=<em><code>2000</code></em>, <strong><code>n_episodes_valid</code></strong>:"Number of episodes for validation"=<em><code>100</code></em>, <strong><code>sequence_len</code></strong>:"Number of time-steps in sequence"=<em><code>64</code></em>, <strong><code>n_sequences</code></strong>:"Number of sequences per batch"=<em><code>1</code></em>, <strong><code>pretrained_weights</code></strong>:"Path to a weights file"=<em><code>None</code></em>)</p>
+<h4 id="banet_nrt_run" class="doc_header"><code>banet_nrt_run</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L169" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_nrt_run</code>(<strong><code>region</code></strong>:<code>Param object at 0x7f657410ee80&gt;</code>, <strong><code>left</code></strong>:<code>Param object at 0x7f657410eeb0&gt;</code>, <strong><code>bottom</code></strong>:<code>Param object at 0x7f657410ef40&gt;</code>, <strong><code>right</code></strong>:<code>Param object at 0x7f657410ef10&gt;</code>, <strong><code>top</code></strong>:<code>Param object at 0x7f657410eee0&gt;</code>, <strong><code>project_path</code></strong>:<code>Param object at 0x7f657410e3a0&gt;</code>, <strong><code>hotspots_region</code></strong>:<code>Param object at 0x7f657410ef70&gt;</code>, <strong><code>product</code></strong>:<code>Param object at 0x7f657410efa0&gt;</code>=<em><code>'VIIRS750'</code></em>, <strong><code>area_epsg</code></strong>:<code>Param object at 0x7f657410e520&gt;</code>=<em><code>3763</code></em>, <strong><code>pixel_size</code></strong>:<code>Param object at 0x7f657410efd0&gt;</code>=<em><code>0.01</code></em>, <strong><code>time</code></strong>:<code>Param object at 0x7f6574112040&gt;</code>=<em><code>'today'</code></em>, <strong><code>threshold</code></strong>:<code>Param object at 0x7f6574112070&gt;</code>=<em><code>0.5</code></em>, <strong><code>skip_hotspots</code></strong>:<code>Param object at 0x7f65741120a0&gt;</code>=<em><code>False</code></em>, <strong><code>skip_ladsweb</code></strong>:<code>Param object at 0x7f65741120d0&gt;</code>=<em><code>False</code></em>, <strong><code>skip_preprocess</code></strong>:<code>Param object at 0x7f6574112100&gt;</code>=<em><code>False</code></em>, <strong><code>skip_getpreds</code></strong>:<code>Param object at 0x7f6574112130&gt;</code>=<em><code>False</code></em>, <strong><code>skip_postprocess</code></strong>:<code>Param object at 0x7f6574112160&gt;</code>=<em><code>False</code></em>, <strong><code>single_fold</code></strong>:<code>Param object at 0x7f6574112190&gt;</code>=<em><code>False</code></em>, <strong><code>max_size</code></strong>:<code>Param object at 0x7f65741121c0&gt;</code>=<em><code>2000</code></em>)</p>
 </blockquote>
 
 </div>
@@ -363,48 +387,9 @@ banet_predict_times <span class="nv">$region</span> <span class="s2">&quot;</spa
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Example:</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
-<span class="nv">val_year</span><span class="o">=</span><span class="m">2018</span>
-<span class="nv">fold_name</span><span class="o">=</span><span class="m">99</span>
-<span class="nv">input_path</span><span class="o">=</span>/srv/banet/data/tiles/train
-<span class="nv">output_path</span><span class="o">=</span>/srv/banet/data/models
-
-banet_train_model <span class="nv">$val_year</span> <span class="nv">$fold_name</span> <span class="nv">$input_path</span> <span class="nv">$output_path</span>
-</pre></div>
-
-</div>
-</div>
-</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="banet_nrt_run" class="doc_header"><code>banet_nrt_run</code><a href="https://github.com/mnpinto/banet/tree/master/banet/cli.py#L191" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>banet_nrt_run</code>(<strong><code>region</code></strong>:"Region name", <strong><code>left</code></strong>:"Left limit of the bounding box.", <strong><code>bottom</code></strong>:"Bottom limit of the bounding box.", <strong><code>right</code></strong>:"Right limit of the bounding box.", <strong><code>top</code></strong>:"Top limit of the bounding box.", <strong><code>project_path</code></strong>:"Root directory of the project", <strong><code>hotspots_region</code></strong>:"Hotspots region name", <strong><code>product</code></strong>:"Product name"=<em><code>'VIIRS750'</code></em>, <strong><code>area_epsg</code></strong>:"EPSG to compute burned area"=<em><code>3763</code></em>, <strong><code>pixel_size</code></strong>:"Pixel size"=<em><code>0.01</code></em>, <strong><code>time</code></strong>:"Day for the run"=<em><code>'today'</code></em>, <strong><code>threshold</code></strong>:"Threshold to apply to output of the model"=<em><code>0.5</code></em>, <strong><code>skip_hotspots</code></strong>:"Skip download of ladsweb data"=<em><code>False</code></em>, <strong><code>skip_ladsweb</code></strong>:"Skip download of ladsweb data"=<em><code>False</code></em>, <strong><code>skip_preprocess</code></strong>:"Skip download of ladsweb data"=<em><code>False</code></em>, <strong><code>skip_getpreds</code></strong>:"Skip download of ladsweb data"=<em><code>False</code></em>, <strong><code>skip_postprocess</code></strong>:"Skip post processing"=<em><code>False</code></em>, <strong><code>single_fold</code></strong>:"Use only one model"=<em><code>False</code></em>, <strong><code>max_size</code></strong>:"Max size to split region on inference and avoid memory error"=<em><code>2000</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}

@@ -2,11 +2,13 @@
 
 title: Train
 
+
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "This module include classes and functions to train BA-Net"
-description: "This module include classes and functions to train BA-Net"
+summary: "This module include classes and functions to train BA-Net. **Note: This module uses fastai version 1.**"
+description: "This module include classes and functions to train BA-Net. **Note: This module uses fastai version 1.**"
+nb_path: "nbs/05_train.ipynb"
 ---
 <!--
 
@@ -26,360 +28,254 @@ description: "This module include classes and functions to train BA-Net"
 
 </div>
     {% endraw %}
+# export
+import fastai
+from fastai.vision import *
+from fastai.callbacks import *
+import scipy.io as sio
+import sys
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
+from banet.models import BA_Net
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Callbacks">Callbacks<a class="anchor-link" href="#Callbacks"> </a></h1>
 </div>
 </div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="SampleEpisode" class="doc_header"><code>class</code> <code>SampleEpisode</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L17" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SampleEpisode</code>(<strong><code>data_source</code></strong>, <strong><code>n_episodes</code></strong>, <strong><code>sequence_len</code></strong>, <strong><code>n_sequences</code></strong>, <strong><code>info_df</code></strong>, <strong><code>nburned</code></strong>=<em><code>100</code></em>) :: <code>Sampler</code></p>
-</blockquote>
-<p>Base class for all Samplers.</p>
-<p>Every Sampler subclass has to provide an :meth:<code>__iter__</code> method, providing a
-way to iterate over indices of dataset elements, and a :meth:<code>__len__</code> method
-that returns the length of the returned iterators.</p>
-<p>.. note:: The :meth:<code>__len__</code> method isn't strictly required by
-          :class:<code>~torch.utils.data.DataLoader</code>, but is expected in any
-          calculation involving the length of a :class:<code>~torch.utils.data.DataLoader</code>.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="ImageSequence" class="doc_header"><code>class</code> <code>ImageSequence</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L70" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ImageSequence</code>(<strong><code>learn</code></strong>, <strong><code>sequence_len</code></strong>=<em><code>64</code></em>, <strong><code>n_sequences</code></strong>=<em><code>1</code></em>) :: <code>LearnerCallback</code></p>
-</blockquote>
-<p>Base class for creating callbacks for a <code>Learner</code>.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_y_fn" class="doc_header"><code>get_y_fn</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L83" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_y_fn</code>(<strong><code>file</code></strong>, <strong><code>satellite</code></strong>=<em><code>'VIIRS750'</code></em>, <strong><code>target_product</code></strong>=<em><code>'MCD64A1C6'</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="open_mat" class="doc_header"><code>open_mat</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L88" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>open_mat</code>(<strong><code>fn</code></strong>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="open_mask" class="doc_header"><code>open_mask</code><a href="fastai/vision/image.py#L404" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>open_mask</code>(<strong><code>fn</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>div</code></strong>=<em><code>False</code></em>, <strong><code>convert_mode</code></strong>=<em><code>'L'</code></em>, <strong><code>after_open</code></strong>:<code>Callable</code>=<em><code>None</code></em>)</p>
-</blockquote>
-<p>Return <code>ImageSegment</code> object create from mask in file <code>fn</code>. If <code>div</code>, divides pixel values by 255.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="set_info_df" class="doc_header"><code>set_info_df</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>set_info_df</code>(<strong><code>items_list</code></strong>, <strong><code>satellite</code></strong>=<em><code>'VIIRS750'</code></em>, <strong><code>target_product</code></strong>=<em><code>'MCD64A1C6'</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="SegLabelListCustom" class="doc_header"><code>class</code> <code>SegLabelListCustom</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L117" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SegLabelListCustom</code>(<strong><code>items</code></strong>:<code>Iterator</code>[<code>T_co</code>], <strong><code>classes</code></strong>:<code>Collection</code>[<code>T_co</code>]=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>SegmentationLabelList</code></p>
-</blockquote>
-<p><code>ItemList</code> for segmentation masks.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="SegItemListCustom" class="doc_header"><code>class</code> <code>SegItemListCustom</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L120" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>SegItemListCustom</code>(<strong>*<code>args</code></strong>, <strong><code>convert_mode</code></strong>=<em><code>'RGB'</code></em>, <strong><code>after_open</code></strong>:<code>Callable</code>=<em><code>None</code></em>, <strong>**<code>kwargs</code></strong>) :: <code>ImageList</code></p>
-</blockquote>
-<p><code>ItemList</code> suitable for computer vision.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="BCE" class="doc_header"><code>class</code> <code>BCE</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L156" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BCE</code>() :: <code>Module</code></p>
-</blockquote>
-<p>Binary Cross Entropy loss.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="accuracy" class="doc_header"><code>accuracy</code><a href="fastai/metrics.py#L25" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>accuracy</code>(<strong><code>input</code></strong>:<code>Tensor</code>, <strong><code>targs</code></strong>:<code>Tensor</code>)</p>
-</blockquote>
-<p>Computes accuracy with <code>targs</code> when <code>input</code> is bs * n_classes.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="dice2d" class="doc_header"><code>dice2d</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L168" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dice2d</code>(<strong><code>pred</code></strong>, <strong><code>targs</code></strong>, <strong><code>thr</code></strong>=<em><code>0.5</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="mean_absolute_error" class="doc_header"><code>mean_absolute_error</code><a href="fastai/metrics.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mean_absolute_error</code>(<strong><code>pred</code></strong>:<code>Tensor</code>, <strong><code>targ</code></strong>:<code>Tensor</code>)</p>
-</blockquote>
-<p>Mean absolute error between <code>pred</code> and <code>targ</code>.</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="train_model" class="doc_header"><code>train_model</code><a href="https://github.com/mnpinto/banet/tree/master/banet/train.py#L183" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train_model</code>(<strong><code>val_year</code></strong>, <strong><code>r_fold</code></strong>, <strong><code>path</code></strong>, <strong><code>model_path</code></strong>, <strong><code>n_epochs</code></strong>=<em><code>8</code></em>, <strong><code>lr</code></strong>=<em><code>0.01</code></em>, <strong><code>nburned</code></strong>=<em><code>10</code></em>, <strong><code>n_episodes_train</code></strong>=<em><code>2000</code></em>, <strong><code>n_episodes_valid</code></strong>=<em><code>100</code></em>, <strong><code>sequence_len</code></strong>=<em><code>64</code></em>, <strong><code>n_sequences</code></strong>=<em><code>1</code></em>, <strong><code>do_cutout</code></strong>=<em><code>True</code></em>, <strong><code>model_arch</code></strong>=<em><code>None</code></em>, <strong><code>pretrained_weights</code></strong>=<em><code>None</code></em>, <strong><code>satellite</code></strong>=<em><code>'VIIRS750'</code></em>, <strong><code>target_product</code></strong>=<em><code>'MCD64A1C6'</code></em>, <strong><code>get_learner</code></strong>=<em><code>False</code></em>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
+</div># export
+class SampleEpisode(Sampler):
+    def __init__(self, data_source, n_episodes, sequence_len, n_sequences, info_df, nburned=100):
+        self.ds, self.epoch_size = data_source, n_episodes
+        self.sequence_len, self.n_sequences = sequence_len, n_sequences
+        self._epochs = []
+        self.df = info_df
+        self.nburned = nburned
+
+    def __len__(self):
+        return self.epoch_size*self.sequence_len*self.n_sequences
+
+    def __iter__(self): return iter(self.get_epoch())
+
+    def get_epoch(self):
+        """Get indices for one epoch of size epoch_size"""
+        idx = []
+        for n in range(self.epoch_size):
+            idx = [*idx, *self.get_batch()]
+        return idx
+
+    def get_batch(self):
+        """Get indices for one mini-batch"""
+        idx = []
+        n = 0
+        while n < self.n_sequences:
+            k = np.random.choice(self.df.loc[self.df.ba>self.nburned].index, size=1, replace=False)[0]
+            s = self.random_sample(k)
+            if s is not None:
+                idx = [*idx, *s]
+                n += 1
+        return idx
+
+    def random_sample(self, k):
+        """Random samples are n-way k-shot"""
+        idx = []
+        condition = ((self.df.name == self.df.loc[k, 'name']) &
+            (self.df.time == self.df.loc[k, 'time'] + pd.Timedelta(days=self.sequence_len)) &
+            (self.df.r == self.df.loc[k, 'r']) &
+            (self.df.c == self.df.loc[k, 'c']))
+        where = self.df.loc[condition].index.values
+        if len(where) == 0:
+            idx = None
+        else:
+            times = pd.date_range(self.df.loc[k-self.sequence_len//2, 'time'], periods=2*self.sequence_len, freq='D')
+            condition = ((self.df.name == self.df.loc[k, 'name']) &
+                (self.df.time.isin(times)) &
+                (self.df.r == self.df.loc[k, 'r']) &
+                (self.df.c == self.df.loc[k, 'c']))
+            where = self.df.loc[condition].sort_values(by='time').index.values
+            idx = where[:self.sequence_len]
+            if len(idx) != self.sequence_len: idx = None
+        return idx
+
+class ImageSequence(LearnerCallback):
+    def __init__(self, learn, sequence_len=64, n_sequences=1):
+        super().__init__(learn)
+        self.sequence_len = sequence_len
+        self.n_sequences = n_sequences
+
+    def on_batch_begin(self, last_input, last_target, epoch, iteration, **kwargs):
+        bs, ch, sz1, sz2 = last_input.size()
+        last_input = last_input.view(self.sequence_len, self.n_sequences, ch, sz1, sz2).permute(1, 2, 0, 3, 4)
+        last_target = last_target.view(self.sequence_len, self.n_sequences, 1, sz1, sz2).permute(1, 2, 0, 3, 4)#.max(2)[0]
+        return {'last_input': last_input, 'last_target': last_target}# export
+def get_y_fn(file, satellite='VIIRS750', target_product='MCD64A1C6'):
+    f = str(Path(str(file))).replace('images', 'masks')
+    f = f.replace(satellite, target_product)
+    return f
+
+def open_mat(fn, *args, **kwargs):
+    data = sio.loadmat(fn)
+    data = np.array([data[r] for r in ['Red', 'NIR', 'MIR', 'FRP']])
+    data[np.isnan(data)] = 0
+    data[-1, ...] = np.log1p(data[-1,...])
+    data[np.isnan(data)] = 0
+    data = torch.from_numpy(data).float()
+    return Image(data)
+
+def open_mask(fn, *args, **kwargs):
+    data = sio.loadmat(fn)['bafrac']
+    data[np.isnan(data)] = 0
+    data = torch.from_numpy(data).float()
+    return Image(data.view(-1, data.size()[0], data.size()[1]))
+
+def set_info_df(items_list, satellite='VIIRS750', target_product='MCD64A1C6'):
+    names, dates = [], []
+    rs, cs = [], []
+    for o in items_list:
+        name, date, r,  c = Path(o).stem.split('_')
+        date = pd.Timestamp(date)
+        names.append(name)
+        dates.append(date)
+        rs.append(r)
+        cs.append(c)
+    ba = [open_mask(get_y_fn(str(o), satellite=satellite, target_product=target_product)
+                   ).data.sum().item() for o in progress_bar(items_list)]
+    return pd.DataFrame({'name': names, 'time': dates, 'r':rs, 'c':cs, 'ba':ba})
+
+class SegLabelListCustom(SegmentationLabelList):
+    def open(self, fn): return open_mask(fn, div=True)
+
+class SegItemListCustom(ImageList):
+    _label_cls = SegLabelListCustom
+    def open(self, fn): return open_mat(fn)
+
+def _cutout(x, n_holes:uniform_int=1, length:uniform_int=40):
+    "Cut out `n_holes` number of square holes of size `length` in image at random locations."
+    h,w = x.shape[1:]
+    for n in range(n_holes):
+        h_y = np.random.randint(0, h)
+        h_x = np.random.randint(0, w)
+        y1 = int(np.clip(h_y - length / 2, 0, h))
+        y2 = int(np.clip(h_y + length / 2, 0, h))
+        x1 = int(np.clip(h_x - length / 2, 0, w))
+        x2 = int(np.clip(h_x + length / 2, 0, w))
+        #x[:2, y1:y2, x1:x2] = 1
+        x[-1, y1:y2, x1:x2] = 0
+    return x
+
+cutout = TfmPixel(_cutout, order=20, )
+
+def _cutout2(x, n_holes:uniform_int=1, length:uniform_int=40):
+    "Cut out `n_holes` number of square holes of size `length` in image at random locations."
+    h,w = x.shape[1:]
+    h_y = np.random.randint(0, h)
+    h_x = np.random.randint(0, w)
+    y1 = int(np.clip(h_y - length / 2, 0, h))
+    y2 = int(np.clip(h_y + length / 2, 0, h))
+    x1 = int(np.clip(h_x - length / 2, 0, w))
+    x2 = int(np.clip(h_x + length / 2, 0, w))
+    x[0, y1:y2, x1:x2] = torch.rand(1)
+    x[1, y1:y2, x1:x2] = torch.rand(1)
+    x[2, y1:y2, x1:x2] = torch.rand(1)
+    return x
+
+cutout2 = TfmPixel(_cutout2, order=20)
+
+class BCE(Module):
+    "Binary Cross Entropy loss."
+    def forward(self, x, y):
+        bce = nn.BCEWithLogitsLoss()
+        return 100*bce(x.view(x.size()[0],-1),y.view(y.size()[0], -1))
+
+def accuracy(input:Tensor, targs:Tensor, thr:int=0.5)->Rank0Tensor:
+    "Compute accuracy with `targs` when `input` is bs * n_classes."
+    input = (input.sigmoid()>thr).long()
+    targs = (targs>thr).long()
+    return (input==targs).float().mean()
+
+def dice2d(pred, targs, thr=0.5):
+    pred = pred.squeeze()
+    targs = targs.squeeze().sum(0)
+    pred = (pred.sigmoid().sum(0)>thr).float()
+    targs = (targs>thr).float()
+    return 2. * (pred*targs).sum() / (pred+targs).sum()
+
+def mae(pred, targs, thr=0.5):
+    a = pred.squeeze().sigmoid().sum(0)>thr
+    pred = pred.squeeze().max(0)[1]
+    targs = targs.squeeze().max(0)[1]
+    pred = pred[a.byte()]
+    targs = targs[a.byte()]
+    return (pred-targs).abs().float().mean()
+
+def train_model(val_year, r_fold, path, model_path, n_epochs=8, lr=1e-2, nburned=10, n_episodes_train=2000,
+        n_episodes_valid=100, sequence_len=64, n_sequences=1, do_cutout=True, model_arch=None,
+        pretrained_weights=None, satellite='VIIRS750', target_product='MCD64A1C6',
+        get_learner=False):
+    path_img = path/'images'
+    train_files = sorted([f.name for f in path_img.iterdir()])
+    times = pd.DatetimeIndex([pd.Timestamp(t.split('_')[1]) for t in train_files])
+
+    train_df = pd.DataFrame({'times': times, 'ID': train_files})
+    valid_idx = train_df.loc[train_df.times.dt.year == val_year].index.values
+
+    if do_cutout:
+        tfms = get_transforms(do_flip=False, max_zoom=0, max_warp=0, max_rotate=0,
+                          xtra_tfms=[cutout(n_holes=(1, 5), length=(5, 50), p=0.5),
+                                     cutout2(n_holes=(1, 5), length=(5, 50), p=0.5)])
+    else:
+        tfms = get_transforms(do_flip=False, max_zoom=0, max_warp=0, max_rotate=0)
+
+    data = (SegItemListCustom.from_df(train_df, path, cols='ID', folder='images')
+        .split_by_idx(valid_idx)
+        .label_from_func(
+            partial(get_y_fn, satellite=satellite, target_product=target_product),
+            classes=['Burned'])
+        .transform(tfms, size=128, tfm_y=False))
+
+    info_train_df = set_info_df(data.train.items, 
+                                satellite=satellite, target_product=target_product)
+    info_valid_df = set_info_df(data.valid.items, 
+                                satellite=satellite, target_product=target_product)
+
+    bs = sequence_len*n_sequences
+    train_dl = DataLoader(
+        data.train,
+        batch_size=bs,
+        sampler=SampleEpisode(data.train, n_episodes=n_episodes_train,
+                              sequence_len=sequence_len, n_sequences=n_sequences,
+                              info_df=info_train_df, nburned=nburned))
+    valid_dl = DataLoader(
+        data.valid,
+        batch_size=bs,
+        sampler=SampleEpisode(data.valid, n_episodes=n_episodes_valid,
+                              sequence_len=sequence_len, n_sequences=n_sequences,
+                              info_df=info_valid_df, nburned=nburned))
+
+    databunch = ImageDataBunch(train_dl, valid_dl, path='.')
+    databunch = databunch.normalize([tensor([0.2349, 0.3548, 0.1128, 0.0016]),
+                                     tensor([0.1879, 0.1660, 0.0547, 0.0776])])
+
+    if model_arch is None:
+        model = BA_Net(4, 1, sequence_len)
+    else:
+        model = model_arch(4, 1, sequence_len)
+
+    if pretrained_weights is not None:
+        print(f'Loading pretrained_weights from {pretrained_weights}\n')
+        if torch.cuda.is_available():
+            model.load_state_dict(torch.load(pretrained_weights)['model'])
+        else: 
+            model.load_state_dict(
+                torch.load(pretrained_weights, map_location=torch.device('cpu'))['model'])
+    learn = Learner(databunch, model, callback_fns=[
+        partial(ImageSequence, sequence_len=sequence_len, n_sequences=n_sequences)],
+        loss_func=BCE(), wd=1e-2, metrics=[accuracy, dice2d, mae])
+    learn.clip_grad = 1
+    if get_learner: return learn
+    print('Starting traning loop\n')
+    learn.fit_one_cycle(n_epochs, lr)
+    model_path.mkdir(exist_ok=True)
+    torch.save(learn.model.state_dict(), model_path/f'banet-val{val_year}-fold{r_fold}-test.pth')
+    print(f'Completed! banet-val{val_year}-fold{r_fold}-test.pth saved to {model_path}.')
 </div>
  
 

@@ -24,19 +24,17 @@ Path.ls = ls
 # Cell
 class RunManager(banet.nrt.RunManager):
     def __init__(self, project_path:ProjectPath, region:str, times:pd.DatetimeIndex,
-                 product:str='VIIRS750', max_size=2000):
+                 product:str='VIIRS750'):
         """
         project_path: banet.core.ProjectPath object
         region: name of the region
         times: dates for the first day of month for each month to use
         product: VIIRS750 or VIIRS375
-        max_size: tile size to use on inference to reduce memory usage
         """
         self.path    = project_path
         self.times   = self.init_times(times)
         self.product = product
         self.region  = region
-        self.max_size= max_size
 
     def init_times(self, times):
         tstart = times[0] - pd.Timedelta(days=15)

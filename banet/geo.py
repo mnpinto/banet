@@ -26,21 +26,27 @@ from .core import *
 # Cell
 class Region():
     """Defines a geographical region with a name, a bounding box and the pixel size"""
-    def __init__(self, name:str, bbox:list, pixel_size:float, epsg:int=4326):
+    def __init__(self, name:str, bbox:list, pixel_size:float, epsg:int=4326,
+                 shape=None):
         self.name       = name
         self.bbox       = rasterio.coords.BoundingBox(*bbox) # left, bottom, right, top
         self.pixel_size = pixel_size
         self.epsg       = epsg
+        self._shape     = shape
 
     @property
     def width(self):
         "Width of the region"
-        return np.arange(self.bbox.left, self.bbox.right, self.pixel_size).shape[0]
+        if self._shape is None:
+            return np.arange(self.bbox.left, self.bbox.right, self.pixel_size).shape[0]
+        else: return self.shape[1]
 
     @property
     def height(self):
         "Height of the region"
-        return np.arange(self.bbox.bottom, self.bbox.top, self.pixel_size).shape[0]
+        if self._shape is None:
+            return np.arange(self.bbox.bottom, self.bbox.top, self.pixel_size).shape[0]
+        else: return self.shape[0]
 
     @property
     def transform(self):
@@ -54,7 +60,9 @@ class Region():
     @property
     def shape(self):
         "Shape of the region (height, width)"
-        return (self.height, self.width)
+        if self._shape is None:
+            return (self.height, self.width)
+        else: return self._shape
 
     def coords(self, offset='ul'):
         "Computes longitude and latitude arrays given a shape and a rasterio Affine transform"
@@ -70,13 +78,14 @@ class Region():
             args = json.load(f)
         return cls(args['name'], args['bbox'], args['pixel_size'])
 
-    def new(self, name:str=None, bbox:list=None, pixel_size:float=None, epsg:int=None):
+    def new(self, name:str=None, bbox:list=None, pixel_size:float=None, epsg:int=None,
+            shape:tuple=None):
         "Create new region with updated parameters."
         if name is None: name = self.name
         if bbox is None: bbox = list(self.bbox)
         if pixel_size is None: pixel_size = self.pixel_size
         if epsg is None: epsg = self.epsg
-        return Region(name, bbox, pixel_size, epsg=epsg)
+        return Region(name, bbox, pixel_size, epsg=epsg, shape=shape)
 
     def export(self, file):
         """Exports region information to json file"""
