@@ -557,7 +557,7 @@ and <code>save</code> the processed data using save method.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="BaseDataset.process_all" class="doc_header"><code>BaseDataset.process_all</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L397" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.process_all</code>(<strong><code>proc_funcs</code></strong>=<em><code>[]</code></em>, <strong><code>max_workers</code></strong>=<em><code>1</code></em>, <strong><code>max_size</code></strong>=<em><code>None</code></em>, <strong>**<code>proc_funcs_kwargs</code></strong>)</p>
+<h4 id="BaseDataset.process_all" class="doc_header"><code>BaseDataset.process_all</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L398" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>BaseDataset.process_all</code>(<strong><code>proc_funcs</code></strong>=<em><code>[]</code></em>, <strong><code>max_workers</code></strong>=<em><code>1</code></em>, <strong><code>max_size</code></strong>=<em><code>None</code></em>, <strong>**<code>proc_funcs_kwargs</code></strong>)</p>
 </blockquote>
 <p><code>process_all</code> runs <code>process_one</code> in parallel using the number of workers defined
 by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code>process_one</code> method</p>
@@ -583,7 +583,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ViirsDataset" class="doc_header"><code>class</code> <code>ViirsDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L409" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ViirsDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="ViirsDataset" class="doc_header"><code>class</code> <code>ViirsDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L410" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ViirsDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a> to process VIIRS 750-meter bands.</p>
 
@@ -608,7 +608,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Viirs375Dataset" class="doc_header"><code>class</code> <code>Viirs375Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L531" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Viirs375Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data.html#ViirsDataset"><code>ViirsDataset</code></a></p>
+<h2 id="Viirs375Dataset" class="doc_header"><code>class</code> <code>Viirs375Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L532" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Viirs375Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data.html#ViirsDataset"><code>ViirsDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a> to process VIIRS 750-meter bands.</p>
 
@@ -633,7 +633,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Viirs750Dataset" class="doc_header"><code>class</code> <code>Viirs750Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L534" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Viirs750Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data.html#ViirsDataset"><code>ViirsDataset</code></a></p>
+<h2 id="Viirs750Dataset" class="doc_header"><code>class</code> <code>Viirs750Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L535" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Viirs750Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>) :: <a href="/banet/data.html#ViirsDataset"><code>ViirsDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a> to process VIIRS 750-meter bands.</p>
 
@@ -693,7 +693,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 1/1 [00:00&lt;00:00, 1923.99it/s]
+<pre>100%|██████████| 1/1 [00:00&lt;00:00, 1279.53it/s]
 </pre>
 </div>
 </div>
@@ -783,7 +783,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 1/1 [00:00&lt;00:00, 2457.12it/s]
+<pre>100%|██████████| 1/1 [00:00&lt;00:00, 2191.38it/s]
 &lt;ipython-input-22-027d8babb8c7&gt;:115: UserWarning: Failed to open file with netCDF4 library, trying pyhdf instead. To use pyhdf by default set _use_netcdf4 to False.
   warn(&#39;Failed to open file with netCDF4 library, trying pyhdf instead. To use pyhdf by default set _use_netcdf4 to False.&#39;)
 </pre>
@@ -826,7 +826,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="MCD64Dataset" class="doc_header"><code>class</code> <code>MCD64Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L538" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MCD64Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="MCD64Dataset" class="doc_header"><code>class</code> <code>MCD64Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L539" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MCD64Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a> to process MCD64A1 Collection 6 burned areas product.</p>
 
@@ -858,7 +858,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FireCCI51Dataset" class="doc_header"><code>class</code> <code>FireCCI51Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L598" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FireCCI51Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="FireCCI51Dataset" class="doc_header"><code>class</code> <code>FireCCI51Dataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L599" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FireCCI51Dataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a> to process FireCCI51 burned areas product.</p>
 
@@ -890,7 +890,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="AusCoverDataset" class="doc_header"><code>class</code> <code>AusCoverDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L649" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AusCoverDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="AusCoverDataset" class="doc_header"><code>class</code> <code>AusCoverDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L650" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>AusCoverDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a> to process AusCover burned areas product.</p>
 
@@ -922,7 +922,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="MTBSDataset" class="doc_header"><code>class</code> <code>MTBSDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L700" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MTBSDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="MTBSDataset" class="doc_header"><code>class</code> <code>MTBSDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L701" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>MTBSDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a> to process MTBS burned areas product.</p>
 
@@ -954,7 +954,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ICNFDataset" class="doc_header"><code>class</code> <code>ICNFDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L743" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ICNFDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
+<h2 id="ICNFDataset" class="doc_header"><code>class</code> <code>ICNFDataset</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L744" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ICNFDataset</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>region</code></strong>:<a href="/banet/geo.html#Region"><code>Region</code></a>, <strong><code>times</code></strong>:<code>DatetimeIndex</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>=<em><code>['bafrac']</code></em>) :: <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a></p>
 </blockquote>
 <p>Subclass of <a href="/banet/data.html#BaseDataset"><code>BaseDataset</code></a> to process ICNF burned areas product.</p>
 
@@ -986,7 +986,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Region2Tiles" class="doc_header"><code>class</code> <code>Region2Tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L790" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Region2Tiles</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>input_name</code></strong>:<code>str</code>, <strong><code>target_name</code></strong>:<code>str</code>, <strong><code>regions</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>size</code></strong>=<em><code>128</code></em>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
+<h2 id="Region2Tiles" class="doc_header"><code>class</code> <code>Region2Tiles</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L791" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Region2Tiles</code>(<strong><code>paths</code></strong>:<a href="/banet/core.html#InOutPath"><code>InOutPath</code></a>, <strong><code>input_name</code></strong>:<code>str</code>, <strong><code>target_name</code></strong>:<code>str</code>, <strong><code>regions</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>bands</code></strong>:<code>list</code>=<em><code>None</code></em>, <strong><code>size</code></strong>=<em><code>128</code></em>, <strong><code>step</code></strong>=<em><code>100</code></em>)</p>
 </blockquote>
 <p>Crops processed dataset into 128x128 tiles to be used to train the model</p>
 
@@ -1018,7 +1018,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.open" class="doc_header"><code>Region2Tiles.open</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L808" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.open</code>(<strong><code>file</code></strong>, <strong><code>bands</code></strong>:<code>list</code>)</p>
+<h4 id="Region2Tiles.open" class="doc_header"><code>Region2Tiles.open</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L809" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.open</code>(<strong><code>file</code></strong>, <strong><code>bands</code></strong>:<code>list</code>)</p>
 </blockquote>
 <p>Open .mat file and select <code>bands</code>.</p>
 
@@ -1030,7 +1030,7 @@ by <code>max_workers</code> and passes the <code>proc_funcs</code> list to <code
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.save" class="doc_header"><code>Region2Tiles.save</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L855" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.save</code>(<strong><code>data</code></strong>, <strong><code>file</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>, <strong><code>folder</code></strong>, <strong><code>bands</code></strong>)</p>
+<h4 id="Region2Tiles.save" class="doc_header"><code>Region2Tiles.save</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L856" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.save</code>(<strong><code>data</code></strong>, <strong><code>file</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>, <strong><code>folder</code></strong>, <strong><code>bands</code></strong>)</p>
 </blockquote>
 <p>Save <code>data</code> to <code>file</code> on <code>folder</code> selecting only the given <code>bands</code>.
 The row and column index are included in the filename so that the large
@@ -1044,7 +1044,7 @@ scene can be reconstructed afterwards after generating the model predictions.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.crop" class="doc_header"><code>Region2Tiles.crop</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L839" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.crop</code>(<strong><code>im</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>)</p>
+<h4 id="Region2Tiles.crop" class="doc_header"><code>Region2Tiles.crop</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L840" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.crop</code>(<strong><code>im</code></strong>, <strong><code>r</code></strong>, <strong><code>c</code></strong>)</p>
 </blockquote>
 <p>crop image into a square of size sz</p>
 
@@ -1056,7 +1056,7 @@ scene can be reconstructed afterwards after generating the model predictions.</p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.process_one" class="doc_header"><code>Region2Tiles.process_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L813" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.process_one</code>(<strong><code>file</code></strong>, <strong><code>bands</code></strong>, <strong><code>folder</code></strong>)</p>
+<h4 id="Region2Tiles.process_one" class="doc_header"><code>Region2Tiles.process_one</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L814" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.process_one</code>(<strong><code>file</code></strong>, <strong><code>bands</code></strong>, <strong><code>folder</code></strong>)</p>
 </blockquote>
 <p>Create tiles for a <code>file</code> saving the results in <code>folder</code> for each
 crop using <code>save</code> method</p>
@@ -1069,7 +1069,7 @@ crop using <code>save</code> method</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Region2Tiles.process_all" class="doc_header"><code>Region2Tiles.process_all</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L827" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.process_all</code>(<strong><code>max_workers</code></strong>=<em><code>8</code></em>, <strong><code>include</code></strong>=<em><code>[]</code></em>)</p>
+<h4 id="Region2Tiles.process_all" class="doc_header"><code>Region2Tiles.process_all</code><a href="https://github.com/mnpinto/banet/tree/master/banet/data.py#L828" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Region2Tiles.process_all</code>(<strong><code>max_workers</code></strong>=<em><code>8</code></em>, <strong><code>include</code></strong>=<em><code>[]</code></em>)</p>
 </blockquote>
 <p>Run <code>process_one</code> in parallel using the number of workers given by <code>max_workers</code></p>
 

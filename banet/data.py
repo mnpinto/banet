@@ -385,8 +385,9 @@ class BaseDataset():
                         data = f(data, time, **kwargs)
                     if save:
                         self.save(time, data, crop=c)
-                    gc.collect()
-                else: return data
+                        del data
+                        gc.collect()
+                    else: return data
             else:
                 warn(f'No files for {time}. Skipping to the next time.')
         else: warn(f'Skipping files for {time}. File already exists.')

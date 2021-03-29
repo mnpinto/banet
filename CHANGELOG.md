@@ -1,6 +1,16 @@
 # Release notes
 
 <!-- do not remove -->
+## 0.6.3
+
+### Bug fixes
+- Fix save option in `BaseDataset.process_one` and delete data before calling `gc.collect()`;
+
+### Improved predict_time function
+- Compute every tile for each month instead of every month for each tile;
+- Save montly outputs and instead of holding all data in memory;
+- Monthly outputs are combined at the end;
+- Existing months (already computed) will be skipped (to recalculate the output files need to be manually deleted).
 
 ## 0.6.2
 
