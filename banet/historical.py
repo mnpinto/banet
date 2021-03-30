@@ -89,10 +89,11 @@ class RunManager(banet.nrt.RunManager):
         run_all(viirs_downloader_list, self.path.ladsweb)
 
     def get_preds(self, weight_files:list, threshold=0.5, save=True, max_size=2000,
-                  filename='data'):
+                  filename='data', verbose=False):
         "Computes BA-Net predictions ensembling the models in the weight_files list."
         local_files = self.init_model_weights(weight_files)
         iop = InOutPath(self.path.dataset, self.path.outputs, mkdir=False)
         region = self.R.new()
         predict_time(iop, self.times, local_files, region, threshold=threshold,
-                     save=save, max_size=max_size, product=self.product, output=filename)
+                     save=save, max_size=max_size, product=self.product, output=filename,
+                     verbose=verbose)

@@ -1,6 +1,12 @@
 # Release notes
 
 <!-- do not remove -->
+## 0.6.4
+
+### Improved predict_time function
+- Monthly output are now saved in netcdf format. Each tile is written directly to the netcdf file instead of holding it in memory until the complete region is mapped.
+
+
 ## 0.6.3
 
 ### Bug fixes
