@@ -1,6 +1,11 @@
 # Release notes
 
 <!-- do not remove -->
+## 0.6.5
+
+### Improved predict_time and get_preds for historical data
+- Added argument check_file (default=False) in `historical.RunManager.get_preds`. When True the code will run over existing netcdf output files and check if there is missing data. If missing data is found, the prediction step runs. 
+
 ## 0.6.4
 
 ### Improved predict_time function
