@@ -73,14 +73,16 @@ class RunManager():
 
     def update_hotspots(self, location, mode='7d', save=True):
         """Update hotspots file with new data.
-          location is according to the data url naming format
-          mode can be on of: 24h, 48h, 7d"""
-        url = f'https://firms.modaps.eosdis.nasa.gov/' \
-                   f'active_fire/viirs/text/VNP14IMGTDL_NRT_{location}_{mode}.csv'
+            location is according to the data url naming format
+            mode can be on of: 24h, 48h, 7d"""
+        url1 = f'https://firms.modaps.eosdis.nasa.gov/' \
+            f'data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_{location}_{mode}.csv'
+        url2 = f'https://firms.modaps.eosdis.nasa.gov/' \
+            f'data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_{location}_{mode}.csv'
         files = self.path.hotspots.ls(include=['.csv', f'hotspots{self.region}'])
         frp = [pd.read_csv(f) for f in files]
-        frp = pd.concat([*frp, pd.read_csv(url)], axis=0, sort=False
-                        ).drop_duplicates().reset_index(drop=True)
+        frp = pd.concat([*frp, *[pd.read_csv(url) for url in [url1, url2]]], axis=0,
+                        sort=False).drop_duplicates().reset_index(drop=True)
         if save:
             frp.to_csv(self.path.hotspots/f'hotspots{self.region}.csv', index=False)
             print(f'hotspots{self.region}.csv updated')

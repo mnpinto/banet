@@ -1,6 +1,14 @@
 # Release notes
 
 <!-- do not remove -->
+## 0.6.6
+
+### Fixed active fire download links for NRT and updated requirements
+- The urls for downloading near-real-time viirs active fires changed recently and the function `nrt.RunManager.update_hotspots` was updated accordingly.
+- proj, geos, cartopy added as requirements in the `settings.ini`.
+- fastai was fixed to version 2.2.7 in the `settings.ini`.
+- pyhdf was fixed to version 0.10.2 in the `settings.ini` to address an error occuring with the newest version.
+
 ## 0.6.5
 
 ### Improved predict_time and get_preds for historical data
