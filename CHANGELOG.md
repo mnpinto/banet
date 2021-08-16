@@ -1,6 +1,12 @@
 # Release notes
 
 <!-- do not remove -->
+## 0.6.7
+
+### Minor update
+- Added parameter `times` to `RunManager.preprocess_dataset`. This argument is passed to ViirsDataset and can be used to filter specific dates for preprocessing.
+
+
 ## 0.6.6
 
 ### Fixed active fire download links for NRT and updated requirements
