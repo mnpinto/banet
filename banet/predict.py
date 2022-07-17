@@ -10,6 +10,7 @@ from tqdm import tqdm
 import netCDF4
 import pdb
 import gc
+import calendar
 import scipy.ndimage as ndimage
 from fastai.vision.all import *
 
@@ -158,9 +159,12 @@ def inspect_netcdf(file, var='preds', crop=None):
     else: is_missing = True
     return is_missing
 
-def load_netcdf(file):
+def load_netcdf(file, crop=None):
     with netCDF4.Dataset(file, 'r', format="NETCDF4") as ncdata:
-        return ncdata['preds'][:].astype(np.float16)
+        if crop is None:
+            return ncdata['preds'][:].astype(np.float16)
+        else:
+            return ncdata['preds'][:, crop[0]:crop[1], crop[2]:crop[3]].astype(np.float16)
 
 def predict_time(path:InOutPath, times, weight_files:list, region:Region,
                  threshold=0.05, save=True, max_size=2000, buffer=128,
@@ -197,26 +201,35 @@ def predict_time(path:InOutPath, times, weight_files:list, region:Region,
         else: warn(f'File {file_save} already exists, skipping to next month.')
 
     # Merging all months and computing confidence level and date of burning
-    preds_all = []
+    si = [[max(0,j*max_size-buffer), (j+1)*max_size+buffer,
+           max(0,i*max_size-buffer), (i+1)*max_size+buffer]
+           for i in range(region.shape[1]//max_size+1) for j in range(region.shape[0]//max_size+1)]
     if verbose: print('Merging monthly files')
-    for time in progress_bar(ptimes):
-        tstr = time.strftime('%Y%m')
-        file = path.dst/f'{output}_{region.name}{tstr}.nc'
-        data = load_netcdf(file)
-        preds_all.append(data)
-    preds_all = np.concatenate(preds_all, axis=0)
-    ba = preds_all.sum(0)
-    ba[ba>1] = 1
-    ba[ba<threshold] = np.nan
-    bd = preds_all.argmax(0)
-    bd = bd.astype(np.float16)
-    bd[np.isnan(ba)] = np.nan
-    del preds_all
-    gc.collect()
+    ylen = 366 if calendar.isleap(ptimes[0].year) else 365
+    bd_all, ba_all = np.zeros(region.shape, dtype=np.float16), np.zeros(region.shape, dtype=np.float16)
+    for i, split in enumerate(si):
+        print(f'Split {split}')
+        preds_all = []
+        for time in progress_bar(ptimes):
+            tstr = time.strftime('%Y%m')
+            file = path.dst/f'{output}_{region.name}{tstr}.nc'
+            data = load_netcdf(file, crop=split)
+            preds_all.append(data)
+        preds_all = np.concatenate(preds_all, axis=0)
+        ba = preds_all.sum(0)
+        ba[ba>1] = 1
+        ba[ba<threshold] = np.nan
+        bd = preds_all.argmax(0)
+        bd = bd.astype(np.float16)
+        bd[np.isnan(ba)] = np.nan
+        ba_all[split[0]:split[1], split[2]:split[3]] = ba
+        bd_all[split[0]:split[1], split[2]:split[3]] = bd
+        del preds_all, ba, bd
+        gc.collect()
     times = pd.date_range(ptimes[0], ptimes_eom[-1], freq='D')
     tstr_start = times[0].strftime('%Y')
     file_save = path.dst/f'{output}_{region.name}{tstr_start}.mat'
-    sio.savemat(file_save, {'burned': ba, 'date': bd, 'times': times.astype(str).tolist()},
+    sio.savemat(file_save, {'burned': ba_all, 'date': bd_all, 'times': times.astype(str).tolist()},
                 do_compression=True)
 
 def predict_month(iop, time, weight_files, region, threshold=0.5, save=True, slice_idx=None):
