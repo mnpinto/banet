@@ -12,7 +12,7 @@ import IPython
 import matplotlib.pyplot as plt
 from nbdev.imports import test_eq
 import datetime
-from geoget.download import run_all
+from geoget.download import run_all, Ladsweb
 from .core import filter_files, ls, Path, InOutPath, ProjectPath
 from .geo import Region
 from .data import *
@@ -88,79 +88,35 @@ class RunManager():
             print(f'hotspots{self.region}.csv updated')
         else: return frp
 
-    def download_viirs(self):
+    def download_viirs(self, products=['VJ102IMG', 'VJ103IMG'], collection='5201', daynight='D'):
         "Download viirs data needed for the dataset."
         tstart, tend = self.get_download_dates()
-        region = self.R.new()
+        for product in products:
+            print(product)
+            lads = Ladsweb(
+                product=product,
+                collection=collection,
+                tstart=tstart,
+                tend=tend,
+                bbox=list(self.R.bbox), # left bottom right top
+                daynight=daynight) # D N DNB
+            lads.download_raw_files(self.path.ladsweb)
 
-        if self.product == 'VIIRS750':
-            viirs_downloader = VIIRS750_download(region, tstart, tend)
-            viirs_downloader_list = viirs_downloader.split_times()
-
-        elif self.product == 'VIIRS375':
-            viirs_downloader1 = VIIRS375_download(region, tstart, tend)
-            region.pixel_size = 0.1 # Angles can be interpolated later
-            viirs_downloader2 = VIIRS750_download(region, tstart, tend,
-                                bands=['SolarZenithAngle', 'SatelliteZenithAngle'])
-            viirs_downloader_list1 = viirs_downloader1.split_times()
-            viirs_downloader_list2 = viirs_downloader2.split_times()
-            viirs_downloader_list = [*viirs_downloader_list1, *viirs_downloader_list2]
-
-        else: raise NotImplementedError(f'Not implemented for {self.product}.')
-
-        run_all(viirs_downloader_list, self.path.ladsweb)
-
-    def preprocess_dataset_750(self, max_size=None, max_workers=1, times=None):
-        "Apply pre-processing to the rawdata and saves results in dataset directory."
-        paths = InOutPath(f'{self.path.ladsweb}', f'{self.path.dataset}')
-        R = self.R.new()
-        bands = ['Reflectance_M5', 'Reflectance_M7', 'Reflectance_M10', 'Radiance_M12',
-                 'Radiance_M15', 'SolarZenithAngle', 'SatelliteZenithAngle']
-        print('\nPre-processing data...')
-        viirs = Viirs750Dataset(paths, R, bands=bands, times=times)
-        merge_tiles = MergeTiles('SatelliteZenithAngle', ignore=['R'])
-        mir_calc = MirCalc('SolarZenithAngle', 'Radiance_M12', 'Radiance_M15')
-        rename = BandsRename(['Reflectance_M5', 'Reflectance_M7'], ['Red', 'NIR'])
-        bfilter = BandsFilter(['Red', 'NIR', 'MIR', 'R'])
-        act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
-        bfilter2 = BandsFilter(['Red', 'NIR', 'MIR', 'FRP'])
-        if max_size is None:
-            proc_funcs = [BandsAssertShape(), merge_tiles,
-                          mir_calc, rename, bfilter1, act_fires, bfilter2]
-        else:
-            proc_funcs = [merge_tiles, mir_calc, rename, bfilter1,
-                          act_fires, bfilter2]
-        viirs.process_all(proc_funcs=proc_funcs, max_size=max_size, max_workers=max_workers)
-
-    def preprocess_dataset_375(self, max_size=None, max_workers=1, times=None):
-        "Apply pre-processing to the rawdata and saves results in dataset directory."
-        paths = InOutPath(f'{self.path.ladsweb}', f'{self.path.dataset}')
-        R = self.R.new()
-        bands = ['Reflectance_I1', 'Reflectance_I2', 'Reflectance_I3',
-                 'Radiance_I4', 'Radiance_I5', 'SolarZenithAngle', 'SatelliteZenithAngle']
-        print('\nPre-processing data...')
-        viirs = Viirs375Dataset(paths, R, bands=bands, times=times)
-        interpAng = InterpolateAngles(R.new(pixel_size=0.1), R,
-                              ['SolarZenithAngle', 'SatelliteZenithAngle'])
-        merge_tiles = MergeTiles('SatelliteZenithAngle', ignore=['R'])
-        mir_calc = MirCalc('SolarZenithAngle', 'Radiance_I4', 'Radiance_I5')
-        rename = BandsRename(['Reflectance_I1', 'Reflectance_I2'], ['Red', 'NIR'])
-        bfilter1 = BandsFilter(['Red', 'NIR', 'MIR', 'R'])
-        act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
-        bfilter2 = BandsFilter(['Red', 'NIR', 'MIR', 'FRP'])
-        if max_size is None:
-            proc_funcs = [interpAng, BandsAssertShape(), merge_tiles,
-                          mir_calc, rename, bfilter1, act_fires, bfilter2]
-        else:
-            proc_funcs = [interpAng, merge_tiles, mir_calc, rename, bfilter1,
-                          act_fires, bfilter2]
-        viirs.process_all(proc_funcs=proc_funcs, max_size=max_size, max_workers=max_workers)
-
-    def preprocess_dataset(self, max_size=None, max_workers=1, times=None):
-        if self.product == 'VIIRS750':
-            self.preprocess_dataset_750(max_size=max_size, max_workers=max_workers, times=times)
-        elif self.product == 'VIIRS375':
-            self.preprocess_dataset_375(max_size=max_size, max_workers=max_workers, times=times)
+    def preprocess_dataset(self, max_workers=1, replace=False):
+        if self.product == 'VIIRS375':
+            viirs = ViirsDataset2(path, region, bands=bands)
+            rename1 = BandsRename(
+                ['I01', 'I02', 'I03', 'I04', 'I05', 'solar_zenith', 'sensor_zenith', 'latitude', 'longitude'],
+                ['Reflectance_I1', 'Reflectance_I2', 'Reflectance_I3', 'Radiance_I4', 'Radiance_I5',
+                 'SolarZenithAngle', 'SatelliteZenithAngle', 'Latitude', 'Longitude'])
+            merge_tiles = MergeTiles('SatelliteZenithAngle')
+            mir_calc = MirCalc('SolarZenithAngle', 'Radiance_I4', 'Radiance_I5')
+            rename2 = BandsRename(['Reflectance_I1', 'Reflectance_I2'], ['Red', 'NIR'])
+            bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
+            act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region.name}.csv')
+            viirs.process_all(proc_funcs=[mask2nan, rename1, merge_tiles, mir_calc,
+                                          rename2, bfilter, act_fires, nan2zero],
+                              max_workers=max_workers, replace=replace)
         else: raise NotImplementedError(f'Not implemented for {self.product}.')
 
     def init_model_weights(self, weight_files:list):
