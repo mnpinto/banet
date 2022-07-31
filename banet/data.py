@@ -402,7 +402,6 @@ class ViirsDataset(BaseDataset):
         self.times = self.check_files()
 
     def list_files(self, time:pd.Timestamp)-> list:
-        print('Using sensor: ', sensor_id)
         if time in self.times:
             dayOfYear = str(time.dayofyear).zfill(3)
             files = self.paths.src.ls(include=[f'.A{time.year}{dayOfYear}.', '.nc'])
@@ -412,8 +411,7 @@ class ViirsDataset(BaseDataset):
         not_missing = []
         for i, t in tqdm(enumerate(self.times), total=len(self.times)):
             files = self.list_files(t)
-            files = ';'.join([f.stem for f in files])
-            if sum([s in files for s in self.bands]) != len(self.bands):
+            if len(files)==0:
                 print(f'Missing files for {t}')
             else: not_missing.append(i)
         return self.times[not_missing]
@@ -458,18 +456,18 @@ class ViirsDataset(BaseDataset):
         valid_input_index, valid_output_index, index_array, distance_array = \
             kd_tree.get_neighbour_info(swath_def, area_def, max_distance_meter, neighbours=1, nprocs=num_workers)
         for k in self.bands:
-            data[k] = kd_tree.get_sample_from_neighbour_info('nn', output_shape=region.shape, data=data[k],
+            data[k] = kd_tree.get_sample_from_neighbour_info('nn', output_shape=self.region.shape, data=data[k],
                                                    valid_input_index=valid_input_index, valid_output_index=valid_output_index,
                                                    index_array=index_array, distance_array=distance_array, fill_value=None)
         return data
 
     def process_one(self, time:pd.Timestamp, proc_funcs:list=[], save=True, replace=False,
-                    sensor_id='VJ', **proc_funcs_kwargs):
+                    **proc_funcs_kwargs):
         """This method defines a processing pipeline consisting of opening the file
         using the `open` method, applying each of the `proc_funcs` to the output of the previous
         and `save` the processed data using save method."""
         tstr = time.strftime('%Y%m%d')
-        files = self.list_files(time, sensor_id=sensor_id)
+        files = self.list_files(time)
         files = group_files(files)
         tstr = time.strftime('%Y%m%d')
         filename = f'{self.paths.dst}/{self.name}{self.region.name}_{tstr}.nc'

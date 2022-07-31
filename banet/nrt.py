@@ -24,7 +24,7 @@ Path.ls = ls
 
 # Cell
 class RunManager():
-    def __init__(self, project_path:ProjectPath, region, time='today',
+    def __init__(self, project_path:ProjectPath, region: str, time='today',
                  product:str='VIIRS750', days=64):
         self.path    = project_path
         self.time    = self.init_time(time)
@@ -62,13 +62,15 @@ class RunManager():
 
     def get_download_dates(self):
         "Find for which new dates the files need to be downloaded."
+        all_times = self.last_n_days(self.time, self.days)
         files = self.check_data()['files']
-        if len(files) == 0:
-            start = self.last_n_days(self.time, self.days)[0]
+        existing_times = [pd.Timestamp(Path(o).stem.split('_')[-1]) for o in files]
+        download_times = set(all_times) - set(existing_times)
+        if len(download_times) > 0:
+            start = min(download_times).strftime('%Y-%m-%d 00:00:00')
+            end = max(download_times).strftime('%Y-%m-%d 23:59:59')
         else:
-            start = pd.Timestamp(files[-1].stem.split('_')[-1])+pd.Timedelta(days=1)
-        start = start.strftime('%Y-%m-%d 00:00:00')
-        end = self.time.strftime('%Y-%m-%d 23:59:59')
+            start, end = None, None
         return start, end
 
     def update_hotspots(self, location, mode='7d', save=True):
@@ -91,20 +93,22 @@ class RunManager():
     def download_viirs(self, products=['VJ102IMG', 'VJ103IMG'], collection='5201', daynight='D'):
         "Download viirs data needed for the dataset."
         tstart, tend = self.get_download_dates()
-        for product in products:
-            print(product)
-            lads = Ladsweb(
-                product=product,
-                collection=collection,
-                tstart=tstart,
-                tend=tend,
-                bbox=list(self.R.bbox), # left bottom right top
-                daynight=daynight) # D N DNB
-            lads.download_raw_files(self.path.ladsweb)
+        if tstart is not None:
+            for product in products:
+                print(product)
+                lads = Ladsweb(
+                    product=product,
+                    collection=collection,
+                    tstart=tstart,
+                    tend=tend,
+                    bbox=list(self.R.bbox), # left bottom right top
+                    daynight=daynight) # D N DNB
+                lads.download_raw_files(self.path.ladsweb)
 
     def preprocess_dataset(self, max_workers=1, replace=False):
         if self.product == 'VIIRS375':
-            viirs = ViirsDataset2(path, region, bands=bands)
+            bands = ['I01', 'I02', 'I03', 'I04', 'I05', 'solar_zenith', 'sensor_zenith', 'latitude', 'longitude']
+            viirs = Viirs375Dataset(InOutPath(self.path.ladsweb, self.path.dataset), self.R, bands=bands)
             rename1 = BandsRename(
                 ['I01', 'I02', 'I03', 'I04', 'I05', 'solar_zenith', 'sensor_zenith', 'latitude', 'longitude'],
                 ['Reflectance_I1', 'Reflectance_I2', 'Reflectance_I3', 'Radiance_I4', 'Radiance_I5',
@@ -113,7 +117,7 @@ class RunManager():
             mir_calc = MirCalc('SolarZenithAngle', 'Radiance_I4', 'Radiance_I5')
             rename2 = BandsRename(['Reflectance_I1', 'Reflectance_I2'], ['Red', 'NIR'])
             bfilter = BandsFilter(['Red', 'NIR', 'MIR'])
-            act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region.name}.csv')
+            act_fires = ActiveFiresLog(f'{self.path.hotspots}/hotspots{self.region}.csv')
             viirs.process_all(proc_funcs=[mask2nan, rename1, merge_tiles, mir_calc,
                                           rename2, bfilter, act_fires, nan2zero],
                               max_workers=max_workers, replace=replace)
