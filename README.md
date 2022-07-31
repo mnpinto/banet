@@ -45,6 +45,9 @@ manager.preprocess_dataset()
 manager.get_preds(weight_files, threshold=0.01, max_size=2000)
 manager.postprocess(filename=f'ba_{manager.time.strftime("%Y%m%d")}', threshold=0.5, area_epsg=3763)
 ```
+
+Note that `manager.update_hotspots()` will only download active fires data from the past 7 days. You can download active fires data for any period and region at https://firms.modaps.eosdis.nasa.gov/download/.
+
 After successfully running `manager.preprocess_dataset()` the contents of `paths.ladsweb` can be removed.
 
 
