@@ -19,6 +19,7 @@ from rasterio.merge import merge
 from rasterio.coords import BoundingBox
 from rasterio.crs import CRS
 import warnings
+import pyresample.geometry as prgeo
 from fastcore.test import *
 
 from .core import *
@@ -37,16 +38,12 @@ class Region():
     @property
     def width(self):
         "Width of the region"
-        if self._shape is None:
-            return np.arange(self.bbox.left, self.bbox.right, self.pixel_size).shape[0]
-        else: return self.shape[1]
+        return self.shape[1]
 
     @property
     def height(self):
         "Height of the region"
-        if self._shape is None:
-            return np.arange(self.bbox.bottom, self.bbox.top, self.pixel_size).shape[0]
-        else: return self.shape[0]
+        return self.shape[0]
 
     @property
     def transform(self):
@@ -60,8 +57,11 @@ class Region():
     @property
     def shape(self):
         "Shape of the region (height, width)"
+        crs = prgeo.CRS(f'EPSG:{self.epsg}')
+        area_def = prgeo.create_area_def(
+            crs.name, crs.to_dict(), area_extent=self.bbox, resolution=self.pixel_size)
         if self._shape is None:
-            return (self.height, self.width)
+            return area_def.shape
         else: return self._shape
 
     def coords(self, offset='ul'):
