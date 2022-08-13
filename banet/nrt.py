@@ -90,7 +90,8 @@ class RunManager():
             print(f'hotspots{self.region}.csv updated')
         else: return frp
 
-    def download_viirs(self, products=['VJ102IMG', 'VJ103IMG'], collection='5201', daynight='D'):
+    def download_viirs(self, products=['VJ102IMG', 'VJ103IMG'], collection='5201', daynight='D',
+                       replace=False):
         "Download viirs data needed for the dataset."
         tstart, tend = self.get_download_dates()
         if tstart is not None:
@@ -103,7 +104,7 @@ class RunManager():
                     tend=tend,
                     bbox=list(self.R.bbox), # left bottom right top
                     daynight=daynight) # D N DNB
-                lads.download_raw_files(self.path.ladsweb)
+                lads.download_raw_files(self.path.ladsweb, replace=replace)
 
     def preprocess_dataset(self, max_workers=1, replace=False):
         if self.product == 'VIIRS375':
