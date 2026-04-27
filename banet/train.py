@@ -279,6 +279,6 @@ def train_model(val_year, r_fold, path, model_path, n_epochs=8, lr=1e-2, nburned
 
     model_path.mkdir(exist_ok=True)
     if save_to is None:
-        save_to='banet-val-{fold}-v2.pth'
+        save_to='banet-val{val_year}-fold{r_fold}-v2.pth'
     torch.save(learn.model.state_dict(), model_path/save_to)
     print(f'Completed! {save_to} saved to {model_path}.')
