@@ -20,8 +20,8 @@ from .models import BA_Net
 
 # Cell
 class SampleEpisode(Sampler):
-    def __init__(self, data_source, n_episodes, sequence_len, n_sequences, info_df, nburned=100):
-        self.ds, self.epoch_size = data_source, n_episodes
+    def __init__(self, n_episodes, sequence_len, n_sequences, info_df, nburned=100):
+        self.epoch_size = n_episodes
         self.sequence_len, self.n_sequences = sequence_len, n_sequences
         self._epochs = []
         self.df = info_df
@@ -91,11 +91,9 @@ class ImageSequence(Callback):
 
     def before_batch(self):
         x, y = self.learn.xb[0], self.learn.yb[0]
-#        print(f"Before reshape: x={x.shape}, y={y.shape}, dtype={x.dtype}, mu_dtype={self.mean.dtype}")  # Debug
         bs, ch, sz1, sz2 = x.shape
         x = x.view(self.sequence_len, self.n_sequences, ch, sz1, sz2).permute(1, 2, 0, 3, 4)
         y = y.view(self.sequence_len, self.n_sequences, 1, sz1, sz2).permute(1, 2, 0, 3, 4)
-#        print(f"After reshape: x={x.shape}, y={y.shape}")  # Debug
         self.learn.xb = (x,)
         self.learn.yb = (y,)
 
@@ -224,7 +222,7 @@ def train_model(val_year, r_fold, path, model_path, n_epochs=8, lr=1e-2, nburned
         splitter=IndexSplitter(valid_idx)
     )
 
-    dsets = dblock.datasets(path_img/train_files)
+    dsets = dblock.datasets([path_img/f for f in train_files])
 
     info_train = set_info_df(dsets.train.items, satellite=satellite, target_product=target_product)
     info_valid = set_info_df(dsets.valid.items, satellite=satellite, target_product=target_product)
@@ -232,12 +230,12 @@ def train_model(val_year, r_fold, path, model_path, n_epochs=8, lr=1e-2, nburned
     bs = sequence_len * n_sequences
 
     train_dl = CustomLoader(dsets.train,
-                        sampler=SampleEpisode(dsets.train[0], n_episodes=n_episodes_train,
+                        sampler=SampleEpisode(n_episodes=n_episodes_train,
                                               sequence_len=sequence_len, n_sequences=n_sequences,
                                               info_df=info_train, nburned=nburned), bs=bs)
 
     valid_dl = CustomLoader(dsets.valid,
-                        sampler=SampleEpisode(dsets.valid[0], n_episodes=n_episodes_valid,
+                        sampler=SampleEpisode(n_episodes=n_episodes_valid,
                                               sequence_len=sequence_len, n_sequences=n_sequences,
                                               info_df=info_valid, nburned=nburned), bs=bs)
 
@@ -275,10 +273,10 @@ def train_model(val_year, r_fold, path, model_path, n_epochs=8, lr=1e-2, nburned
     if get_learner: return learn
 
     print('Starting traning loop\n')
-    learn.fit_one_cycle(n_epochs, lr*64/sequence_len)
+    learn.fit_one_cycle(n_epochs, lr*sequence_len/64)
 
     model_path.mkdir(exist_ok=True)
     if save_to is None:
-        save_to='banet-val{val_year}-fold{r_fold}-v2.pth'
+        save_to=f'banet-val{val_year}-fold{r_fold}-v2.pth'
     torch.save(learn.model.state_dict(), model_path/save_to)
     print(f'Completed! {save_to} saved to {model_path}.')
