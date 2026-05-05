@@ -11,7 +11,7 @@ jobs:
         architecture: 'x64'
     - name: Install system dependencies
       run: |
-        sudo apt install -y libhdf4-dev
+        sudo apt install -y libhdf4-dev libproj-dev proj-data proj-bin libgeos-dev
     - name: Install the library
       run: |
         pip install -e .
