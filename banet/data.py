@@ -28,7 +28,6 @@ from pyresample import kd_tree
 from geoget.download import *
 from .core import *
 from .geo import *
-from IPython.core.debugger import set_trace
 
 # Cell
 class VIIRS375_download(Ladsweb):

@@ -6,7 +6,6 @@ import numpy as np
 import scipy.io as sio
 import rasterio
 import requests
-import IPython
 import matplotlib.pyplot as plt
 import datetime
 from geoget.download import run_all

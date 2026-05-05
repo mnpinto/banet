@@ -5,10 +5,7 @@ __all__ = ['banet_viirs375_download', 'banet_viirs750_download', 'banet_create_d
 import calendar
 import pandas as pd
 from fastcore.script import call_parse, Param
-import pdb
 import os
-import IPython
-import pdb
 
 from geoget.download import run_all
 
