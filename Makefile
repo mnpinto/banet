@@ -1,23 +1,11 @@
-SRC = $(wildcard nbs/*.ipynb)
+SRC = $(wildcard banet/*.py)
 
-all: banet2 docs
-
-banet2: $(SRC)
-	nbdev_build_lib
-	touch banet2
-
-docs_serve: docs
-	cd docs && bundle exec jekyll serve
-
-docs: $(SRC)
-	nbdev_build_docs
-	touch docs
+all: test
 
 test:
-	nbdev_test_nbs
+	python -m pytest --tb=short -q
 
 release: pypi
-	nbdev_bump_version
 
 pypi: dist
 	twine upload --repository pypi dist/*
