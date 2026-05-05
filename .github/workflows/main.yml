@@ -14,6 +14,7 @@ jobs:
         sudo apt install -y libhdf4-dev libproj-dev proj-data proj-bin libgeos-dev
     - name: Install the library
       run: |
+        pip install setuptools
         pip install -e .
     - name: Run tests
       run: |
