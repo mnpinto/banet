@@ -6,13 +6,26 @@
 
 ## Install
 
-libhdf4-dev is required for pyhdf to read .hdf4 files.
+**System dependencies** (required for `pyhdf`, `pyresample`, `shapely`/`rasterio`):
 
-`sudo apt install -y libhdf4-dev`
+```bash
+sudo apt-get install -y libhdf4-dev libproj-dev proj-data proj-bin libgeos-dev
+```
 
-`conda install -c conda-forge pykdtree pyresample`
+**Clone and install:**
 
-`pip install banet`
+```bash
+git clone https://github.com/mnpinto/banet.git
+cd banet
+make
+source .venv/bin/activate
+```
+
+Or install directly from PyPI:
+
+```bash
+pip install banet
+```
 
 ## Setup ladsweb
 Follow the instructions at https://github.com/mnpinto/geoget to create the `~/.ladsweb` config file.
