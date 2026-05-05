@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "banet"
+version = "0.8.0"
+description = "A deep learning approach for mapping and dating burned areas using temporal sequences of satellite images"
+readme = "README.md"
+license = { text = "Apache Software License 2.0" }
+authors = [{ name = "Miguel Pinto", email = "mnpinto@fc.ul.pt" }]
+keywords = ["burned areas", "viirs", "deep learning", "computer vision", "remote sensing"]
+requires-python = ">=3.8"
+dependencies = [
+    "geoget>=0.1.17",
+    "fire_split",
+    "fastcore>=1.3.8",
+    "fastai>=2.2.7",
+    "ipython",
+    "rasterio",
+    "geopandas",
+    "shapely",
+    "netcdf4",
+    "pyhdf>=0.10.2",
+    "pykdtree",
+    "pyresample",
+]
+
+[project.urls]
+Homepage = "https://github.com/mnpinto/banet"
+
+[project.scripts]
+banet_viirs375_download = "banet.cli:banet_viirs375_download"
+banet_viirs750_download = "banet.cli:banet_viirs750_download"
+banet_create_dataset = "banet.cli:banet_create_dataset"
+banet_dataset2tiles = "banet.cli:banet_dataset2tiles"
+banet_predict_monthly = "banet.cli:banet_predict_monthly"
+banet_predict_times = "banet.cli:banet_predict_times"
+banet_train_model = "banet.cli:banet_train_model"
+banet_nrt_run = "banet.cli:banet_nrt_run"
+
+[tool.setuptools.packages.find]
+where = ["."]

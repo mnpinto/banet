@@ -2,11 +2,13 @@
 
 title: Mapping Australia 2019/2020 fires
 
+
 keywords: fastai
 sidebar: home_sidebar
 
 summary: "An example of usage of BA-Net to map and date the extreme fire events that occured in eastern Australia in the fire season of 2019/2020."
 description: "An example of usage of BA-Net to map and date the extreme fire events that occured in eastern Australia in the fire season of 2019/2020."
+nb_path: "nbs/tutorial.australia2020.ipynb"
 ---
 <!--
 
@@ -40,8 +42,7 @@ description: "An example of usage of BA-Net to map and date the extreme fire eve
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">sio</span>
@@ -71,8 +72,7 @@ description: "An example of usage of BA-Net to map and date the extreme fire eve
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="n">path</span> <span class="o">=</span> <span class="n">InOutPath</span><span class="p">(</span><span class="s1">&#39;/srv/australia2020/&#39;</span><span class="p">,</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">InOutPath</span><span class="p">(</span><span class="s1">&#39;/srv/australia2020/&#39;</span><span class="p">,</span> 
                  <span class="s1">&#39;/srv/australia2020/&#39;</span><span class="p">)</span>
 
 <span class="c1"># load and merge archive and nrt csv with VIIRS active fires</span>
@@ -250,11 +250,10 @@ description: "An example of usage of BA-Net to map and date the extreme fire eve
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="n">hour</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">acq_time</span><span class="o">.</span><span class="n">values</span><span class="o">//</span><span class="mi">100</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">acq_time</span><span class="o">.</span><span class="n">values</span><span class="o">//</span><span class="mi">100</span>
 <span class="n">minute</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">acq_time</span><span class="o">.</span><span class="n">values</span><span class="o">-</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">acq_time</span><span class="o">.</span><span class="n">values</span><span class="o">//</span><span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
 
-<span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{o}</span><span class="s1"> </span><span class="si">{h}</span><span class="s1">:</span><span class="si">{m}</span><span class="s1">:00&#39;</span><span class="p">)</span> 
+<span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">o</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">h</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1">:00&#39;</span><span class="p">)</span> 
          <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">acq_date</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">)])</span>
 
 <span class="n">doy</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">dayofyear</span><span class="o">.</span><span class="n">values</span>
@@ -265,7 +264,7 @@ description: "An example of usage of BA-Net to map and date the extreme fire eve
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">doy</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Active Fires Australia ({df.acq_date.min()} - {df.acq_date.max()})&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Active Fires Australia (</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">acq_date</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">acq_date</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
 </pre></div>
@@ -309,15 +308,14 @@ description: "An example of usage of BA-Net to map and date the extreme fire eve
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="n">df_crop</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">longitude</span><span class="o">&lt;</span><span class="mi">154</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">longitude</span><span class="o">&gt;</span><span class="mi">146</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_crop</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">longitude</span><span class="o">&lt;</span><span class="mi">154</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">longitude</span><span class="o">&gt;</span><span class="mi">146</span><span class="p">)</span>
                  <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">latitude</span><span class="o">&lt;-</span><span class="mi">26</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">latitude</span><span class="o">&gt;-</span><span class="mi">39</span><span class="p">)]</span>
 
 <span class="n">df_crop</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dst</span><span class="o">/</span><span class="s1">&#39;hotspotsAU2020.csv&#39;</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_crop</span><span class="o">.</span><span class="n">longitude</span><span class="p">,</span> <span class="n">df_crop</span><span class="o">.</span><span class="n">latitude</span><span class="p">,</span> <span class="n">s</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">df_crop</span><span class="o">.</span><span class="n">doy</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Active Fires ({df_crop.acq_date.min()} - {df_crop.acq_date.max()})&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Active Fires (</span><span class="si">{</span><span class="n">df_crop</span><span class="o">.</span><span class="n">acq_date</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">df_crop</span><span class="o">.</span><span class="n">acq_date</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">);</span>
 </pre></div>
@@ -361,10 +359,9 @@ description: "An example of usage of BA-Net to map and date the extreme fire eve
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">Region</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;AU2020&#39;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">[</span><span class="mi">146</span><span class="p">,</span> <span class="o">-</span><span class="mi">39</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="o">-</span><span class="mi">26</span><span class="p">],</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">Region</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;AU2020&#39;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">[</span><span class="mi">146</span><span class="p">,</span> <span class="o">-</span><span class="mi">39</span><span class="p">,</span> <span class="mi">154</span><span class="p">,</span> <span class="o">-</span><span class="mi">26</span><span class="p">],</span> <span class="n">pixel_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 <span class="n">r</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dst</span><span class="o">/</span><span class="s1">&#39;R_AU2020.json&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Region shape: </span><span class="si">{r.shape}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Region shape: </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -493,8 +490,7 @@ banet_predict_times <span class="nv">$region</span> <span class="s2">&quot;</spa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="n">R</span> <span class="o">=</span> <span class="n">Region</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;/srv/australia2020/R_AU2020.json&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">Region</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;/srv/australia2020/R_AU2020.json&#39;</span><span class="p">)</span>
 <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">coords</span><span class="p">()</span>
 <span class="n">gdf</span> <span class="o">=</span> <span class="n">open_shp</span><span class="p">(</span><span class="s1">&#39;/srv/australia2020/Australia_Polygon.shp&#39;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">sio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;/srv/australia2020/monthly/data.mat&#39;</span><span class="p">)</span>
@@ -533,8 +529,7 @@ banet_predict_times <span class="nv">$region</span> <span class="s2">&quot;</spa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mf">7.5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mf">7.5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="n">im0</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">ba</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">im1</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">bd</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlGn_r&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im0</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -582,8 +577,7 @@ banet_predict_times <span class="nv">$region</span> <span class="s2">&quot;</spa
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="n">LON</span><span class="p">,</span> <span class="n">LAT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">LON</span><span class="p">,</span> <span class="n">LAT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
 <span class="n">dLAT</span> <span class="o">=</span> <span class="mf">1.1111</span>
 <span class="n">dLON</span> <span class="o">=</span> <span class="n">dLAT</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">LAT</span><span class="p">))</span>
 <span class="n">pix_size</span> <span class="o">=</span> <span class="n">dLON</span><span class="o">*</span><span class="n">dLAT</span>
@@ -644,8 +638,7 @@ To register the converters:
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">times</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">times</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
 
 <span class="n">monthly</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
@@ -703,8 +696,7 @@ To register the converters:
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># local</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total burned area: {np.round(np.nansum(df.freq)*100)} ha&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total burned area: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s1"> ha&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>

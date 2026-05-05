@@ -1,29 +1,24 @@
-SRC = $(wildcard nbs/*.ipynb)
+SRC = $(wildcard banet/*.py)
 
-all: banet2 docs
+all: setup
 
-banet2: $(SRC)
-	nbdev_build_lib
-	touch banet2
+syslibs:
+	sudo apt-get install -y libhdf4-dev libproj-dev proj-data proj-bin libgeos-dev
 
-docs_serve: docs
-	cd docs && bundle exec jekyll serve
-
-docs: $(SRC)
-	nbdev_build_docs
-	touch docs
+setup: syslibs
+	python -m venv .venv
+	.venv/bin/pip install -e .
 
 test:
-	nbdev_test_nbs
+	python -m pytest --tb=short -q
 
 release: pypi
-	nbdev_bump_version
 
 pypi: dist
 	twine upload --repository pypi dist/*
 
 dist: clean
-	python setup.py sdist bdist_wheel
+	python -m build
 
 clean:
 	rm -rf dist
